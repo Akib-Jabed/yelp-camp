@@ -1,19 +1,25 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const Campground = require('./models/campground');
+const dotenv = require('dotenv');
+const Campground = require('./src/models/campground');
+
+dotenv.config();
 
 const app = express();
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src/views'));
 
-const dbUser = 'm001-student';
-const dbPassword = 'm001-mongodb-basics';
+const dbUser = process.env.DATABASE_USER;
+const dbPassword = process.env.DATABASE_PASSWORD;
+const dbName = process.env.DATABASE_NAME;
+
+const database = process.env.DATABASE_URL.replace('<USER>', dbUser)
+    .replace('<PASSWORD>', dbPassword)
+    .replace('<DBNAME>', dbName);
 mongoose.set('strictQuery', false);
 mongoose
-    .connect(
-        `mongodb+srv://${dbUser}:${dbPassword}@sandbox.0fk4x.mongodb.net/tourism?retryWrites=true&w=majority`
-    )
+    .connect(database)
     .then(() => console.log('Database connected....'))
     .catch((err) => console.err(err));
 
@@ -25,6 +31,16 @@ mongoose
 
 app.get('/', (req, res) => {
     res.render('home');
+});
+
+app.get('/campgrounds', async (req, res) => {
+    const campgrounds = await Campground.find({});
+    res.render('campgrounds/index', { campgrounds });
+});
+
+app.get('/campgrounds/:id', async (req, res, id) => {
+    const campground = await Campground.findById(req.params.id);
+    res.render('campgrounds/show', { campground });
 });
 
 app.get('/make', async (req, res) => {
