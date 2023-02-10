@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 const path = require('path');
 const dotenv = require('dotenv');
 const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate');
 const Campground = require('./src/models/campground');
 
 dotenv.config();
 
 const app = express();
+app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
 app.use(express.urlencoded({ extended: true }));
