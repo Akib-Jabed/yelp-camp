@@ -4,9 +4,12 @@ const { Schema } = mongoose;
 
 const schema = new Schema({
     title: String,
-    price: String,
+    price: Number,
     description: String,
     location: String,
+    latitude: String,
+    longitude: String,
+    image: String,
 });
 
 const CampgroundModel = mongoose.model('Campground', schema);

@@ -60,7 +60,8 @@
         "tabWidth": 4,
         "semi": true
       }
-    ]
+    ],
+    "comma-dangle": ["error", "always-multiline", { "functions": "never" }]
   },
   "plugins": ["prettier"]
 }

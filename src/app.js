@@ -18,6 +18,16 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+app.get('/campgrounds', async (req, res) => {
+    const campgrounds = await CampgroundModel.find({});
+    res.render('campgrounds/index', { campgrounds });
+});
+
+app.get('/campgrounds/:id', async (req, res) => {
+    const campground = await CampgroundModel.findById(req.params.id);
+    res.render('campgrounds/show', { campground });
+});
+
 app.post('/', async (req, res) => {
     const campground = new CampgroundModel({ title: 'My backyard' });
     await campground.save();
