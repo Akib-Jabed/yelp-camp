@@ -33,5 +33,27 @@
       integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      (() => {
+        "use strict";
+        const fields = document.querySelectorAll(".needs-validation");
+
+        Array.from(fields).forEach((field) => {
+          field.addEventListener(
+            "submit",
+            (event) => {
+              if (!field.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              field.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+    </script>
   </body>
 </html>

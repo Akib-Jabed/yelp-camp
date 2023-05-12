@@ -21,7 +21,16 @@
         "semi": true
       }
     ],
-    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "no-unused-vars": ["error", { "args": "none" }],
+    "comma-dangle": [
+      "error",
+      {
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
+    ]
   },
   "plugins": ["prettier"]
 }

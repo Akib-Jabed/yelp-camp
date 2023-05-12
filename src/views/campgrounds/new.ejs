@@ -3,20 +3,42 @@
 <div class="row">
   <h1 class="text-center">New Campground</h1>
   <div class="col-6 offset-3">
-    <form action="/campgrounds" method="POST">
+    <form
+      class="needs-validation"
+      action="/campgrounds"
+      method="POST"
+      novalidate
+    >
       <div class="mb-2">
         <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" name="title" id="title" />
+        <input
+          type="text"
+          class="form-control"
+          name="title"
+          id="title"
+          required
+        />
       </div>
       <div class="mb-2">
         <label for="location" class="form-label">Location</label>
-        <input type="text" class="form-control" name="location" id="location" />
+        <input
+          type="text"
+          class="form-control"
+          name="location"
+          id="location"
+          required
+        />
       </div>
       <div class="mb-2">
         <label for="image" class="form-label">Image Url</label>
-        <input type="text" class="form-control" name="image" id="image" />
+        <input
+          type="text"
+          class="form-control"
+          name="image"
+          id="image"
+          required
+        />
       </div>
-
       <div class="mb-2">
         <label for="price" class="form-label">Price</label>
         <div class="input-group">
@@ -28,16 +50,17 @@
             placeholder="0.00"
             aria-label="price"
             aria-describedby="price"
+            required
           />
         </div>
       </div>
-
       <div class="mb-2">
         <label for="description" class="form-label">Description</label>
         <textarea
           class="form-control"
           name="description"
           id="description"
+          required
         ></textarea>
       </div>
       <div class="mb-2">
