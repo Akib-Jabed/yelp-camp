@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 const CampgroundModel = require('../src/models/Campground');
+
 dotenv.config();
 
 mongoose.set('strictQuery', false);
@@ -13,15 +14,14 @@ mongoose
 
 const importData = async () => {
     try {
-        const campgrounds = JSON.parse(
-            fs.readFileSync(`${__dirname}/data.json`, 'utf-8'),
-        );
+        const campgrounds = JSON.parse(fs.readFileSync(`${__dirname}/data.json`, 'utf-8'));
+        console.table(campgrounds);
         await CampgroundModel.deleteMany();
         await CampgroundModel.create(campgrounds);
     } catch (error) {
         console.log(error);
     }
-    process.exit()
+    process.exit();
 };
 
 importData();
