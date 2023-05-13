@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const engine = require('ejs-mate');
 const methodOverride = require('method-override');
 const path = require('path');
+const Joi = require('joi');
 const CampgroundModel = require('./models/Campground');
 const ExpressError = require('./utils/ExpressError');
 const { catchAsync } = require('./utils/catchAsync');
@@ -22,6 +23,23 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+const validateCampground = (req, res, next) => {
+    const schema = Joi.object({
+        title: Joi.string().required(),
+        price: Joi.number().required().min(0),
+        image: Joi.string().required(),
+        location: Joi.string().required(),
+        description: Joi.string().required(),
+    });
+
+    const { error } = schema.validate(req.body);
+    if (error) {
+        console.log(error.message);
+        throw new ExpressError(error.message, 400);
+    }
+    next();
+};
+
 app.get('/', (req, res) => {
     res.render('home');
 });
@@ -40,6 +58,7 @@ app.get('/campgrounds/new', (req, res) => {
 
 app.post(
     '/campgrounds',
+    validateCampground,
     catchAsync(async (req, res) => {
         const campground = new CampgroundModel(req.body);
         await campground.save();
@@ -65,6 +84,7 @@ app.get(
 
 app.put(
     '/campgrounds/:id',
+    validateCampground,
     catchAsync(async (req, res) => {
         const { id } = req.params;
         const campground = await CampgroundModel.findByIdAndUpdate(id, { ...req.body });

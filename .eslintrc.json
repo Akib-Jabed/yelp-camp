@@ -26,6 +26,8 @@
     "comma-dangle": [
       "error",
       {
+        "arrays": "only-multiline",
+        "objects": "only-multiline",
         "imports": "never",
         "exports": "never",
         "functions": "never"
