@@ -15,7 +15,6 @@ mongoose
 const importData = async () => {
     try {
         const campgrounds = JSON.parse(fs.readFileSync(`${__dirname}/data.json`, 'utf-8'));
-        console.table(campgrounds);
         await CampgroundModel.deleteMany();
         await CampgroundModel.create(campgrounds);
     } catch (error) {

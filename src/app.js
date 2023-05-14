@@ -7,6 +7,7 @@ const Joi = require('joi');
 const CampgroundModel = require('./models/Campground');
 const ExpressError = require('./utils/ExpressError');
 const { catchAsync } = require('./utils/catchAsync');
+const ReviewModel = require('./models/review');
 
 mongoose.set('strictQuery', false);
 mongoose
@@ -30,6 +31,20 @@ const validateCampground = (req, res, next) => {
         image: Joi.string().required(),
         location: Joi.string().required(),
         description: Joi.string().required(),
+    });
+
+    const { error } = schema.validate(req.body);
+    if (error) {
+        console.log(error.message);
+        throw new ExpressError(error.message, 400);
+    }
+    next();
+};
+
+const validateReview = (req, res, next) => {
+    const schema = Joi.object({
+        body: Joi.string().required(),
+        rating: Joi.number().required().min(1).max(5),
     });
 
     const { error } = schema.validate(req.body);
@@ -69,7 +84,7 @@ app.post(
 app.get(
     '/campgrounds/:id',
     catchAsync(async (req, res) => {
-        const campground = await CampgroundModel.findById(req.params.id);
+        const campground = await CampgroundModel.findById(req.params.id).populate('reviews');
         res.render('campgrounds/show', { campground });
     })
 );
@@ -98,6 +113,21 @@ app.delete(
         const { id } = req.params;
         await CampgroundModel.findByIdAndDelete(id);
         res.redirect('/campgrounds');
+    })
+);
+
+app.post(
+    '/campgrounds/:id/reviews',
+    validateReview,
+    catchAsync(async (req, res) => {
+        const { id } = req.params;
+        const campground = await CampgroundModel.findById(id);
+        const review = new ReviewModel(req.body);
+        campground.reviews.push(review);
+        await campground.save();
+        await review.save();
+
+        res.redirect(`/campgrounds/${campground._id}`);
     })
 );
 
