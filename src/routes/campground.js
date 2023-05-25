@@ -31,7 +31,7 @@ router.get(
     })
 );
 
-router.get('/campgrounds/new', (req, res) => {
+router.get('/new', (req, res) => {
     res.render('campgrounds/new');
 });
 
@@ -41,6 +41,7 @@ router.post(
     catchAsync(async (req, res) => {
         const campground = new CampgroundModel(req.body);
         await campground.save();
+        req.flash('success', 'Campground created successfully!!');
         res.redirect(`/campgrounds/${campground._id}`);
     })
 );
@@ -49,7 +50,11 @@ router.get(
     '/:id',
     catchAsync(async (req, res) => {
         const campground = await CampgroundModel.findById(req.params.id).populate('reviews');
-        res.render('campgrounds/show', { campground });
+        if (!campground) {
+            req.flash('error', 'Campground not found');
+            return res.redirect('/campgrounds');
+        }
+        return res.render('campgrounds/show', { campground });
     })
 );
 
@@ -57,7 +62,11 @@ router.get(
     '/:id/edit',
     catchAsync(async (req, res) => {
         const campground = await CampgroundModel.findById(req.params.id);
-        res.render('campgrounds/edit', { campground });
+        if (!campground) {
+            req.flash('error', 'Campground not found');
+            return res.redirect('/campgrounds');
+        }
+        return res.render('campgrounds/edit', { campground });
     })
 );
 
@@ -67,7 +76,12 @@ router.put(
     catchAsync(async (req, res) => {
         const { id } = req.params;
         const campground = await CampgroundModel.findByIdAndUpdate(id, { ...req.body });
-        res.redirect(`/campgrounds/${campground._id}`);
+        if (!campground) {
+            req.flash('error', 'Campground not found');
+            return res.redirect('/campgrounds');
+        }
+        req.flash('success', 'Campground updated successfully!!');
+        return res.redirect(`/campgrounds/${campground._id}`);
     })
 );
 
@@ -75,8 +89,13 @@ router.delete(
     '/:id',
     catchAsync(async (req, res) => {
         const { id } = req.params;
-        await CampgroundModel.findByIdAndDelete(id);
-        res.redirect('/campgrounds');
+        const campground = await CampgroundModel.findByIdAndDelete(id);
+        if (!campground) {
+            req.flash('error', 'Campground not found');
+            return res.redirect('/campgrounds');
+        }
+        req.flash('success', 'Campground deleted successfully!!');
+        return res.redirect('/campgrounds');
     })
 );
 
