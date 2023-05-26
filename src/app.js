@@ -44,6 +44,8 @@ passport.deserializeUser(UserModel.deserializeUser());
 
 app.use(flash());
 app.use((req, res, next) => {
+    res.locals.returnTo = req.session.returnTo;
+    res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
@@ -53,9 +55,9 @@ app.use('/', require('./routes/auth'));
 app.use('/campgrounds', require('./routes/campground'));
 app.use('/campgrounds/:id/reviews', require('./routes/reviews'));
 
-// app.get('/', (req, res) => {
-//     res.render('home');
-// });
+app.get('/', (req, res) => {
+    res.render('home');
+});
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404));

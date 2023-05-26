@@ -32,7 +32,7 @@ router.get(
     })
 );
 
-router.get('/new', (req, res) => {
+router.get('/new', checkLogin, (req, res) => {
     res.render('campgrounds/new');
 });
 
@@ -62,6 +62,7 @@ router.get(
 
 router.get(
     '/:id/edit',
+    checkLogin,
     catchAsync(async (req, res) => {
         const campground = await CampgroundModel.findById(req.params.id);
         if (!campground) {
@@ -74,6 +75,7 @@ router.get(
 
 router.put(
     '/:id',
+    checkLogin,
     validateCampground,
     catchAsync(async (req, res) => {
         const { id } = req.params;
@@ -89,6 +91,7 @@ router.put(
 
 router.delete(
     '/:id',
+    checkLogin,
     catchAsync(async (req, res) => {
         const { id } = req.params;
         const campground = await CampgroundModel.findByIdAndDelete(id);
