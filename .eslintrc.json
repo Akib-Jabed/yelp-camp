@@ -32,7 +32,8 @@
         "exports": "never",
         "functions": "never"
       }
-    ]
+    ],
+    "consistent-return": "off"
   },
   "plugins": ["prettier"]
 }

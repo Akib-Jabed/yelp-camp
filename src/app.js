@@ -49,13 +49,13 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/auth', require('./routes/auth'));
+app.use('/', require('./routes/auth'));
 app.use('/campgrounds', require('./routes/campground'));
 app.use('/campgrounds/:id/reviews', require('./routes/reviews'));
 
-app.get('/', (req, res) => {
-    res.render('home');
-});
+// app.get('/', (req, res) => {
+//     res.render('home');
+// });
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404));

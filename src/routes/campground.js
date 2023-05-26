@@ -3,6 +3,7 @@ const Joi = require('joi');
 const ExpressError = require('../utils/ExpressError');
 const { catchAsync } = require('../utils/catchAsync');
 const CampgroundModel = require('../models/Campground');
+const checkLogin = require('../middlewares/check-login');
 
 const router = express.Router();
 
@@ -37,6 +38,7 @@ router.get('/new', (req, res) => {
 
 router.post(
     '/',
+    checkLogin,
     validateCampground,
     catchAsync(async (req, res) => {
         const campground = new CampgroundModel(req.body);
@@ -54,7 +56,7 @@ router.get(
             req.flash('error', 'Campground not found');
             return res.redirect('/campgrounds');
         }
-        return res.render('campgrounds/show', { campground });
+        res.render('campgrounds/show', { campground });
     })
 );
 
@@ -66,7 +68,7 @@ router.get(
             req.flash('error', 'Campground not found');
             return res.redirect('/campgrounds');
         }
-        return res.render('campgrounds/edit', { campground });
+        res.render('campgrounds/edit', { campground });
     })
 );
 
@@ -81,7 +83,7 @@ router.put(
             return res.redirect('/campgrounds');
         }
         req.flash('success', 'Campground updated successfully!!');
-        return res.redirect(`/campgrounds/${campground._id}`);
+        res.redirect(`/campgrounds/${campground._id}`);
     })
 );
 
@@ -95,7 +97,7 @@ router.delete(
             return res.redirect('/campgrounds');
         }
         req.flash('success', 'Campground deleted successfully!!');
-        return res.redirect('/campgrounds');
+        res.redirect('/campgrounds');
     })
 );
 
