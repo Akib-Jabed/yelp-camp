@@ -1,32 +1,18 @@
 const mongoose = require('mongoose');
-// const passportLocalMongose = req
+const passportLocalMongose = require('passport-local-mongoose');
 
-// const { Schema } = mongoose;
+const { Schema } = mongoose;
 
-// const schema = new Schema({
-//     title: String,
-//     price: Number,
-//     description: String,
-//     location: String,
-//     latitude: String,
-//     longitude: String,
-//     image: String,
-//     reviews: [
-//         {
-//             type: Schema.Types.ObjectId,
-//             ref: 'Review',
-//         },
-//     ],
-// });
+const schema = new Schema({
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+});
 
-// schema.post('findOneAndDelete', async (data) => {
-//     if (data) {
-//         await ReviewModel.deleteMany({
-//             _id: { $in: data.reviews },
-//         });
-//     }
-// });
+schema.plugin(passportLocalMongose);
 
-// const CampgroundModel = mongoose.model('Campground', schema);
+const UserModel = mongoose.model('User', schema);
 
-// module.exports = CampgroundModel;
+module.exports = UserModel;

@@ -1,0 +1,43 @@
+<% layout('layouts/boilerplate') -%>
+
+<h1>Sign Up</h1>
+<form class="needs-validation" action="/auth/register" method="POST" novalidate>
+  <div class="mb-2">
+    <label for="username" class="form-label">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      name="username"
+      id="username"
+      required
+      autocomplete="off"
+    />
+  </div>
+  <div class="mb-2">
+    <label for="email" class="form-label">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      name="email"
+      id="email"
+      required
+      autocomplete="off"
+    />
+  </div>
+  <div class="mb-2">
+    <label for="password" class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      id="password"
+      required
+      autocomplete="off"
+    />
+  </div>
+  <div class="mb-2">
+    <button type="submit" class="btn btn-info">
+      <span class="text-light fw-medium">Register</span>
+    </button>
+  </div>
+</form>
