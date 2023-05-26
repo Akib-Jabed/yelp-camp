@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') -%>
 
-<h1>Sign Up</h1>
-<form class="needs-validation" action="/auth/register" method="POST" novalidate>
+<h1>Sign In</h1>
+<form class="needs-validation" action="/auth/login" method="POST" novalidate>
   <div class="mb-2">
     <label for="username" class="form-label">Username</label>
     <input
@@ -9,17 +9,6 @@
       class="form-control"
       name="username"
       id="username"
-      required
-      autocomplete="off"
-    />
-  </div>
-  <div class="mb-2">
-    <label for="email" class="form-label">Email</label>
-    <input
-      type="email"
-      class="form-control"
-      name="email"
-      id="email"
       required
       autocomplete="off"
     />
@@ -37,7 +26,7 @@
   </div>
   <div class="mb-2">
     <button type="submit" class="btn btn-success">
-      <span class="text-light fw-medium">Register</span>
+      <span class="text-light fw-medium">Login</span>
     </button>
   </div>
 </form>
