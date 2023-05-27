@@ -18,8 +18,16 @@ const validateCampground = (req, res, next) => {
 
     const { error } = schema.validate(req.body);
     if (error) {
-        console.log(error.message);
         throw new ExpressError(error.message, 400);
+    }
+    next();
+};
+
+const isAuthor = async (req, res, next) => {
+    const campground = await CampgroundModel.findById(req.params.id);
+    if (!campground.author.equals(req.user._id)) {
+        req.flash('error', "You don't have authorized access!!");
+        return res.redirect(`/campgrounds/${req.params.id}`);
     }
     next();
 };
@@ -42,6 +50,7 @@ router.post(
     validateCampground,
     catchAsync(async (req, res) => {
         const campground = new CampgroundModel(req.body);
+        campground.author = req.user._id;
         await campground.save();
         req.flash('success', 'Campground created successfully!!');
         res.redirect(`/campgrounds/${campground._id}`);
@@ -51,7 +60,9 @@ router.post(
 router.get(
     '/:id',
     catchAsync(async (req, res) => {
-        const campground = await CampgroundModel.findById(req.params.id).populate('reviews');
+        const campground = await CampgroundModel.findById(req.params.id)
+            .populate('reviews')
+            .populate('author');
         if (!campground) {
             req.flash('error', 'Campground not found');
             return res.redirect('/campgrounds');
@@ -63,6 +74,7 @@ router.get(
 router.get(
     '/:id/edit',
     checkLogin,
+    isAuthor,
     catchAsync(async (req, res) => {
         const campground = await CampgroundModel.findById(req.params.id);
         if (!campground) {

@@ -1,6 +1,7 @@
 [
   {
     "title": "Yosemite National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Yosemite Valley, CA",
     "latitude": 37.8651,
     "longitude": -119.5383,
@@ -10,6 +11,7 @@
   },
   {
     "title": "Yellowstone National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Yellowstone National Park, WY",
     "latitude": 44.428,
     "longitude": -110.5885,
@@ -19,6 +21,7 @@
   },
   {
     "title": "Acadia National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Bar Harbor, ME",
     "latitude": 44.3386,
     "longitude": -68.2733,
@@ -28,6 +31,7 @@
   },
   {
     "title": "Grand Canyon National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Grand Canyon Village, AZ",
     "latitude": 36.1069,
     "longitude": -112.1121,
@@ -37,6 +41,7 @@
   },
   {
     "title": "Glacier National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "West Glacier, MT",
     "latitude": 48.7596,
     "longitude": -113.787,
@@ -46,6 +51,7 @@
   },
   {
     "title": "Camping Slatina",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Martinšćica, Croatia",
     "latitude": 44.79102,
     "longitude": 14.50012,
@@ -55,6 +61,7 @@
   },
   {
     "title": "Camping Zeeburg",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Amsterdam, Netherlands",
     "latitude": 52.37818,
     "longitude": 4.95988,
@@ -64,6 +71,7 @@
   },
   {
     "title": "Camping La Rosaleda",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Conil de la Frontera, Spain",
     "latitude": 36.28108,
     "longitude": -6.08322,
@@ -73,6 +81,7 @@
   },
   {
     "title": "Camping Domaine des Ormes",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Dol-de-Bretagne, France",
     "latitude": 48.55682,
     "longitude": -1.72818,
@@ -82,6 +91,7 @@
   },
   {
     "title": "Camping San Francesco",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Desenzano del Garda, Italy",
     "latitude": 45.47431,
     "longitude": 10.55296,
@@ -91,6 +101,7 @@
   },
   {
     "title": "Hirayu Onsen Campsite",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Takayama, Gifu",
     "latitude": 36.1597,
     "longitude": 137.5403,
@@ -100,6 +111,7 @@
   },
   {
     "title": "Gulmarg Camping Ground",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Gulmarg, Jammu and Kashmir",
     "latitude": 34.0495,
     "longitude": 74.3894,
@@ -109,6 +121,7 @@
   },
   {
     "title": "Khao Yai National Park Campsite",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Pak Chong, Thailand",
     "latitude": 14.5167,
     "longitude": 101.3667,
@@ -118,6 +131,7 @@
   },
   {
     "title": "Kashid Beach Camping",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Kashid, Maharashtra",
     "latitude": 18.7644,
     "longitude": 72.9386,
@@ -127,6 +141,7 @@
   },
   {
     "title": "Guryongpo Beach Campground",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Pohang, South Korea",
     "latitude": 36.0257,
     "longitude": 129.3384,
@@ -136,6 +151,7 @@
   },
   {
     "title": "Twee Rivieren Rest Camp",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Kgalagadi Transfrontier Park, South Africa",
     "latitude": -26.348702,
     "longitude": 20.785609,
@@ -145,6 +161,7 @@
   },
   {
     "title": "Berg River Resort",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Paarl, Western Cape, South Africa",
     "latitude": -33.735214,
     "longitude": 18.974914,
@@ -154,6 +171,7 @@
   },
   {
     "title": "The River Camp",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Maun, North-West District, Botswana",
     "latitude": -19.908979,
     "longitude": 23.426089,
@@ -163,6 +181,7 @@
   },
   {
     "title": "Ai Aiba Lodge",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Erongo Region, Namibia",
     "latitude": -21.718219,
     "longitude": 15.827219,
@@ -172,6 +191,7 @@
   },
   {
     "title": "Kololo Game Reserve",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Ward 9, Limpopo, South Africa",
     "latitude": -24.004536,
     "longitude": 27.759796,
@@ -181,6 +201,7 @@
   },
   {
     "title": "Tofino Camping",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Tofino, British Columbia",
     "latitude": 49.152984,
     "longitude": -125.903466,
@@ -190,6 +211,7 @@
   },
   {
     "title": "Jasper National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Jasper, Alberta",
     "latitude": 52.873383,
     "longitude": -118.081455,
@@ -199,6 +221,7 @@
   },
   {
     "title": "Algonquin Provincial Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Algonquin Park, Ontario",
     "latitude": 45.837159,
     "longitude": -78.379258,
@@ -208,6 +231,7 @@
   },
   {
     "title": "Banff National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Banff, Alberta",
     "latitude": 51.166457,
     "longitude": -115.605733,
@@ -217,6 +241,7 @@
   },
   {
     "title": "Fundy National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Alma, New Brunswick",
     "latitude": 45.608224,
     "longitude": -64.998694,
@@ -226,6 +251,7 @@
   },
   {
     "title": "Wilson's Promontory National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Promontory, Victoria",
     "latitude": -39.0528,
     "longitude": 146.3322,
@@ -235,6 +261,7 @@
   },
   {
     "title": "Freycinet National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Coles Bay, Tasmania",
     "latitude": -42.1278,
     "longitude": 148.2878,
@@ -244,6 +271,7 @@
   },
   {
     "title": "Fiordland National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Te Anau, South Island",
     "latitude": -45.437,
     "longitude": 167.797,
@@ -253,6 +281,7 @@
   },
   {
     "title": "Abel Tasman National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Motueka, South Island",
     "latitude": -40.9167,
     "longitude": 173.0167,
@@ -262,6 +291,7 @@
   },
   {
     "title": "Kakadu National Park",
+    "author": "6470c38f7977d6af471f3e1e",
     "location": "Jabiru, Northern Territory",
     "latitude": -13.0126,
     "longitude": 132.3936,
