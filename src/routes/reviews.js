@@ -4,6 +4,7 @@ const ReviewModel = require('../models/Review');
 const CampgroundModel = require('../models/Campground');
 const ExpressError = require('../utils/ExpressError');
 const { catchAsync } = require('../utils/catchAsync');
+const checkLogin = require('../middlewares/check-login');
 
 const router = express.Router({ mergeParams: true });
 
@@ -21,13 +22,24 @@ const validateReview = (req, res, next) => {
     next();
 };
 
+const isAuthor = async (req, res, next) => {
+    const review = await ReviewModel.findById(req.params.rId);
+    if (!review.author.equals(req.user._id)) {
+        req.flash('error', "You don't have authorized access!!");
+        return res.redirect(`/campgrounds/${req.params.id}`);
+    }
+    next();
+};
+
 router.post(
     '/',
+    checkLogin,
     validateReview,
     catchAsync(async (req, res) => {
         const { id } = req.params;
         const campground = await CampgroundModel.findById(id);
         const review = new ReviewModel(req.body);
+        review.author = req.user._id;
         campground.reviews.push(review);
         await campground.save();
         await review.save();
@@ -38,6 +50,8 @@ router.post(
 
 router.delete(
     '/:rId',
+    checkLogin,
+    isAuthor,
     catchAsync(async (req, res) => {
         const { id, rId } = req.params;
         await CampgroundModel.findByIdAndUpdate(id, { $pull: { reviews: rId } });
