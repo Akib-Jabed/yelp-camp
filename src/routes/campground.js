@@ -4,6 +4,7 @@ const ExpressError = require('../utils/ExpressError');
 const { catchAsync } = require('../utils/catchAsync');
 const CampgroundModel = require('../models/Campground');
 const checkLogin = require('../middlewares/check-login');
+const CampgroundController = require('../controllers/CampgroundController');
 
 const router = express.Router();
 
@@ -32,13 +33,7 @@ const isAuthor = async (req, res, next) => {
     next();
 };
 
-router.get(
-    '/',
-    catchAsync(async (req, res) => {
-        const campgrounds = await CampgroundModel.find({});
-        res.render('campgrounds/index', { campgrounds });
-    })
-);
+router.get('/', catchAsync(CampgroundController.index));
 
 router.get('/new', checkLogin, (req, res) => {
     res.render('campgrounds/new');
