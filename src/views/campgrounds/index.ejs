@@ -7,7 +7,11 @@
 <ul>
   <% for (let campground of campgrounds) { %>
   <div class="card mt-3">
-    <img class="card-img-top" src="<%= campground.image %>" alt="" />
+    <img
+      class="card-img-top"
+      src="/uploads/<%= campground.images[0] %>"
+      alt=""
+    />
     <div class="card-body">
       <h5 class="card-title"><%= campground.title %></h5>
       <p class="card-text"><%= campground.description %></p>

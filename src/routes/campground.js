@@ -5,16 +5,19 @@ const { catchAsync } = require('../utils/catchAsync');
 const CampgroundModel = require('../models/Campground');
 const checkLogin = require('../middlewares/check-login');
 const CampgroundController = require('../controllers/CampgroundController');
+const fileUploader = require('../utils/fileUploader');
+const { generateThumb } = require('../middlewares/generate-thumb');
 
 const router = express.Router();
+const upload = fileUploader.uploader();
 
 const validateCampground = (req, res, next) => {
     const schema = Joi.object({
         title: Joi.string().required(),
         price: Joi.number().required().min(0),
-        image: Joi.string().required(),
         location: Joi.string().required(),
         description: Joi.string().required(),
+        deleteImages: Joi.array(),
     });
 
     const { error } = schema.validate(req.body);
@@ -42,9 +45,12 @@ router.get('/new', checkLogin, (req, res) => {
 router.post(
     '/',
     checkLogin,
+    upload.array('images'),
+    generateThumb,
     validateCampground,
     catchAsync(async (req, res) => {
         const campground = new CampgroundModel(req.body);
+        campground.images = req.files.map((file) => file.filename);
         campground.author = req.user._id;
         await campground.save();
         req.flash('success', 'Campground created successfully!!');
@@ -86,13 +92,18 @@ router.get(
 router.put(
     '/:id',
     checkLogin,
+    upload.array('images'),
+    generateThumb,
     validateCampground,
     catchAsync(async (req, res) => {
         const { id } = req.params;
         const campground = await CampgroundModel.findByIdAndUpdate(id, { ...req.body });
-        if (!campground) {
-            req.flash('error', 'Campground not found');
-            return res.redirect('/campgrounds');
+        campground.images.push(...req.files.map((file) => file.filename));
+        await campground.save();
+        if (req.body.deleteImages) {
+            await campground.updateOne({
+                $pull: { images: { $in: req.body.deleteImages } },
+            });
         }
         req.flash('success', 'Campground updated successfully!!');
         res.redirect(`/campgrounds/${campground._id}`);

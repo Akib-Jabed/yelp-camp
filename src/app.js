@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const engine = require('ejs-mate');
 const methodOverride = require('method-override');
 const path = require('path');
+// const fileUpload = require('express-fileupload');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
@@ -24,6 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
+// app.use(fileUpload());
 app.use(
     session({
         secret: process.env.SECRET_KEY,

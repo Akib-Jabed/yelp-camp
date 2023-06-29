@@ -7,7 +7,7 @@
     "longitude": -119.5383,
     "description": "Yosemite National Park is a beautiful park located in California's Sierra Nevada mountains. It is known for its granite cliffs, waterfalls, and giant sequoia trees. Visitors can enjoy hiking, camping, and rock climbing in the park.",
     "price": 30.5,
-    "image": "https://source.unsplash.com/featured/?campground, yosemite"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Yellowstone National Park",
@@ -17,7 +17,7 @@
     "longitude": -110.5885,
     "description": "Yellowstone National Park is located in Wyoming and is known for its geothermal features such as Old Faithful, as well as its wildlife, such as grizzly bears, wolves, and herds of bison. Visitors can camp, hike, and fish in the park.",
     "price": 40.0,
-    "image": "https://source.unsplash.com/featured/?campground, yellowstone"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Acadia National Park",
@@ -27,7 +27,7 @@
     "longitude": -68.2733,
     "description": "Acadia National Park is located in Maine and is known for its rocky coastline, forested areas, and Cadillac Mountain, which is the highest point on the East Coast. Visitors can camp, hike, and bike in the park.",
     "price": 25.75,
-    "image": "https://source.unsplash.com/featured/?campground, acadia"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Grand Canyon National Park",
@@ -37,7 +37,7 @@
     "longitude": -112.1121,
     "description": "Grand Canyon National Park is located in Arizona and is known for its stunning views of the canyon, which is over a mile deep. Visitors can camp, hike, and take mule rides in the park.",
     "price": 35.25,
-    "image": "https://source.unsplash.com/featured/?campground, grandcanyon"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Glacier National Park",
@@ -47,7 +47,7 @@
     "longitude": -113.787,
     "description": "Glacier National Park is located in Montana and is known for its beautiful mountain scenery, glaciers, and lakes. Visitors can camp, hike, and fish in the park.",
     "price": 20.0,
-    "image": "https://source.unsplash.com/featured/?campground, glacier"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Camping Slatina",
@@ -57,7 +57,7 @@
     "longitude": 14.50012,
     "description": "Camping Slatina is located on the island of Cres in Croatia, surrounded by crystal clear sea, Mediterranean vegetation and beautiful beaches.",
     "price": 40,
-    "image": "https://source.unsplash.com/1600x900/?campground,nature"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Camping Zeeburg",
@@ -67,7 +67,7 @@
     "longitude": 4.95988,
     "description": "Camping Zeeburg is situated on the edge of Amsterdam, next to a large park and a lake, offering a peaceful camping experience in the bustling city.",
     "price": 50,
-    "image": "https://source.unsplash.com/1600x900/?campground,amsterdam"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Camping La Rosaleda",
@@ -77,7 +77,7 @@
     "longitude": -6.08322,
     "description": "Camping La Rosaleda is located on the Costa de la Luz, in the province of Cadiz, Andalusia. It offers beautiful sea views and access to pristine beaches.",
     "price": 35,
-    "image": "https://source.unsplash.com/1600x900/?campground,beach"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Camping Domaine des Ormes",
@@ -87,7 +87,7 @@
     "longitude": -1.72818,
     "description": "Camping Domaine des Ormes is a 5-star camping resort located in the heart of Brittany, France. It offers a wide range of activities and amenities, including a golf course, a lake, and a water park.",
     "price": 60,
-    "image": "https://source.unsplash.com/1600x900/?campground,france"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Camping San Francesco",
@@ -97,7 +97,7 @@
     "longitude": 10.55296,
     "description": "Camping San Francesco is located on the shores of Lake Garda, in northern Italy. It offers a private beach, swimming pools, and a range of sports facilities.",
     "price": 45,
-    "image": "https://source.unsplash.com/1600x900/?campground,italy"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Hirayu Onsen Campsite",
@@ -107,7 +107,7 @@
     "longitude": 137.5403,
     "description": "Hirayu Onsen Campsite is located in the Japanese Alps and offers a relaxing escape from the city. The campground features hot springs, hiking trails, and a variety of outdoor activities.",
     "price": 25,
-    "image": "https://source.unsplash.com/Z8ldJ8Sh9n0"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Gulmarg Camping Ground",
@@ -117,7 +117,7 @@
     "longitude": 74.3894,
     "description": "Gulmarg Camping Ground is a scenic and peaceful campground in the Himalayan Mountains. Visitors can enjoy hiking, skiing, and other outdoor activities.",
     "price": 30,
-    "image": "https://source.unsplash.com/C7G8aKMtp9Y"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Khao Yai National Park Campsite",
@@ -127,7 +127,7 @@
     "longitude": 101.3667,
     "description": "Khao Yai National Park Campsite is a beautiful and serene campground located in a stunning national park. Visitors can enjoy hiking, wildlife watching, and other outdoor activities.",
     "price": 20,
-    "image": "https://source.unsplash.com/XTGgKChL2jQ"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Kashid Beach Camping",
@@ -137,7 +137,7 @@
     "longitude": 72.9386,
     "description": "Kashid Beach Camping is a fun and adventurous camping experience on the coast of the Arabian Sea. Visitors can enjoy swimming, surfing, and other beach activities.",
     "price": 35,
-    "image": "https://source.unsplash.com/3H_bG9YysnE"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Guryongpo Beach Campground",
@@ -147,7 +147,7 @@
     "longitude": 129.3384,
     "description": "Guryongpo Beach Campground is a popular destination for beach camping in South Korea. Visitors can enjoy swimming, fishing, and other beach activities.",
     "price": 28,
-    "image": "https://source.unsplash.com/C8STm0nE2rI"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Twee Rivieren Rest Camp",
@@ -157,7 +157,7 @@
     "longitude": 20.785609,
     "description": "Twee Rivieren Rest Camp is situated on the banks of the dry Nossob Riverbed in the Kgalagadi Transfrontier Park.",
     "price": 300,
-    "image": "https://source.unsplash.com/featured/?campground"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Berg River Resort",
@@ -167,7 +167,7 @@
     "longitude": 18.974914,
     "description": "Berg River Resort is a family resort situated on the banks of the Berg River in the Cape Winelands.",
     "price": 500,
-    "image": "https://source.unsplash.com/featured/?campground"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "The River Camp",
@@ -177,7 +177,7 @@
     "longitude": 23.426089,
     "description": "The River Camp is situated on the banks of the Thamalakane River, just outside Maun.",
     "price": 900,
-    "image": "https://source.unsplash.com/featured/?campground"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Ai Aiba Lodge",
@@ -187,7 +187,7 @@
     "longitude": 15.827219,
     "description": "Ai Aiba Lodge is nestled in the rocky terrain of the Erongo Region, offering breathtaking views of the surrounding area.",
     "price": 750,
-    "image": "https://source.unsplash.com/featured/?campground"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Kololo Game Reserve",
@@ -197,7 +197,7 @@
     "longitude": 27.759796,
     "description": "Kololo Game Reserve is a malaria-free reserve situated in the heart of the Waterberg Biosphere, just 3 hours from Johannesburg.",
     "price": 1200,
-    "image": "https://source.unsplash.com/featured/?campground"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Tofino Camping",
@@ -207,7 +207,7 @@
     "longitude": -125.903466,
     "description": "Located on the edge of the Pacific Ocean, Tofino Camping offers spectacular views and direct beach access. Amenities include fire pits, picnic tables, and hot showers.",
     "price": 35.0,
-    "image": "https://source.unsplash.com/mWZTnMkgkZ8"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Jasper National Park",
@@ -217,7 +217,7 @@
     "longitude": -118.081455,
     "description": "With its stunning mountain views and abundant wildlife, Jasper National Park is a must-visit destination for any nature lover. Campsites are available for tents and RVs.",
     "price": 40.0,
-    "image": "https://source.unsplash.com/1L94M5Kgdig"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Algonquin Provincial Park",
@@ -227,7 +227,7 @@
     "longitude": -78.379258,
     "description": "Spanning over 7,000 square kilometres, Algonquin Provincial Park is home to over 2,000 lakes and an incredible variety of wildlife. Camping options range from rustic to luxurious.",
     "price": 25.0,
-    "image": "https://source.unsplash.com/XJv9b5BCOx4"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Banff National Park",
@@ -237,7 +237,7 @@
     "longitude": -115.605733,
     "description": "Nestled in the heart of the Rocky Mountains, Banff National Park is a world-renowned destination for outdoor enthusiasts. Campsites are available in several picturesque locations.",
     "price": 50.0,
-    "image": "https://source.unsplash.com/VpITWQxM6KY"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Fundy National Park",
@@ -247,7 +247,7 @@
     "longitude": -64.998694,
     "description": "Home to the world's highest tides, Fundy National Park offers a unique camping experience. Enjoy hiking trails, beaches, and stunning views of the Bay of Fundy.",
     "price": 30.0,
-    "image": "https://source.unsplash.com/WPYe1Y2-4yQ"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Wilson's Promontory National Park",
@@ -257,7 +257,7 @@
     "longitude": 146.3322,
     "description": "Wilson's Promontory National Park is located at the southernmost tip of mainland Australia and offers a range of camping options, from walk-in sites to caravan parks.",
     "price": 15.0,
-    "image": "https://source.unsplash.com/1600x900/?campground"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Freycinet National Park",
@@ -267,7 +267,7 @@
     "longitude": 148.2878,
     "description": "Freycinet National Park is home to the iconic Wineglass Bay and offers a variety of camping options, from basic campsites to luxury glamping tents.",
     "price": 25.0,
-    "image": "https://source.unsplash.com/1600x900/?camping"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Fiordland National Park",
@@ -277,7 +277,7 @@
     "longitude": 167.797,
     "description": "Fiordland National Park is New Zealand's largest national park and is home to some of the country's most stunning natural landscapes, including Milford Sound.",
     "price": 20.0,
-    "image": "https://source.unsplash.com/1600x900/?tent"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Abel Tasman National Park",
@@ -287,7 +287,7 @@
     "longitude": 173.0167,
     "description": "Abel Tasman National Park is known for its golden beaches, turquoise waters, and coastal hiking trails, making it a popular destination for camping and outdoor activities.",
     "price": 30.0,
-    "image": "https://source.unsplash.com/1600x900/?nature"
+    "images": ["1686209392122.png"]
   },
   {
     "title": "Kakadu National Park",
@@ -297,6 +297,6 @@
     "longitude": 132.3936,
     "description": "Kakadu National Park is home to some of Australia's most ancient rock art, as well as crocodiles, waterfalls, and billabongs. Camping options include both basic and luxury campsites.",
     "price": 10.0,
-    "image": "https://source.unsplash.com/1600x900/?outdoors"
+    "images": ["1686209392122.png"]
   }
 ]

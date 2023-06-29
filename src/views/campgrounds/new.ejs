@@ -7,6 +7,7 @@
       class="needs-validation"
       action="/campgrounds"
       method="POST"
+      enctype="multipart/form-data"
       novalidate
     >
       <div class="mb-2">
@@ -30,13 +31,14 @@
         />
       </div>
       <div class="mb-2">
-        <label for="image" class="form-label">Image Url</label>
+        <label for="images" class="form-label">Images</label>
         <input
-          type="text"
+          type="file"
           class="form-control"
-          name="image"
-          id="image"
+          name="images"
+          id="images"
           required
+          multiple
         />
       </div>
       <div class="mb-2">

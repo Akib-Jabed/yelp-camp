@@ -8,6 +8,7 @@
       action="/campgrounds/<%=campground._id%>?_method=PUT"
       method="POST"
       novalidate
+      enctype="multipart/form-data"
     >
       <div class="mb-2">
         <label for="title" class="form-label">Title</label>
@@ -28,17 +29,6 @@
           name="location"
           id="location"
           value="<%= campground.location %>"
-          required
-        />
-      </div>
-      <div class="mb-2">
-        <label for="image" class="form-label">Image Url</label>
-        <input
-          type="text"
-          class="form-control"
-          name="image"
-          id="image"
-          value="<%= campground.image %>"
           required
         />
       </div>
@@ -71,6 +61,33 @@
 <%= campground.description %></textarea
         >
       </div>
+
+      <div class="mb-2">
+        <label for="images" class="form-label">Images</label>
+        <input
+          type="file"
+          class="form-control"
+          name="images"
+          id="images"
+          multiple
+        />
+      </div>
+
+      <div class="mb-2">
+        <% campground.images.forEach((img, idx) => { %>
+        <img src="/uploads/thumbs/<%= img %>" class="img-thumbnail" alt="" />
+        <div class="form-check-inline">
+          <input
+            type="checkbox"
+            id="image-<%=idx%>"
+            name="deleteImages[]"
+            value="<%= img %>"
+          />
+        </div>
+        <label for="image-<%=idx%>">Delete?</label>
+        <% }) %>
+      </div>
+
       <div class="mb-2">
         <button type="submit" class="btn btn-info">
           <span class="text-light fw-medium">Update Campground</span>

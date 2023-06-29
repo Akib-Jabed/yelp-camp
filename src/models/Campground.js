@@ -10,7 +10,7 @@ const schema = new Schema({
     location: String,
     latitude: String,
     longitude: String,
-    image: String,
+    images: [String],
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
