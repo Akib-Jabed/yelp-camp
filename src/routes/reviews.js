@@ -1,35 +1,13 @@
 const express = require('express');
-const Joi = require('joi');
+
 const ReviewModel = require('../models/Review');
 const CampgroundModel = require('../models/Campground');
-const ExpressError = require('../utils/ExpressError');
 const { catchAsync } = require('../utils/catchAsync');
 const checkLogin = require('../middlewares/check-login');
+const { isReviewAuthor } = require('../middlewares/author');
+const validateReview = require('../validators/review');
 
 const router = express.Router({ mergeParams: true });
-
-const validateReview = (req, res, next) => {
-    const schema = Joi.object({
-        body: Joi.string().required(),
-        rating: Joi.number().required().min(1).max(5),
-    });
-
-    const { error } = schema.validate(req.body);
-    if (error) {
-        console.log(error.message);
-        throw new ExpressError(error.message, 400);
-    }
-    next();
-};
-
-const isAuthor = async (req, res, next) => {
-    const review = await ReviewModel.findById(req.params.rId);
-    if (!review.author.equals(req.user._id)) {
-        req.flash('error', "You don't have authorized access!!");
-        return res.redirect(`/campgrounds/${req.params.id}`);
-    }
-    next();
-};
 
 router.post(
     '/',
@@ -51,7 +29,7 @@ router.post(
 router.delete(
     '/:rId',
     checkLogin,
-    isAuthor,
+    isReviewAuthor,
     catchAsync(async (req, res) => {
         const { id, rId } = req.params;
         await CampgroundModel.findByIdAndUpdate(id, { $pull: { reviews: rId } });
