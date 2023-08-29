@@ -6,3 +6,7 @@
 .btn-block {
   width: 100%;
 }
+
+.img-fluid {
+  height: 100%;
+}
