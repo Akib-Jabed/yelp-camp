@@ -44,6 +44,7 @@
     "express-mongo-sanitize": "^2.2.0",
     "helmet": "^7.1.0",
     "http-status": "^1.7.4",
+    "joi": "^17.13.3",
     "mongoose": "^8.5.4",
     "validator": "^13.12.0",
     "xss-req-sanitizer": "^1.0.4"

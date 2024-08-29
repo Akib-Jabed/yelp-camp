@@ -1,5 +1,7 @@
+/* eslint-disable func-names */
 const mongoose = require('mongoose');
 const validator = require('validator');
+const bcrypt = require('bcrypt');
 const { roles } = require('../config/roles');
 
 const { Schema } = mongoose;
@@ -59,10 +61,24 @@ schema.virtual('fullName').get(() => {
     return `${this.firstName} ${this.lastName}`;
 });
 
-// schema.pre('save', async function (next) {
-//     const user = this;
-//     if (user)
-// })
+schema.statics.isEmailTaken = async function (email, excludeUserId) {
+    const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
+    return !!user;
+};
+
+schema.methods.isPasswordMatch = async function (password) {
+    const user = this;
+    return bcrypt.compare(password, user.password);
+};
+
+schema.pre('save', async function (next) {
+    const user = this;
+    if (user.isModified('password')) {
+        user.password = await bcrypt.hash(user.password, 11);
+    }
+
+    next();
+});
 
 const User = mongoose.model('User', schema);
 
