@@ -1,5 +1,17 @@
-const getUsers = async () => {};
+const httpStatus = require('http-status');
+const catchAsync = require('../utils/catchAsync');
+const { userService } = require('../services');
+
+const createUser = catchAsync(async (req, res) => {
+    const user = await userService.createUser(req.body);
+    res.status(httpStatus.CREATED).send(user);
+});
+
+const getUsers = async (req, res) => {
+    // const result = await userService.queryUsers()
+};
 
 module.exports = {
+    createUser,
     getUsers,
 };
