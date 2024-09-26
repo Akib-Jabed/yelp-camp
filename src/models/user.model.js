@@ -2,7 +2,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
-const { roles } = require('../config/roles');
 const { paginate, toJSON } = require('./plugins');
 
 const { Schema } = mongoose;
@@ -11,47 +10,49 @@ const schema = new Schema(
     {
         firstName: {
             type: String,
-            required: true,
+            required: [true, 'Please tell us your first name'],
             trim: true,
         },
         lastName: {
             type: String,
-            required: true,
+            required: [true, 'Please tell us your last name'],
             trim: true,
         },
         email: {
             type: String,
-            required: true,
+            required: [true, 'Please provide your email'],
             trim: true,
             unique: true,
             lowercase: true,
-            validate(value) {
-                if (!validator.isEmail(value)) {
-                    throw new Error('Invalid email');
-                }
-            },
+            validate: [validator.isEmail, 'Please provide a valid email'],
+        },
+        photo: {
+            type: String,
+            default: 'default.jpg',
+        },
+        role: {
+            type: String,
+            enum: ['admin', 'user', 'guide'],
+            default: 'user',
         },
         password: {
             type: String,
-            required: true,
+            required: [true, 'Please provide a password'],
             trim: true,
             minlength: 8,
+            select: false,
             validate(value) {
                 if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
                     throw new Error('Password must contain at least one letter and one number');
                 }
             },
-            private: true,
         },
-        role: {
-            type: String,
-            enum: roles,
-            default: 'user',
-        },
-        isEmailVerified: {
+        active: {
             type: Boolean,
-            default: false,
+            default: true,
         },
+        passwordResetToken: String,
+        passwordResetExpired: Date,
     },
     {
         timestamps: true,
@@ -65,24 +66,36 @@ schema.virtual('fullName').get(() => {
     return `${this.firstName} ${this.lastName}`;
 });
 
+schema.pre('save', async function (next) {
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 11);
+    }
+
+    next();
+});
+
+schema.pre('/^find/', function (next) {
+    this.find({ active: { $ne: false } });
+    next();
+});
+
 schema.statics.isEmailTaken = async function (email, excludeUserId) {
     const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
     return !!user;
 };
 
 schema.methods.isPasswordMatch = async function (password) {
-    const user = this;
-    return bcrypt.compare(password, user.password);
+    return bcrypt.compare(password, this.password);
 };
 
-schema.pre('save', async function (next) {
-    const user = this;
-    if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 11);
-    }
+schema.methods.createPasswordResetToken = function () {
+    const resetToken = crypto.randomBytes(32).toString('hex');
 
-    next();
-});
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    this.passwordResetExpired = Date.now() + 10 * 60 * 1000;
+
+    return resetToken;
+};
 
 const User = mongoose.model('User', schema);
 
