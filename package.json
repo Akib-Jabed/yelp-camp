@@ -6,7 +6,7 @@
   "repository": "https://github.com/Akib-Jabed/yelp-camp",
   "author": "Akib Jabed <a.jabed.bd@gmail.com>",
   "scripts": {
-    "start": "NODE_ENV=development nodemon src/index"
+    "start": "NODE_ENV=development nodemon index"
   },
   "keywords": [
     "node",
@@ -47,6 +47,7 @@
     "joi": "^17.13.3",
     "mongoose": "^8.5.4",
     "validator": "^13.12.0",
+    "winston": "^3.14.2",
     "xss-req-sanitizer": "^1.0.4"
   }
 }

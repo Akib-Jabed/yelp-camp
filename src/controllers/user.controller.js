@@ -7,9 +7,12 @@ const createUser = catchAsync(async (req, res) => {
     res.status(httpStatus.CREATED).send(user);
 });
 
-const getUsers = async (req, res) => {
-    // const result = await userService.queryUsers()
-};
+const getUsers = catchAsync(async (req, res) => {
+    const filter = [];
+    const options = [];
+    const result = await userService.queryUsers(filter, options);
+    res.send(result);
+});
 
 module.exports = {
     createUser,

@@ -10,6 +10,12 @@ const createUser = async (data) => {
     return User.create(data);
 };
 
+const queryUsers = async (filter, options) => {
+    const users = await User.paginate(filter, options);
+    return users;
+};
+
 module.exports = {
     createUser,
+    queryUsers,
 };
