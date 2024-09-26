@@ -9,4 +9,11 @@ module.exports = {
     database: {
         url: process.env.DATABASE_URL,
     },
+    jwt: {
+        secret: process.env.SECRET_KEY,
+        accessTokenExpires: 5,
+        refreshTokenExpires: 3,
+        resetPasswordExpires: 30,
+        verifyEmailExpires: 30,
+    },
 };

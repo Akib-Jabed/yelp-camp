@@ -1,14 +1,8 @@
 /* eslint-disable func-names */
 const mongoose = require('mongoose');
+const tokenTypes = require('../config/tokens');
 
 const { Schema } = mongoose;
-
-const tokenTypes = {
-    ACCESS: 'access',
-    REFRESH: 'refresh',
-    RESET_PASSWORD: 'reset-password',
-    VERIFY_EMAIL: 'verify-email',
-};
 
 const schema = new Schema(
     {
