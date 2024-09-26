@@ -51,8 +51,6 @@ const schema = new Schema(
             type: Boolean,
             default: true,
         },
-        passwordResetToken: String,
-        passwordResetExpired: Date,
     },
     {
         timestamps: true,
@@ -86,15 +84,6 @@ schema.statics.isEmailTaken = async function (email, excludeUserId) {
 
 schema.methods.isPasswordMatch = async function (password) {
     return bcrypt.compare(password, this.password);
-};
-
-schema.methods.createPasswordResetToken = function () {
-    const resetToken = crypto.randomBytes(32).toString('hex');
-
-    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-    this.passwordResetExpired = Date.now() + 10 * 60 * 1000;
-
-    return resetToken;
 };
 
 const User = mongoose.model('User', schema);
