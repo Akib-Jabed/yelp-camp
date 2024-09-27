@@ -16,7 +16,7 @@ const schema = new Schema(
             ref: 'User',
             required: true,
         },
-        role: {
+        type: {
             type: String,
             enum: [tokenTypes.ACCESS, tokenTypes.REFRESH, tokenTypes.RESET_PASSWORD, tokenTypes.VERIFY_EMAIL],
             required: true,

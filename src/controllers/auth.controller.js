@@ -1,8 +1,9 @@
 const httpStatus = require('http-status');
+const mongoose = require('mongoose');
 const catchAsync = require('../utils/catchAsync');
-const { User } = require('../models');
+const { User, Token } = require('../models');
 const ApiError = require('../utils/ApiError');
-const { generateAuthTokens } = require('../services/token.service');
+const { generateAuthTokens } = require('../utils/tokens');
 
 const register = catchAsync(async (req, res) => {
     const { email } = req.body;
@@ -10,10 +11,36 @@ const register = catchAsync(async (req, res) => {
         throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
     }
 
-    const user = await User.create(req.body);
-    const tokens = await generateAuthTokens(user);
+    const session = await mongoose.startSession();
+    session.startTransaction();
 
-    res.status(httpStatus.CREATED).send({ user, tokens });
+    try {
+        const user = await User.create([req.body], { session });
+        const tokens = generateAuthTokens(user);
+        const { token, expires, type } = tokens.refresh;
+
+        // Save refresh token at database
+        await Token.create(
+            [
+                {
+                    token,
+                    user: user[0].id,
+                    expires,
+                    type,
+                    blacklisted: false,
+                },
+            ],
+            { session }
+        );
+
+        await session.commitTransaction();
+        res.status(httpStatus.CREATED).send({ user, tokens });
+    } catch (err) {
+        await session.abortTransaction();
+        throw new ApiError(httpStatus.BAD_REQUEST, err);
+    } finally {
+        session.endSession();
+    }
 });
 
 const login = catchAsync(async (req, res) => {
