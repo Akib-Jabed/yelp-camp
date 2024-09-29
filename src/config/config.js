@@ -11,7 +11,7 @@ module.exports = {
     },
     jwt: {
         secret: process.env.SECRET_KEY,
-        accessTokenExpires: 5,
+        accessTokenExpires: 15,
         refreshTokenExpires: 3,
         resetPasswordExpires: 30,
         verifyEmailExpires: 30,

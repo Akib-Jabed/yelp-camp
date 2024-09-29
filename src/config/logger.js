@@ -1,5 +1,4 @@
 const winston = require('winston');
-const config = require('./config');
 
 const { combine, timestamp, json } = winston.format;
 

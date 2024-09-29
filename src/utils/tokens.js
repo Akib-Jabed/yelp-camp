@@ -14,12 +14,12 @@ const generateToken = (userId, expires, type, secret = config.jwt.secret) => {
     return jwt.sign(payload, secret);
 };
 
-const generateAuthTokens = (user) => {
+const generateAuthTokens = (userId) => {
     const accessTokenExpires = moment().add(config.jwt.accessTokenExpires, 'minutes');
-    const accessToken = generateToken(user.id, accessTokenExpires, tokenTypes.ACCESS);
+    const accessToken = generateToken(userId, accessTokenExpires, tokenTypes.ACCESS);
 
     const refreshTokenExpires = moment().add(config.jwt.refreshTokenExpires, 'days');
-    const refreshToken = generateToken(user.id, refreshTokenExpires, tokenTypes.REFRESH);
+    const refreshToken = generateToken(userId, refreshTokenExpires, tokenTypes.REFRESH);
 
     return {
         access: {
@@ -35,6 +35,15 @@ const generateAuthTokens = (user) => {
     };
 };
 
+const storeTokenToCookie = (res, token, expires) => {
+    res.cookie('jwt', token, {
+        expires,
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== 'development',
+    });
+};
+
 module.exports = {
     generateAuthTokens,
+    storeTokenToCookie,
 };

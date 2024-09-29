@@ -40,7 +40,6 @@ const schema = new Schema(
             required: [true, 'Please provide a password'],
             trim: true,
             minlength: 8,
-            select: false,
             validate(value) {
                 if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
                     throw new Error('Password must contain at least one letter and one number');
@@ -72,7 +71,7 @@ schema.pre('save', async function (next) {
     next();
 });
 
-schema.pre('/^find/', function (next) {
+schema.pre(/^find/, function (next) {
     this.find({ active: { $ne: false } });
     next();
 });
@@ -83,7 +82,8 @@ schema.statics.isEmailTaken = async function (email, excludeUserId) {
 };
 
 schema.methods.isPasswordMatch = async function (password) {
-    return bcrypt.compare(password, this.password);
+    const isMatched = await bcrypt.compare(password, this.password);
+    return isMatched;
 };
 
 const User = mongoose.model('User', schema);
