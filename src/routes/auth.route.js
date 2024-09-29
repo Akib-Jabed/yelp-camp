@@ -5,7 +5,7 @@ const validate = require('../middlewares/validate');
 
 const router = express.Router();
 
-router.post('/register', authController.register);
+router.post('/register', validate(authValidation.register), authController.register);
 router.post('/login', validate(authValidation.login), authController.login);
 router.post('/logout', authController.logout);
 
