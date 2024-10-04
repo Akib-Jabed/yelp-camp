@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 const mongoose = require('mongoose');
 const tokenTypes = require('../config/tokens');
 
@@ -34,15 +33,6 @@ const schema = new Schema(
         timestamps: true,
     }
 );
-
-// schema.methods.createPasswordResetToken = function () {
-//     const resetToken = crypto.randomBytes(32).toString('hex');
-
-//     this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-//     this.passwordResetExpired = Date.now() + 10 * 60 * 1000;
-
-//     return resetToken;
-// };
 
 const Token = mongoose.model('Token', schema);
 

@@ -1,8 +1,6 @@
-/* eslint-disable func-names */
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
-const { paginate, toJSON } = require('./plugins');
 
 const { Schema } = mongoose;
 
@@ -52,12 +50,13 @@ const schema = new Schema(
         },
     },
     {
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true },
+    },
+    {
         timestamps: true,
     }
 );
-
-schema.plugin(toJSON);
-schema.plugin(paginate);
 
 schema.virtual('fullName').get(() => {
     return `${this.firstName} ${this.lastName}`;

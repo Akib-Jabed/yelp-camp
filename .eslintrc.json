@@ -33,6 +33,7 @@
         "functions": "never"
       }
     ],
+    "func-names": "off",
     "consistent-return": "off"
   },
   "plugins": ["prettier"]

@@ -18,7 +18,7 @@ const register = catchAsync(async (req, res) => {
         const user = await User.create([req.body], { session });
         user[0].password = undefined;
         const userId = user[0].id;
-        const tokens = generateAuthTokens(userId);
+        const tokens = generateAuthTokens(user[0]);
         const { token, expires, type } = tokens.refresh;
         // Save refresh token at database
         await Token.create(
@@ -53,8 +53,9 @@ const login = catchAsync(async (req, res) => {
         throw new ApiError(httpStatus.UNAUTHORIZED, 'Invalid credential');
     }
 
+    user.password = undefined;
     const userId = user.id;
-    const tokens = await generateAuthTokens(userId);
+    const tokens = await generateAuthTokens(user);
 
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -81,8 +82,6 @@ const login = catchAsync(async (req, res) => {
 
         storeTokenToCookie(res, tokens.access.token, tokens.access.expires);
 
-        user.password = undefined;
-
         res.send({ user, token: tokens.access });
     } catch (err) {
         await session.abortTransaction();
@@ -92,7 +91,9 @@ const login = catchAsync(async (req, res) => {
     }
 });
 
-const logout = catchAsync(async (req, res) => {});
+const logout = catchAsync(async (req, res) => {
+    // const refreshToken = await Token.findOne({token: req.body.refreshToken})
+});
 
 module.exports = {
     register,
