@@ -1,9 +1,9 @@
 const httpStatus = require('http-status');
-const mongoose = require('mongoose');
 const catchAsync = require('../utils/catchAsync');
 const { User, Token } = require('../models');
 const ApiError = require('../utils/ApiError');
-const { generateAuthTokens, storeTokenToCookie } = require('../utils/tokens');
+const { generateToken } = require('../utils/tokens');
+const tokenTypes = require('../config/tokens');
 
 const register = catchAsync(async (req, res) => {
     const { email } = req.body;
@@ -11,38 +11,12 @@ const register = catchAsync(async (req, res) => {
         throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
     }
 
-    const session = await mongoose.startSession();
-    session.startTransaction();
+    const user = await User.create(req.body);
+    user[0].password = undefined;
 
-    try {
-        const user = await User.create([req.body], { session });
-        user[0].password = undefined;
-        const userId = user[0].id;
-        const tokens = generateAuthTokens(user[0]);
-        const { token, expires, type } = tokens.refresh;
-        // Save refresh token at database
-        await Token.create(
-            [
-                {
-                    token,
-                    user: userId,
-                    expires,
-                    type,
-                    blacklisted: false,
-                },
-            ],
-            { session }
-        );
+    const token = generateToken(user[0]);
 
-        await session.commitTransaction();
-        storeTokenToCookie(res, tokens.access.token, tokens.access.expires);
-        res.status(httpStatus.CREATED).send({ user, token: tokens.access });
-    } catch (err) {
-        await session.abortTransaction();
-        throw new ApiError(httpStatus.BAD_REQUEST, err);
-    } finally {
-        session.endSession();
-    }
+    res.status(httpStatus.CREATED).send({ user, token });
 });
 
 const login = catchAsync(async (req, res) => {
@@ -54,45 +28,17 @@ const login = catchAsync(async (req, res) => {
     }
 
     user.password = undefined;
-    const userId = user.id;
-    const tokens = await generateAuthTokens(user);
+    const token = generateToken(user);
 
-    const session = await mongoose.startSession();
-    session.startTransaction();
-
-    try {
-        const { token, expires, type } = tokens.refresh;
-
-        await Token.deleteOne({ user: userId, type: 'refresh' }).session(session);
-
-        await Token.create(
-            [
-                {
-                    token,
-                    user: userId,
-                    expires,
-                    type,
-                    blacklisted: false,
-                },
-            ],
-            { session }
-        );
-
-        await session.commitTransaction();
-
-        storeTokenToCookie(res, tokens.access.token, tokens.access.expires);
-
-        res.send({ user, token: tokens.access });
-    } catch (err) {
-        await session.abortTransaction();
-        throw new ApiError(httpStatus.BAD_REQUEST, err);
-    } finally {
-        session.endSession();
-    }
+    res.status(httpStatus.OK).send({ user, token });
 });
 
 const logout = catchAsync(async (req, res) => {
-    // const refreshToken = await Token.findOne({token: req.body.refreshToken})
+    const { token, user } = req;
+
+    await Token.create({ token, user: user.id, type: tokenTypes.ACCESS, blacklisted: true });
+
+    res.status(200).send();
 });
 
 module.exports = {

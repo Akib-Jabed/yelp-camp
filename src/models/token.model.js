@@ -22,7 +22,6 @@ const schema = new Schema(
         },
         expires: {
             type: Date,
-            required: true,
         },
         blacklisted: {
             type: Boolean,
@@ -33,6 +32,11 @@ const schema = new Schema(
         timestamps: true,
     }
 );
+
+schema.pre(/^find/, function (next) {
+    this.find({ blacklisted: { $ne: false } });
+    next();
+});
 
 const Token = mongoose.model('Token', schema);
 
