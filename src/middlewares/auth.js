@@ -26,7 +26,7 @@ const checkLogin = catchAsync(async (req, res, next) => {
             const decodedJwt = jwt.decode(token);
             const { data } = decodedJwt;
             req.user = data;
-            if (req.path === '/logout') {
+            if (['/deactivate', '/logout'].includes(req.path)) {
                 req.token = token;
             }
         }
@@ -36,7 +36,10 @@ const checkLogin = catchAsync(async (req, res, next) => {
 });
 
 const verifyRole = (role) => (req, res, next) => {
-    if (role !== req.user.role) throw new ApiError(401, 'Only admins can access users list');
+    console.log(req.user);
+
+    if (role === 'admin' && role !== req.user.role) throw new ApiError(401, 'Only admins have the access');
+    if (role === 'user' && role !== req.user.role) throw new ApiError(401, 'Only users have the access');
 
     next();
 };
