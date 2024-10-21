@@ -8,7 +8,7 @@ const schema = new Schema(
         title: {
             type: String,
             required: [true, 'Tour must have a title'],
-            unique: true,
+            unique: [true, 'Tour title already taken'],
             trim: true,
             maxlength: [30, "Title can't be more than 30 characters"],
             minlength: [3, 'Title must be atleast 3 characters long'],
@@ -27,7 +27,7 @@ const schema = new Schema(
             required: [true, 'Tour must have a difficulty level'],
             enum: {
                 values: ['easy', 'normal', 'difficult'],
-                message: 'Srt difficulty level between easy, normal and difficult',
+                message: 'Tour difficulty level between easy, normal and difficult',
             },
         },
         price: {
@@ -43,6 +43,10 @@ const schema = new Schema(
             type: String,
             trim: true,
             required: [true, 'Tour must have a location'],
+        },
+        startDate: {
+            type: Date,
+            required: [true, 'Tour must have a start date'],
         },
         images: [String],
         active: {
@@ -67,7 +71,7 @@ const schema = new Schema(
 schema.index({ slug: 1 });
 schema.index({ price: 1 });
 
-schema.virtuals('reviews', {
+schema.virtual('reviews', {
     ref: 'Review',
     foreignField: 'tour',
     localField: '_id',
@@ -80,6 +84,11 @@ schema.pre('save', function (next) {
 
 schema.pre(/^find/, function (next) {
     this.find({ active: { $ne: false } });
+    next();
+});
+
+schema.pre(/^find/, function (next) {
+    this.find({ startDate: { $gte: new Date() } });
     next();
 });
 

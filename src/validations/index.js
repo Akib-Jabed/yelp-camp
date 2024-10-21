@@ -1,2 +1,3 @@
 module.exports.authValidation = require('./auth.validation');
 module.exports.accountValidation = require('./account.validation');
+module.exports.tourValidation = require('./tour.validation');

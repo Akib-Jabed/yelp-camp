@@ -27,10 +27,6 @@ const updateAccountInfo = catchAsync(async (req, res) => {
     }
 });
 
-const updateProfile = catchAsync(async (req, res) => {});
-
-const updatePassword = catchAsync(async (req, res) => {});
-
 const deactivateAccount = catchAsync(async (req, res) => {
     const session = await mongoose.startSession();
     session.startTransaction();

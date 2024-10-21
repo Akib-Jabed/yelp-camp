@@ -27,14 +27,8 @@ const unexpectedErrorHandler = (error) => {
     exitHandler();
 };
 
-process.on('uncaughtException', () => {
-    logger.info('UNCAUGHT EXCEPTION!! Shutting down...');
-    unexpectedErrorHandler();
-});
-process.on('unhandledRejection', () => {
-    logger.info('UNHANDLED REJECTION!! Shutting down...');
-    unexpectedErrorHandler();
-});
+process.on('uncaughtException', unexpectedErrorHandler);
+process.on('unhandledRejection', unexpectedErrorHandler);
 process.on('SIGTERM', () => {
     logger.info('SIGETRM received');
     exitHandler();

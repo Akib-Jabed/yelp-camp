@@ -36,8 +36,6 @@ const checkLogin = catchAsync(async (req, res, next) => {
 });
 
 const verifyRole = (role) => (req, res, next) => {
-    console.log(req.user);
-
     if (role === 'admin' && role !== req.user.role) throw new ApiError(401, 'Only admins have the access');
     if (role === 'user' && role !== req.user.role) throw new ApiError(401, 'Only users have the access');
 
