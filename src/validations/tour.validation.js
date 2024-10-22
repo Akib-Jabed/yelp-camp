@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
-const createTour = Joi.object({
-    title: Joi.string().required().min(8).max(30).messages({
+const tour = Joi.object({
+    title: Joi.string().required().min(3).max(30).messages({
         'string.empty': "Tour Title can't be empty",
         'string.base': 'Tour Title must be string',
         'any.required': 'Tour Title is required',
@@ -42,5 +42,5 @@ const createTour = Joi.object({
 });
 
 module.exports = {
-    createTour,
+    tour,
 };

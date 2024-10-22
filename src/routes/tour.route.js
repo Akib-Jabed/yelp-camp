@@ -16,8 +16,21 @@ router
         verifyRole('admin'),
         upload.array('images'),
         generateThumb,
-        validate(tourValidation.createTour),
+        validate(tourValidation.tour),
         tourController.createTour
     );
+
+router
+    .route('/:slug')
+    .get(tourController.getTour)
+    .put(
+        checkLogin,
+        verifyRole('admin'),
+        upload.array('images'),
+        generateThumb,
+        validate(tourValidation.tour),
+        tourController.updateTour
+    )
+    .delete(checkLogin, verifyRole('admin'), tourController.deleteTour);
 
 module.exports = router;
