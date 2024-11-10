@@ -41,8 +41,20 @@ const logout = catchAsync(async (req, res) => {
     res.status(200).send();
 });
 
+const resetPassword = catchAsync(async (req, res) => {
+    // const { email } = req.body;
+    // if (await User.isEmailTaken(email)) {
+    //     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+    // }
+    // const user = await User.create(req.body);
+    // user[0].password = undefined;
+    // const token = generateToken(user[0]);
+    // res.status(httpStatus.CREATED).send({ user, token });
+});
+
 module.exports = {
     register,
     login,
     logout,
+    resetPassword,
 };

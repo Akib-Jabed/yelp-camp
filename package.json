@@ -6,7 +6,8 @@
   "repository": "https://github.com/Akib-Jabed/yelp-camp",
   "author": "Akib Jabed <a.jabed.bd@gmail.com>",
   "scripts": {
-    "start": "NODE_ENV=development nodemon index"
+    "start": "NODE_ENV=development nodemon index",
+    "test": "vitest"
   },
   "keywords": [
     "node",
@@ -34,7 +35,8 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-prettier": "^5.2.1",
     "nodemon": "^3.1.4",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "vitest": "^2.1.3"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

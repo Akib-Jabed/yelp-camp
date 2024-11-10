@@ -4,6 +4,7 @@ const authRoute = require('./auth.route');
 const accountRoute = require('./account.route');
 const tourRoute = require('./tour.route');
 const reviewRoute = require('./review.route');
+const bookingRoute = require('./booking.route');
 
 const router = express.Router();
 
@@ -27,6 +28,10 @@ const routes = [
     {
         path: '/tours/:tourId/reviews',
         route: reviewRoute,
+    },
+    {
+        path: '/bookings',
+        route: bookingRoute,
     },
 ];
 

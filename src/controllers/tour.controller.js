@@ -4,7 +4,7 @@ const ApiError = require('../utils/ApiError');
 
 const getTours = catchAsync(async (req, res) => {
     const tours = await Tour.find({});
-    res.status(201).send({ data: tours });
+    res.status(200).send({ data: tours });
 });
 
 const createTour = catchAsync(async (req, res) => {

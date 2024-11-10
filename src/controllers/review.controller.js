@@ -16,6 +16,20 @@ const postReview = catchAsync(async (req, res) => {
     res.status(201).send(review);
 });
 
+const deleteReview = catchAsync(async (req, res) => {
+    // const tourId = req.originalUrl.split('/')[2];
+    // const tour = await Tour.findById(tourId);
+    // if (!tour) {
+    //     throw new ApiError(404, 'Tour not found');
+    // }
+    // const review = new Review(req.body);
+    // review.tour = tourId;
+    // review.user = req.user.id;
+    // await review.save();
+    // res.status(201).send(review);
+});
+
 module.exports = {
     postReview,
+    deleteReview,
 };

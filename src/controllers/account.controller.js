@@ -55,8 +55,35 @@ const deactivateAccount = catchAsync(async (req, res) => {
     }
 });
 
+const updatePassword = catchAsync(async (req, res) => {
+    // const session = await mongoose.startSession();
+    // session.startTransaction();
+    // try {
+    //     await User.findOneAndUpdate({ _id: req.user.id }, { active: false }, { session });
+    //     await Token.create(
+    //         [
+    //             {
+    //                 token: req.token,
+    //                 user: req.user.id,
+    //                 type: tokenTypes.ACCESS,
+    //                 blacklisted: true,
+    //             },
+    //         ],
+    //         { session }
+    //     );
+    //     await session.commitTransaction();
+    //     return res.status(httpStatus.OK).send({ message: 'Account successfully deactivated' });
+    // } catch (err) {
+    //     await session.abortTransaction();
+    //     throw new ApiError(500, 'Something Went Wrong', false);
+    // } finally {
+    //     session.endSession();
+    // }
+});
+
 module.exports = {
     getAccountInfo,
     updateAccountInfo,
     deactivateAccount,
+    updatePassword,
 };
