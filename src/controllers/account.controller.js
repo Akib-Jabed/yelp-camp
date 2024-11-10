@@ -4,6 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const { User, Token } = require('../models');
 const ApiError = require('../utils/ApiError');
 const tokenTypes = require('../config/tokens');
+const { generateToken } = require('../utils/tokens');
 
 const getAccountInfo = catchAsync(async (req, res) => {
     const user = await User.find({ _id: req.user.id }).select({
@@ -56,29 +57,18 @@ const deactivateAccount = catchAsync(async (req, res) => {
 });
 
 const updatePassword = catchAsync(async (req, res) => {
-    // const session = await mongoose.startSession();
-    // session.startTransaction();
-    // try {
-    //     await User.findOneAndUpdate({ _id: req.user.id }, { active: false }, { session });
-    //     await Token.create(
-    //         [
-    //             {
-    //                 token: req.token,
-    //                 user: req.user.id,
-    //                 type: tokenTypes.ACCESS,
-    //                 blacklisted: true,
-    //             },
-    //         ],
-    //         { session }
-    //     );
-    //     await session.commitTransaction();
-    //     return res.status(httpStatus.OK).send({ message: 'Account successfully deactivated' });
-    // } catch (err) {
-    //     await session.abortTransaction();
-    //     throw new ApiError(500, 'Something Went Wrong', false);
-    // } finally {
-    //     session.endSession();
-    // }
+    const { oldPassword, newPassword } = req.body;
+
+    const user = await User.findById(req.user.id);
+    if (!(await user.isPasswordMatch(oldPassword))) {
+        throw new ApiError(400, 'Old password not matched');
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    const token = generateToken(user);
+    res.status(httpStatus.OK).send({ user, token });
 });
 
 module.exports = {

@@ -12,4 +12,12 @@ router
 
 router.put('/deactivate', checkLogin, verifyRole('user'), accountController.deactivateAccount);
 
+router.put(
+    '/update-password',
+    checkLogin,
+    verifyRole('user'),
+    validate(accountValidation.updatePassword),
+    accountController.updatePassword
+);
+
 module.exports = router;

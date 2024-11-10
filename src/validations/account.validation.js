@@ -13,6 +13,26 @@ const account = Joi.object({
     }),
 });
 
+const updatePassword = Joi.object({
+    oldPassword: Joi.string().required().messages({
+        'string.empty': 'Old password is required',
+        'any.required': 'Old password is required',
+    }),
+    newPassword: Joi.string().required().min(8).alphanum().messages({
+        'string.empty': "New password can't be empty",
+        'string.base': 'New password must be string',
+        'string.alphanum': 'New password must be combination of number and string',
+        'string.min': 'New password must be 8 characters long',
+        'any.required': 'New password is required',
+    }),
+    confirmPassword: Joi.string().required().valid(Joi.ref('newPassword')).messages({
+        'string.empty': "Confirm password can't be empty",
+        'any.required': 'Confirm password is required',
+        'any.only': 'Password must match with new password',
+    }),
+});
+
 module.exports = {
     account,
+    updatePassword,
 };
