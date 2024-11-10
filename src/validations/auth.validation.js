@@ -50,7 +50,33 @@ const login = Joi.object({
     }),
 });
 
+const forgetPassword = Joi.object({
+    email: Joi.string().required().email().messages({
+        'string.empty': "Email can't be empty",
+        'string.base': 'Email must be string',
+        'string.email': 'Provide a valid email',
+        'any.required': 'Email is required',
+    }),
+});
+
+const resetPassword = Joi.object({
+    password: Joi.string().required().min(8).alphanum().messages({
+        'string.empty': "Password can't be empty",
+        'string.base': 'Password must be string',
+        'string.alphanum': 'Password must be combination of number and string',
+        'string.min': 'Password must be 8 characters long',
+        'any.required': 'Password is required',
+    }),
+    confirmPassword: Joi.string().required().valid(Joi.ref('password')).messages({
+        'string.empty': "Confirm password can't be empty",
+        'any.required': 'Confirm password is required',
+        'any.only': 'Password must match',
+    }),
+});
+
 module.exports = {
     register,
     login,
+    forgetPassword,
+    resetPassword,
 };
