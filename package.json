@@ -55,6 +55,8 @@
     "nodemailer": "^6.9.16",
     "sharp": "^0.33.5",
     "slugify": "^1.6.6",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "validator": "^13.12.0",
     "winston": "^3.14.2",
     "xss-req-sanitizer": "^1.0.4"

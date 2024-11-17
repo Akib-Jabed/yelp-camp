@@ -29,7 +29,8 @@ app.use(mongoSanitize());
 app.use(cors());
 app.options('*', cors());
 
-app.use('/', routes);
+app.use('/api', routes);
+
 // middleware to handle unknown api requests
 app.use((req, res, next) => {
     next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));

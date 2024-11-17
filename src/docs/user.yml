@@ -1,0 +1,28 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+        lastName:
+          type: string
+        fullName:
+          type: string
+        role:
+          type: string
+        photo:
+          type: string
+      example:
+        id: 5ebac534954b54139806c112
+        email: fake@example.com
+        firstName: fake
+        lastName: name
+        fullName: fake name
+        role: user
+        photo: fake_photo.png
