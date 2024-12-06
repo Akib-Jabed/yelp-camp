@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  api:
+    build:
+      context: .
+    container_name: yelp-camp-app
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    networks:
+      - yelp-camp
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  mongodb:
+    image: mongo
+    container_name: yelp-camp-db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 15s
+      timeout: 10s
+      retries: 3
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - yelp-camp-data:/data/db
+    networks:
+      - yelp-camp
+
+volumes:
+  yelp-camp-data:
+
+networks:
+  yelp-camp:

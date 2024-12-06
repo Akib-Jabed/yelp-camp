@@ -5,21 +5,27 @@ const { User, Token } = require('../models');
 const ApiError = require('../utils/ApiError');
 const { generateToken } = require('../utils/tokens');
 const tokenTypes = require('../config/tokens');
-const { sendResetPasswordMail } = require('../utils/email');
 const config = require('../config/config');
 
 const register = catchAsync(async (req, res) => {
-    const { email } = req.body;
+    const { name, email, role, password } = req.body;
+
     if (await User.isEmailTaken(email)) {
         throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
     }
 
-    const user = await User.create(req.body);
-    user[0].password = undefined;
+    const newUser = {
+        name,
+        email,
+        role,
+        password,
+    };
+    await User.create(newUser);
 
-    const token = generateToken(user[0]);
+    delete newUser.password;
+    const token = generateToken(newUser);
 
-    res.status(httpStatus.CREATED).send({ user, token });
+    res.status(httpStatus.CREATED).send({ newUser, token });
 });
 
 const login = catchAsync(async (req, res) => {
@@ -42,19 +48,6 @@ const logout = catchAsync(async (req, res) => {
     await Token.create({ token, user: user.id, type: tokenTypes.ACCESS, blacklisted: true });
 
     res.status(200).send();
-});
-
-const forgetPassword = catchAsync(async (req, res) => {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
-        throw new ApiError(404, 'No user found with this email');
-    }
-
-    const token = generateToken(user, '1h');
-    await Token.create({ token, user: user.id, type: tokenTypes.RESET_PASSWORD });
-    await sendResetPasswordMail(email, token);
-    res.status(httpStatus.NO_CONTENT).send();
 });
 
 const resetPassword = catchAsync(async (req, res) => {
@@ -94,6 +87,5 @@ module.exports = {
     register,
     login,
     logout,
-    forgetPassword,
     resetPassword,
 };

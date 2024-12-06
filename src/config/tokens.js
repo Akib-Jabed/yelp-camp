@@ -1,8 +1,10 @@
 const tokenTypes = {
     ACCESS: 'access',
     REFRESH: 'refresh',
-    RESET_PASSWORD: 'reset-password',
-    VERIFY_EMAIL: 'verify-email',
+    RESET_PASSWORD: 'resetPassword',
+    VERIFY_EMAIL: 'verifyEmail',
 };
 
-module.exports = tokenTypes;
+module.exports = {
+    tokenTypes,
+};

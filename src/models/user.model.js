@@ -6,19 +6,24 @@ const { Schema } = mongoose;
 
 const schema = new Schema(
     {
-        firstName: {
+        // firstName: {
+        //     type: String,
+        //     required: [true, 'Please tell us your first name'],
+        //     trim: true,
+        // },
+        // lastName: {
+        //     type: String,
+        //     required: [true, 'Please tell us your last name'],
+        //     trim: true,
+        // },
+        name: {
             type: String,
-            required: [true, 'Please tell us your first name'],
-            trim: true,
-        },
-        lastName: {
-            type: String,
-            required: [true, 'Please tell us your last name'],
+            required: [true, 'Please tell us your name'],
             trim: true,
         },
         email: {
             type: String,
-            required: [true, 'Please provide your email'],
+            // required: [true, 'Please provide your email'],
             trim: true,
             unique: true,
             lowercase: true,
@@ -27,11 +32,6 @@ const schema = new Schema(
         photo: {
             type: String,
             default: 'default.jpg',
-        },
-        role: {
-            type: String,
-            enum: ['admin', 'user', 'guide'],
-            default: 'user',
         },
         password: {
             type: String,
@@ -58,9 +58,9 @@ const schema = new Schema(
     }
 );
 
-schema.virtual('fullName').get(function () {
-    return `${this.firstName} ${this.lastName}`;
-});
+// schema.virtual('fullName').get(function () {
+//     return `${this.firstName} ${this.lastName}`;
+// });
 
 schema.pre('save', async function (next) {
     if (this.isModified('password')) {

@@ -7,18 +7,11 @@ module.exports = {
     env: process.env.NODE_ENV,
     port: process.env.PORT,
     database: {
-        url: process.env.DATABASE_URL,
+        // url: process.env.DATABASE_URL,
+        url: 'mongodb://admin:password@mongodb/yelp-camp?authSource=admin',
     },
     jwt: {
         secret: process.env.SECRET_KEY,
         expires: 24 * 60 * 60, // 1 day
-    },
-    aws: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        region: process.env.AWS_REGION,
-    },
-    email: {
-        from: 'info@yelp-camp.com',
     },
 };
