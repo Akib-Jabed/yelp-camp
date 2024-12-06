@@ -1,0 +1,29 @@
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 04:50:23 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 04:50:47 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 04:50:47 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 04:52:10 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 04:52:10 PM"}
+{"level":"error","message":"Error: Email already taken\n    at /app/src/controllers/auth.controller.js:14:15\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-12-06 04:52:16 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 04:52:59 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 04:52:59 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 04:54:55 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 04:54:55 PM"}
+{"level":"error","message":"Error: Email already taken\n    at /app/src/controllers/auth.controller.js:14:15\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-12-06 04:55:01 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 05:01:02 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 05:01:02 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 05:01:25 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 05:01:25 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 05:01:54 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 05:01:54 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 05:04:18 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 05:04:19 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 05:04:47 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 05:04:47 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 05:04:57 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 05:04:57 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 05:05:05 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 05:05:05 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 05:19:30 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 05:19:30 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-06 05:19:40 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-06 05:19:40 PM"}

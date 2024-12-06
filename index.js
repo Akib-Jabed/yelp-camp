@@ -8,7 +8,7 @@ const server = app.listen(config.port, () => {
     mongoose
         .connect(config.database.url)
         .then(() => logger.info('database connection successful'))
-        .catch((err) => console.error(err));
+        .catch((err) => logger.error(err));
 
     logger.info(`listening on port: ${config.port}`);
 });
@@ -23,13 +23,13 @@ const exitHandler = () => {
 };
 
 const unexpectedErrorHandler = (error) => {
-    logger.info(error);
+    logger.error(error);
     exitHandler();
 };
 
 process.on('uncaughtException', unexpectedErrorHandler);
 process.on('unhandledRejection', unexpectedErrorHandler);
 process.on('SIGTERM', () => {
-    logger.info('SIGETRM received');
+    logger.error('SIGETRM received');
     exitHandler();
 });

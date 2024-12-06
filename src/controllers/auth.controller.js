@@ -1,23 +1,18 @@
-const httpStatus = require('http-status');
-const jwt = require('jsonwebtoken');
 const catchAsync = require('../utils/catchAsync');
 const { User, Token } = require('../models');
 const ApiError = require('../utils/ApiError');
 const { generateToken } = require('../utils/tokens');
-const tokenTypes = require('../config/tokens');
-const config = require('../config/config');
 
 const register = catchAsync(async (req, res) => {
-    const { name, email, role, password } = req.body;
+    const { name, email, password } = req.body;
 
     if (await User.isEmailTaken(email)) {
-        throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+        throw new ApiError(400, 'Email already taken');
     }
 
     const newUser = {
         name,
         email,
-        role,
         password,
     };
     await User.create(newUser);
@@ -25,7 +20,7 @@ const register = catchAsync(async (req, res) => {
     delete newUser.password;
     const token = generateToken(newUser);
 
-    res.status(httpStatus.CREATED).send({ newUser, token });
+    res.status(201).send({ newUser, token });
 });
 
 const login = catchAsync(async (req, res) => {
@@ -33,59 +28,41 @@ const login = catchAsync(async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user || !(await user.isPasswordMatch(password))) {
-        throw new ApiError(httpStatus.UNAUTHORIZED, 'Invalid credential');
+        throw new ApiError(403, 'Invalid credential');
     }
 
     user.password = undefined;
     const token = generateToken(user);
 
-    res.status(httpStatus.OK).send({ user, token });
+    res.status(200).send({ user, token });
 });
 
 const logout = catchAsync(async (req, res) => {
     const { token, user } = req;
 
-    await Token.create({ token, user: user.id, type: tokenTypes.ACCESS, blacklisted: true });
+    await Token.create({ token, user: user.id, blacklisted: true });
 
     res.status(200).send();
 });
 
-const resetPassword = catchAsync(async (req, res) => {
-    const { token } = req.query;
-    const { password } = req.body;
+const updatePassword = catchAsync(async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
 
-    const decoded = jwt.verify(token, config.jwt.secret);
-    if (!decoded) {
-        throw new ApiError(403, 'Token expired.');
+    const user = await User.findById(req.user.id);
+    if (!(await user.isPasswordMatch(currentPassword))) {
+        throw new ApiError(400, 'Old password not matched');
     }
 
-    const tokenDoc = await Token.findOne({
-        token,
-        type: tokenTypes.RESET_PASSWORD,
-        user: decoded.data.id,
-        blacklisted: false,
-    });
-    if (!tokenDoc) {
-        throw new Error('Token not found');
-    }
+    user.password = newPassword;
+    await user.save();
 
-    const user = await User.findById(decoded.data.id);
-    if (!user) {
-        throw new ApiError(404, 'No user found');
-    }
-
-    try {
-        user.password = password;
-        await user.save();
-        res.status(httpStatus.OK).send('Password reset successful');
-    } catch (e) {
-        throw new ApiError(httpStatus.UNAUTHORIZED, 'Password reset failed');
-    }
+    const token = generateToken(user);
+    res.status(200).send({ user, token });
 });
 
 module.exports = {
     register,
     login,
     logout,
-    resetPassword,
+    updatePassword,
 };

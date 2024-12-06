@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const tokenTypes = require('../config/tokens');
 
 const { Schema } = mongoose;
 
@@ -13,11 +12,6 @@ const schema = new Schema(
         user: {
             type: mongoose.SchemaTypes.ObjectId,
             ref: 'User',
-            required: true,
-        },
-        type: {
-            type: String,
-            enum: [tokenTypes.ACCESS, tokenTypes.REFRESH, tokenTypes.RESET_PASSWORD, tokenTypes.VERIFY_EMAIL],
             required: true,
         },
         expires: {

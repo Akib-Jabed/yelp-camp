@@ -23,7 +23,7 @@ const schema = new Schema(
         },
         email: {
             type: String,
-            // required: [true, 'Please provide your email'],
+            required: [true, 'Please provide your email'],
             trim: true,
             unique: true,
             lowercase: true,

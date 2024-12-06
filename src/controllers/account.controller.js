@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const catchAsync = require('../utils/catchAsync');
 const { User, Token } = require('../models');
 const ApiError = require('../utils/ApiError');
-const tokenTypes = require('../config/tokens');
 const { generateToken } = require('../utils/tokens');
 
 const getAccountInfo = catchAsync(async (req, res) => {
@@ -39,7 +38,6 @@ const deactivateAccount = catchAsync(async (req, res) => {
                 {
                     token: req.token,
                     user: req.user.id,
-                    type: tokenTypes.ACCESS,
                     blacklisted: true,
                 },
             ],
@@ -56,20 +54,7 @@ const deactivateAccount = catchAsync(async (req, res) => {
     }
 });
 
-const updatePassword = catchAsync(async (req, res) => {
-    const { oldPassword, newPassword } = req.body;
-
-    const user = await User.findById(req.user.id);
-    if (!(await user.isPasswordMatch(oldPassword))) {
-        throw new ApiError(400, 'Old password not matched');
-    }
-
-    user.password = newPassword;
-    await user.save();
-
-    const token = generateToken(user);
-    res.status(httpStatus.OK).send({ user, token });
-});
+const updatePassword = catchAsync(async (req, res) => {});
 
 module.exports = {
     getAccountInfo,

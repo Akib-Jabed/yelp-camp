@@ -7,6 +7,7 @@ const httpStatus = require('http-status');
 const path = require('path');
 const routes = require('./routes');
 const ApiError = require('./utils/ApiError');
+const logger = require('./config/logger');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 
 const app = express();
@@ -37,8 +38,8 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+    logger.error(err.stack);
+    res.status(500).send('Something went wrong!');
 });
 
 app.use(errorConverter);
