@@ -3,7 +3,6 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xssReqSanitizer = require('xss-req-sanitizer');
 const cors = require('cors');
-const httpStatus = require('http-status');
 const path = require('path');
 const routes = require('./routes');
 const ApiError = require('./utils/ApiError');
@@ -34,7 +33,7 @@ app.use('/api', routes);
 
 // middleware to handle unknown api requests
 app.use((req, res, next) => {
-    next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
+    next(new ApiError(404, 'Not found'));
 });
 
 app.use((err, req, res, next) => {

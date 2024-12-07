@@ -2,25 +2,13 @@ const catchAsync = require('../utils/catchAsync');
 const { User, Token } = require('../models');
 const ApiError = require('../utils/ApiError');
 const { generateToken } = require('../utils/tokens');
+const { authService } = require('../services');
 
 const register = catchAsync(async (req, res) => {
-    const { name, email, password } = req.body;
+    const user = await authService.createUser(req.body);
+    const token = await authService.generateToken(user);
 
-    if (await User.isEmailTaken(email)) {
-        throw new ApiError(400, 'Email already taken');
-    }
-
-    const newUser = {
-        name,
-        email,
-        password,
-    };
-    await User.create(newUser);
-
-    delete newUser.password;
-    const token = generateToken(newUser);
-
-    res.status(201).send({ newUser, token });
+    res.status(201).send({ user, token });
 });
 
 const login = catchAsync(async (req, res) => {

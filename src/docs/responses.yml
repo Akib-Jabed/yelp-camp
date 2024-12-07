@@ -1,14 +1,14 @@
 components:
   responses:
-    DuplicateEmail:
-      description: Email already taken
+    InvalidInput:
+      description: Invalid user input
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
           example:
             code: 400
-            message: Email already taken
+            message: Invalid user input
     Unauthorized:
       description: Unauthorized (Access token not found)
       content:
@@ -36,3 +36,21 @@ components:
           example:
             code: 404
             message: Not found
+    DuplicateEmail:
+      description: Email already taken
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: 409
+            message: Email already taken
+    ServerError:
+      description: Internal Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            code: 500
+            message: Something went wrong
