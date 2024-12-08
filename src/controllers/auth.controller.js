@@ -1,36 +1,27 @@
 const catchAsync = require('../utils/catchAsync');
-const { User, Token } = require('../models');
+const { User } = require('../models');
 const ApiError = require('../utils/ApiError');
 const { generateToken } = require('../utils/tokens');
 const { authService } = require('../services');
 
 const register = catchAsync(async (req, res) => {
     const user = await authService.createUser(req.body);
-    const token = await authService.generateToken(user);
+    const token = authService.generateToken(user);
 
     res.status(201).send({ user, token });
 });
 
 const login = catchAsync(async (req, res) => {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
-
-    if (!user || !(await user.isPasswordMatch(password))) {
-        throw new ApiError(403, 'Invalid credential');
-    }
-
-    user.password = undefined;
-    const token = generateToken(user);
+    const user = await authService.loginUser(req.body);
+    const token = authService.generateToken(user);
 
     res.status(200).send({ user, token });
 });
 
 const logout = catchAsync(async (req, res) => {
-    const { token, user } = req;
+    await authService.logoutUser(req);
 
-    await Token.create({ token, user: user.id, blacklisted: true });
-
-    res.status(200).send();
+    res.status(204).send();
 });
 
 const updatePassword = catchAsync(async (req, res) => {
