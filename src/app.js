@@ -6,7 +6,6 @@ const cors = require('cors');
 const path = require('path');
 const routes = require('./routes');
 const ApiError = require('./utils/ApiError');
-const logger = require('./config/logger');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 
 const app = express();
@@ -34,11 +33,6 @@ app.use('/api', routes);
 // middleware to handle unknown api requests
 app.use((req, res, next) => {
     next(new ApiError(404, 'Not found'));
-});
-
-app.use((err, req, res, next) => {
-    logger.error(err.stack);
-    res.status(500).send('Something went wrong!');
 });
 
 app.use(errorConverter);

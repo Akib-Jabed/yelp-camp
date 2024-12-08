@@ -24,3 +24,42 @@
 {"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:44:21 AM"}
 {"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:44:24 AM"}
 {"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:44:24 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:50:13 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:50:13 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:50:20 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:50:20 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:51:52 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:51:52 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:52:18 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:52:19 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:52:25 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:52:25 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:52:34 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:52:34 AM"}
+{"level":"error","message":"Error: Token expired.\n    at /app/src/middlewares/auth.js:24:19\n    at /app/node_modules/jsonwebtoken/verify.js:171:14\n    at getSecret (/app/node_modules/jsonwebtoken/verify.js:97:14)\n    at module.exports [as verify] (/app/node_modules/jsonwebtoken/verify.js:101:10)\n    at /app/src/middlewares/auth.js:22:9\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-12-08 10:53:01 AM"}
+{"level":"error","message":"Error: Invalid token\n    at /app/src/middlewares/auth.js:20:33\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-12-08 10:53:41 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:54:33 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:54:34 AM"}
+{"level":"error","message":"Error: Invalid token\n    at /app/src/middlewares/auth.js:20:33\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-12-08 10:54:37 AM"}
+{"level":"error","message":"Error: Invalid token\n    at /app/src/middlewares/auth.js:20:33\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-12-08 10:57:20 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:58:10 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:58:10 AM"}
+{"level":"error","message":"Error: Old password not matched\n    at Object.updatePassword (/app/src/services/auth.service.js:48:15)\n    at async /app/src/controllers/auth.controller.js:25:18","timestamp":"2024-12-08 10:58:16 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:59:00 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:59:00 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:59:44 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:59:44 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 10:59:48 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 10:59:48 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 11:00:07 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 11:00:07 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 11:00:21 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 11:00:21 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 11:00:44 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 11:00:44 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 11:01:13 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 11:01:13 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 11:01:56 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 11:01:57 AM"}
+{"level":"error","message":"Error: Old password not matched\n    at Object.updatePassword (/app/src/services/auth.service.js:48:15)\n    at async /app/src/controllers/auth.controller.js:25:18","timestamp":"2024-12-08 11:02:02 AM"}
+{"level":"error","message":"Error: Invalid credential\n    at Object.loginUser (/app/src/services/auth.service.js:26:15)\n    at async /app/src/controllers/auth.controller.js:12:18","timestamp":"2024-12-08 11:03:32 AM"}

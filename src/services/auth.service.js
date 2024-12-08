@@ -40,6 +40,25 @@ const logoutUser = async (data) => {
     await Token.create({ token, user: user.id, blacklisted: true });
 };
 
+const updatePassword = async (data, _user) => {
+    const { currentPassword, newPassword } = data;
+
+    const user = await User.findById(_user.id);
+    if (!(await user.isPasswordMatch(currentPassword))) {
+        throw new ApiError(400, 'Old password not matched');
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        photo: user.photo,
+    };
+};
+
 const generateToken = (user, expires = config.jwt.expires, secret = config.jwt.secret) => {
     const payload = {
         data: user,
@@ -52,5 +71,6 @@ module.exports = {
     createUser,
     loginUser,
     logoutUser,
+    updatePassword,
     generateToken,
 };
