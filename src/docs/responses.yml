@@ -1,14 +1,14 @@
 components:
   responses:
     InvalidInput:
-      description: Invalid user input
+      description: Invalid input
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
           example:
             code: 400
-            message: Invalid user input
+            message: Invalid input
     Unauthorized:
       description: Unauthorized (Access token not found)
       content:
@@ -28,7 +28,7 @@ components:
             code: 403
             message: Forbidden
     NotFound:
-      description: Item not found
+      description: Not found
       content:
         application/json:
           schema:
@@ -45,12 +45,3 @@ components:
           example:
             code: 409
             message: Email already taken
-    ServerError:
-      description: Internal Server Error
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Error"
-          example:
-            code: 500
-            message: Something went wrong

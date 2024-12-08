@@ -63,3 +63,41 @@
 {"level":"info","message":"database connection successful","timestamp":"2024-12-08 11:01:57 AM"}
 {"level":"error","message":"Error: Old password not matched\n    at Object.updatePassword (/app/src/services/auth.service.js:48:15)\n    at async /app/src/controllers/auth.controller.js:25:18","timestamp":"2024-12-08 11:02:02 AM"}
 {"level":"error","message":"Error: Invalid credential\n    at Object.loginUser (/app/src/services/auth.service.js:26:15)\n    at async /app/src/controllers/auth.controller.js:12:18","timestamp":"2024-12-08 11:03:32 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 11:05:10 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 11:05:10 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 01:45:28 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 01:45:28 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 01:45:39 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 01:45:39 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 01:45:49 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 01:45:49 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 01:48:11 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 01:48:11 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 02:38:55 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 02:38:55 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 02:44:16 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 02:44:16 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 02:44:39 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 02:44:39 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 02:44:45 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 02:44:45 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 02:46:25 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 02:46:25 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 02:46:43 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 02:46:44 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 02:50:07 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 02:50:07 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 03:02:58 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 03:02:58 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 03:03:30 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 03:03:31 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 03:05:10 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 03:05:10 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 03:05:58 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 03:05:58 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 03:07:31 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 03:07:31 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 03:08:16 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 03:08:16 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-08 03:14:14 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-08 03:14:14 PM"}
