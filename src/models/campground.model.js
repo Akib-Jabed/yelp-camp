@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const slugify = require('slugify');
 
 const { Schema } = mongoose;
 
@@ -13,7 +12,6 @@ const schema = new Schema(
             maxlength: [30, "Title can't be more than 30 characters"],
             minlength: [3, 'Title must be atleast 3 characters long'],
         },
-        slug: String,
         description: {
             type: String,
             trim: true,
@@ -48,18 +46,12 @@ const schema = new Schema(
     }
 );
 
-schema.index({ slug: 1 });
 schema.index({ price: 1 });
 
 schema.virtual('reviews', {
     ref: 'Review',
     foreignField: 'campground',
     localField: '_id',
-});
-
-schema.pre('save', function (next) {
-    this.slug = slugify(this.title, { lower: true });
-    next();
 });
 
 schema.pre(/^find/, function (next) {

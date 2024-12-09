@@ -15,9 +15,8 @@ const getCampgrounds = async () => {
     return data;
 };
 
-const getCampground = async (queryParam) => {
-    const { slug } = queryParam;
-    const campground = await Campground.findOne({ slug });
+const getCampground = async (req) => {
+    const campground = await Campground.findById(req.params.id);
     if (!campground) {
         throw new ApiError(404, 'Campground not found');
     }
@@ -26,21 +25,22 @@ const getCampground = async (queryParam) => {
 };
 
 const updateCampground = async (req) => {
-    const { slug } = req.params;
-    const campground = await Campground.findOneAndUpdate({ slug }, { ...req.body });
+    const campground = await Campground.findByIdAndUpdate(req.params.id, { ...req.body });
     if (!campground) {
         throw new ApiError(404, 'Campground not found');
     }
-    campground.images.push(...req.files.map((file) => file.filename));
+
+    if (req.files) {
+        campground.images.push(...req.files.map((file) => file.filename));
+    }
+
     await campground.save();
 
     return campground;
 };
 
 const deleteCampground = async (req) => {
-    const { slug } = req.params;
-
-    const campground = await Campground.findOneAndUpdate({ slug }, { active: false });
+    const campground = await Campground.findByIdAndUpdate(req.params.id, { active: false });
     if (!campground) {
         throw new ApiError(404, 'Campground not found');
     }

@@ -26,7 +26,7 @@ const deleteCampground = catchAsync(async (req, res) => {
 });
 
 const getCampground = catchAsync(async (req, res) => {
-    const campground = await campgroundService.getCampground(req.params);
+    const campground = await campgroundService.getCampground(req);
 
     res.status(200).send(campground);
 });

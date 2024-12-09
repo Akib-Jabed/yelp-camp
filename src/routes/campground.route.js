@@ -20,7 +20,7 @@ router
     );
 
 router
-    .route('/:slug')
+    .route('/:id')
     .get(campgroundController.getCampground)
     .put(
         checkLogin,
