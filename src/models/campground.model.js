@@ -33,7 +33,7 @@ const schema = new Schema(
             type: Boolean,
             default: true,
         },
-        author: {
+        user: {
             type: mongoose.Schema.ObjectId,
             ref: 'User',
             required: [true, 'Campground must belong to a user'],
@@ -53,12 +53,20 @@ schema.index({ price: 1 });
 
 schema.virtual('reviews', {
     ref: 'Review',
-    foreignField: 'tour',
+    foreignField: 'campground',
     localField: '_id',
 });
 
 schema.pre('save', function (next) {
     this.slug = slugify(this.title, { lower: true });
+    next();
+});
+
+schema.pre(/^find/, function (next) {
+    this.populate({
+        path: 'user',
+        select: 'name, email, photo',
+    }).populate('reviews');
     next();
 });
 

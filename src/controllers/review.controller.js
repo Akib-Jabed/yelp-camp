@@ -1,21 +1,26 @@
-const { Review, Tour } = require('../models');
 const catchAsync = require('../utils/catchAsync');
-const ApiError = require('../utils/ApiError');
+const { reviewService } = require('../services');
 
 const postReview = catchAsync(async (req, res) => {
-    const tourId = req.originalUrl.split('/')[2];
-    const tour = await Tour.findById(tourId);
-    if (!tour) {
-        throw new ApiError(404, 'Tour not found');
-    }
-    const review = new Review(req.body);
-    review.tour = tourId;
-    review.user = req.user.id;
-    await review.save();
+    const review = await reviewService.createReview(req);
 
     res.status(201).send(review);
 });
 
+const updateReview = catchAsync(async (req, res) => {
+    const review = await reviewService.updateReview(req);
+
+    res.status(200).send(review);
+});
+
+const deleteReview = catchAsync(async (req, res) => {
+    await reviewService.deleteReview(req);
+
+    res.status(204).send();
+});
+
 module.exports = {
     postReview,
+    updateReview,
+    deleteReview,
 };

@@ -131,3 +131,87 @@
 {"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:20:31 PM"}
 {"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:20:45 PM"}
 {"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:20:46 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:21:34 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:21:35 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:24:41 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:24:41 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:25:13 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:25:13 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:25:43 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:25:43 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:28:44 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:28:44 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:29:33 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:29:33 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:30:38 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:30:38 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:33:41 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:33:41 PM"}
+{"level":"error","message":"Error: Campground validation failed: author: Campground must belong to a user\n    at errorConverter (/app/src/middlewares/error.js:11:17)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:71:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:67:12)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)","timestamp":"2024-12-09 03:35:33 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:36:11 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:36:11 PM"}
+{"level":"error","message":"Error: Not found\n    at /app/src/app.js:35:10\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at /app/node_modules/express/lib/router/index.js:646:15\n    at next (/app/node_modules/express/lib/router/index.js:265:14)\n    at Function.handle (/app/node_modules/express/lib/router/index.js:175:3)\n    at router (/app/node_modules/express/lib/router/index.js:47:12)","timestamp":"2024-12-09 03:38:00 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:38:37 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:38:37 PM"}
+{"level":"error","message":"Error: Token expired.\n    at /app/src/middlewares/auth.js:24:19\n    at /app/node_modules/jsonwebtoken/verify.js:171:14\n    at getSecret (/app/node_modules/jsonwebtoken/verify.js:97:14)\n    at module.exports [as verify] (/app/node_modules/jsonwebtoken/verify.js:101:10)\n    at /app/src/middlewares/auth.js:22:9\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-12-09 03:40:36 PM"}
+{"level":"error","message":"Error: Cannot read properties of undefined (reading 'findById')\n    at errorConverter (/app/src/middlewares/error.js:11:17)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:71:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:67:12)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)","timestamp":"2024-12-09 03:40:52 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:41:28 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:41:28 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:42:45 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:42:45 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:47:26 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:47:26 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:48:01 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:48:01 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:48:16 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:48:16 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:49:42 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:49:42 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 03:50:21 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 03:50:21 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:04:45 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:04:45 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:05:06 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:05:06 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:05:12 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:05:12 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:05:31 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:05:31 PM"}
+{"level":"error","message":"Error: Campground not found\n    at Object.createReview (/app/src/services/review.service.js:8:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async /app/src/controllers/review.controller.js:5:20","timestamp":"2024-12-09 04:05:38 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:05:57 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:05:57 PM"}
+{"level":"error","message":"Error: Campground not found\n    at Object.createReview (/app/src/services/review.service.js:11:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async /app/src/controllers/review.controller.js:5:20","timestamp":"2024-12-09 04:06:01 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:06:23 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:06:23 PM"}
+{"level":"error","message":"Error: Campground not found\n    at Object.createReview (/app/src/services/review.service.js:13:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async /app/src/controllers/review.controller.js:5:20","timestamp":"2024-12-09 04:06:27 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:07:12 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:07:12 PM"}
+{"level":"error","message":"Error: Campground not found\n    at Object.createReview (/app/src/services/review.service.js:13:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async /app/src/controllers/review.controller.js:5:20","timestamp":"2024-12-09 04:07:30 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:09:23 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:09:23 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:09:46 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:09:46 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:10:23 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:10:23 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:11:09 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:11:09 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:23:34 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:23:34 PM"}
+{"level":"error","message":"Error: Cannot populate path `review` because it is not in your schema. Set the `strictPopulate` option to false to override.\n    at errorConverter (/app/src/middlewares/error.js:11:17)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:71:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:67:12)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)","timestamp":"2024-12-09 04:23:41 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:24:57 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:24:57 PM"}
+{"level":"error","message":"Error: Cannot populate path `review` because it is not in your schema. Set the `strictPopulate` option to false to override.\n    at errorConverter (/app/src/middlewares/error.js:11:17)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:71:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:67:12)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)","timestamp":"2024-12-09 04:25:00 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:26:45 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:26:45 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:32:40 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:32:40 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:35:03 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:35:03 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:35:05 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:35:05 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:35:36 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:35:36 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:36:19 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:36:19 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 04:37:00 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-09 04:37:00 PM"}

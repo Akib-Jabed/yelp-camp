@@ -1,5 +1,5 @@
 const express = require('express');
-const { checkLogin, verifyRole } = require('../middlewares/auth');
+const { checkLogin } = require('../middlewares/auth');
 const { campgroundController } = require('../controllers');
 const validate = require('../middlewares/validate');
 const { campgroundValidation } = require('../validations');
@@ -13,7 +13,6 @@ router
     .get(campgroundController.getCampgrounds)
     .post(
         checkLogin,
-        verifyRole('admin'),
         upload.array('images'),
         generateThumb,
         validate(campgroundValidation.campground),
@@ -25,12 +24,11 @@ router
     .get(campgroundController.getCampground)
     .put(
         checkLogin,
-        verifyRole('admin'),
         upload.array('images'),
         generateThumb,
         validate(campgroundValidation.campground),
         campgroundController.updateCampground
     )
-    .delete(checkLogin, verifyRole('admin'), campgroundController.deleteCampground);
+    .delete(checkLogin, campgroundController.deleteCampground);
 
 module.exports = router;
