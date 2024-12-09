@@ -7,56 +7,36 @@ const schema = new Schema(
     {
         title: {
             type: String,
-            required: [true, 'Tour must have a title'],
-            unique: [true, 'Tour title already taken'],
+            required: [true, 'Title is required'],
+            unique: [true, 'Title already taken'],
             trim: true,
             maxlength: [30, "Title can't be more than 30 characters"],
             minlength: [3, 'Title must be atleast 3 characters long'],
         },
         slug: String,
-        duration: {
-            type: Number,
-            required: [true, 'Tour must have a duration'],
-        },
-        groupSize: {
-            type: Number,
-            required: [true, 'Tour must have a group size'],
-        },
-        difficulty: {
-            type: String,
-            required: [true, 'Tour must have a difficulty level'],
-            enum: {
-                values: ['easy', 'normal', 'difficult'],
-                message: 'Tour difficulty level between easy, normal and difficult',
-            },
-        },
-        price: {
-            type: Number,
-            required: [true, 'Tour must have a price'],
-        },
         description: {
             type: String,
             trim: true,
-            required: [true, 'Tour must have a description'],
+            required: [true, 'Description is required'],
         },
         location: {
             type: String,
             trim: true,
-            required: [true, 'Tour must have a location'],
+            required: [true, 'Location is required'],
         },
-        startDate: {
-            type: Date,
-            required: [true, 'Tour must have a start date'],
+        price: {
+            type: Number,
+            required: [true, 'Price is required'],
         },
         images: [String],
         active: {
             type: Boolean,
             default: true,
         },
-        user: {
+        author: {
             type: mongoose.Schema.ObjectId,
             ref: 'User',
-            required: [true, 'Tour must belong to a user'],
+            required: [true, 'Campground must belong to a user'],
         },
     },
     {
@@ -87,11 +67,6 @@ schema.pre(/^find/, function (next) {
     next();
 });
 
-schema.pre(/^find/, function (next) {
-    this.find({ startDate: { $gte: new Date() } });
-    next();
-});
+const Campground = mongoose.model('Campground', schema);
 
-const Tour = mongoose.model('Tour', schema);
-
-module.exports = Tour;
+module.exports = Campground;

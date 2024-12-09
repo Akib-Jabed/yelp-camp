@@ -1,8 +1,8 @@
 const express = require('express');
 const { checkLogin, verifyRole } = require('../middlewares/auth');
-const { tourController } = require('../controllers');
+const { campgroundController } = require('../controllers');
 const validate = require('../middlewares/validate');
-const { tourValidation } = require('../validations');
+const { campgroundValidation } = require('../validations');
 const { uploader, generateThumb } = require('../middlewares/fileUploader');
 
 const router = express.Router();
@@ -10,27 +10,27 @@ const upload = uploader();
 
 router
     .route('/')
-    .get(tourController.getTours)
+    .get(campgroundController.getCampgrounds)
     .post(
         checkLogin,
         verifyRole('admin'),
         upload.array('images'),
         generateThumb,
-        validate(tourValidation.tour),
-        tourController.createTour
+        validate(campgroundValidation.campground),
+        campgroundController.createCampground
     );
 
 router
     .route('/:slug')
-    .get(tourController.getTour)
+    .get(campgroundController.getCampground)
     .put(
         checkLogin,
         verifyRole('admin'),
         upload.array('images'),
         generateThumb,
-        validate(tourValidation.tour),
-        tourController.updateTour
+        validate(campgroundValidation.campground),
+        campgroundController.updateCampground
     )
-    .delete(checkLogin, verifyRole('admin'), tourController.deleteTour);
+    .delete(checkLogin, verifyRole('admin'), campgroundController.deleteCampground);
 
 module.exports = router;

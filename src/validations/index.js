@@ -1,3 +1,3 @@
 module.exports.authValidation = require('./auth.validation');
-module.exports.tourValidation = require('./tour.validation');
+module.exports.campgroundValidation = require('./campground.validation');
 module.exports.reviewValidation = require('./review.validation');

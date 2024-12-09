@@ -1,7 +1,7 @@
 const express = require('express');
 const config = require('../config/config');
 const authRoute = require('./auth.route');
-const tourRoute = require('./tour.route');
+const campgroundRoute = require('./campground.route');
 const reviewRoute = require('./review.route');
 const docsRoute = require('./docs.route');
 
@@ -13,8 +13,8 @@ const routes = [
         route: authRoute,
     },
     {
-        path: '/tours',
-        route: tourRoute,
+        path: '/campgrounds',
+        route: campgroundRoute,
     },
     {
         path: '/tours/:tourId/reviews',
