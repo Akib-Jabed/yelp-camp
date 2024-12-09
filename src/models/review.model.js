@@ -4,13 +4,6 @@ const { Schema } = mongoose;
 
 const schema = new Schema(
     {
-        title: {
-            type: String,
-            required: [true, 'Review must have a title'],
-            trim: true,
-            maxlength: [30, "Title can't be more than 30 characters"],
-            minlength: [3, 'Title must be atleast 3 characters long'],
-        },
         body: {
             type: String,
             required: [true, "Review body can't be empty"],
@@ -24,10 +17,10 @@ const schema = new Schema(
             type: Date,
             default: Date.now(),
         },
-        tour: {
+        campground: {
             type: mongoose.Schema.ObjectId,
-            ref: 'Tour',
-            required: [true, 'Review must belong to a tour'],
+            ref: 'Campground',
+            required: [true, 'Review must belong to a campground'],
         },
         user: {
             type: mongoose.Schema.ObjectId,
@@ -44,12 +37,12 @@ const schema = new Schema(
     }
 );
 
-schema.index({ tour: 1, user: 1 }, { unique: true });
+schema.index({ campground: 1, user: 1 }, { unique: true });
 
 schema.pre(/^find/, function (next) {
     this.populate({
         path: 'user',
-        select: 'firstName, lastName, photo',
+        select: 'name, email, photo',
     });
 
     next();
