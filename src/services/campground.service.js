@@ -24,12 +24,18 @@ const getCampground = async (req) => {
     return campground;
 };
 
+const checkValidUser = (campgroundUser, loggedUser) => {
+    if (campgroundUser !== loggedUser) {
+        throw new ApiError(403, "Don't have access to take this action");
+    }
+};
+
 const updateCampground = async (req) => {
     const campground = await Campground.findByIdAndUpdate(req.params.id, { ...req.body });
     if (!campground) {
         throw new ApiError(404, 'Campground not found');
     }
-
+    checkValidUser(campground.user, req.user.id);
     if (req.files) {
         campground.images.push(...req.files.map((file) => file.filename));
     }
@@ -44,6 +50,7 @@ const deleteCampground = async (req) => {
     if (!campground) {
         throw new ApiError(404, 'Campground not found');
     }
+    checkValidUser(campground.user, req.user.id);
 
     return campground;
 };

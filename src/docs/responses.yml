@@ -23,7 +23,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/component/schemas/Error"
+            $ref: "#/components/schemas/Error"
           example:
             code: 403
             message: Forbidden

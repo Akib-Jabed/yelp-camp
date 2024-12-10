@@ -17,7 +17,7 @@ const routes = [
         route: campgroundRoute,
     },
     {
-        path: '/campgrounds/:campground/reviews',
+        path: '/campgrounds/:campgroundId/reviews',
         route: reviewRoute,
     },
 ];

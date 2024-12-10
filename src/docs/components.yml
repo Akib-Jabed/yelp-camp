@@ -57,6 +57,7 @@ components:
         location: Fake location
         price: 100
         images: [fake01.png, fake02.png]
+        active: true
     Review:
       type: object
       properties:
@@ -66,3 +67,7 @@ components:
           type: string
         rating:
           type: number
+      example:
+        id: 6757262ca3c9fc43b05e341e
+        body: Fake review body
+        rating: 5
