@@ -151,10 +151,6 @@ module.exports = router;
  *   responses:
  *    "204":
  *     description: No content
- *     content:
- *      application/json:
- *       schema:
- *        $ref: '#/components/schemas/Review'
  *    "401":
  *     $ref: '#/components/responses/Unauthorized'
  *    "403":

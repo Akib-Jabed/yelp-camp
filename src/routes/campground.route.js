@@ -97,6 +97,32 @@ module.exports = router;
 /**
  * @swagger
  * /campground/{id}:
+ *  get:
+ *   summary: Get a campground information
+ *   tags: [Campground]
+ *   security:
+ *    - bearerAuth: []
+ *   parameters:
+ *    - name: id
+ *      in: path
+ *      required: true
+ *      description: The unique identifier of a campground
+ *      schema:
+ *       type: string
+ *   responses:
+ *    "200":
+ *     description: OK
+ *     content:
+ *      application/json:
+ *       schema:
+ *        $ref: '#/components/schemas/Campground'
+ *    "404":
+ *     $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /campground/{id}:
  *  put:
  *   summary: Update a campground
  *   tags: [Campground]
@@ -156,4 +182,32 @@ module.exports = router;
  *     $ref: '#/components/responses/Unauthorized'
  *    "403":
  *     $ref: '#/components/responses/Forbidden'
+ *    "404":
+ *     $ref: '#/components/responses/NotFound'
+ */
+
+/**
+ * @swagger
+ * /campground/{id}:
+ *  delete:
+ *   summary: Delete a campground
+ *   tags: [Campground]
+ *   security:
+ *    - bearerAuth: []
+ *   parameters:
+ *    - name: id
+ *      in: path
+ *      required: true
+ *      description: The unique identifier of a campground
+ *      schema:
+ *       type: string
+ *   responses:
+ *    "204":
+ *     description: No content
+ *    "401":
+ *     $ref: '#/components/responses/Unauthorized'
+ *    "403":
+ *     $ref: '#/components/responses/Forbidden'
+ *    "404":
+ *     $ref: '#/components/responses/NotFound'
  */
