@@ -57,8 +57,12 @@ schema.virtual('reviews', {
 schema.pre(/^find/, function (next) {
     this.populate({
         path: 'user',
-        select: 'name, email, photo',
-    }).populate('reviews');
+        select: 'name email photo',
+    }).populate({
+        path: 'reviews',
+        select: 'body rating',
+    });
+
     next();
 });
 

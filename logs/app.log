@@ -282,3 +282,30 @@
 {"level":"info","message":"database connection successful","timestamp":"2024-12-09 05:27:47 PM"}
 {"level":"info","message":"listening on port: 3000","timestamp":"2024-12-09 05:27:54 PM"}
 {"level":"info","message":"database connection successful","timestamp":"2024-12-09 05:27:54 PM"}
+{"level":"error","message":"SIGETRM received","timestamp":"2024-12-09 05:41:17 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 11:54:49 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 11:54:49 AM"}
+{"level":"error","message":"Error: Not found\n    at /app/src/app.js:35:10\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at cors (/app/node_modules/cors/lib/index.js:188:7)\n    at /app/node_modules/cors/lib/index.js:224:17\n    at originCallback (/app/node_modules/cors/lib/index.js:214:15)\n    at /app/node_modules/cors/lib/index.js:219:13","timestamp":"2024-12-10 11:55:36 AM"}
+{"level":"error","message":"Error: Not found\n    at /app/src/app.js:35:10\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at cors (/app/node_modules/cors/lib/index.js:188:7)\n    at /app/node_modules/cors/lib/index.js:224:17\n    at originCallback (/app/node_modules/cors/lib/index.js:214:15)\n    at /app/node_modules/cors/lib/index.js:219:13","timestamp":"2024-12-10 11:55:38 AM"}
+{"level":"error","message":"Error: Not found\n    at /app/src/app.js:35:10\n    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:328:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at cors (/app/node_modules/cors/lib/index.js:188:7)\n    at /app/node_modules/cors/lib/index.js:224:17\n    at originCallback (/app/node_modules/cors/lib/index.js:214:15)\n    at /app/node_modules/cors/lib/index.js:219:13","timestamp":"2024-12-10 11:55:39 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 11:57:02 AM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 11:57:02 AM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:09:21 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:09:21 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:22:15 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:22:15 PM"}
+{"level":"error","message":"Error: E11000 duplicate key error collection: yelp-camp.reviews index: tour_1_user_1 dup key: { tour: null, user: ObjectId('6754588077a7ef789dd1c318') }\n    at errorConverter (/app/src/middlewares/error.js:11:17)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:71:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:67:12)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)","timestamp":"2024-12-10 12:24:28 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:25:35 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:25:35 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:26:09 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:26:09 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:27:48 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:27:48 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:29:12 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:29:12 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:29:37 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:29:37 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:29:48 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:29:48 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:30:06 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:30:06 PM"}

@@ -31,3 +31,38 @@ components:
           type: number
         message:
           type: string
+    Campground:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+        price:
+          type: number
+        images:
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
+      example:
+        id: 6757243ca3c9ec43b05e341e
+        title: Fake Title
+        description: Fake description for this campground
+        location: Fake location
+        price: 100
+        images: [fake01.png, fake02.png]
+    Review:
+      type: object
+      properties:
+        id:
+          type: string
+        body:
+          type: string
+        rating:
+          type: number
