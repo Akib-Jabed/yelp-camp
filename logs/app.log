@@ -309,3 +309,37 @@
 {"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:29:48 PM"}
 {"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:30:06 PM"}
 {"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:30:06 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:39:55 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:39:55 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:40:41 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:40:41 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:41:07 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:41:07 PM"}
+{"level":"error","message":"Error: Review not found\n    at Object.deleteReview (/app/src/services/review.service.js:49:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async /app/src/controllers/review.controller.js:17:5","timestamp":"2024-12-10 12:41:39 PM"}
+{"level":"error","message":"Error: Cast to ObjectId failed for value \"6757243ca3c9ec43b05e341\" (type string) at path \"_id\" for model \"Campground\"\n    at errorConverter (/app/src/middlewares/error.js:11:17)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:71:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:67:12)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)","timestamp":"2024-12-10 12:41:50 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:42:47 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:42:47 PM"}
+{"level":"error","message":"Error: Cast to ObjectId failed for value \"6757243ca3c9ec43b05e341\" (type string) at path \"_id\" for model \"Campground\"\n    at errorConverter (/app/src/middlewares/error.js:11:17)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:71:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:67:12)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)","timestamp":"2024-12-10 12:42:50 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:43:20 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:43:20 PM"}
+{"level":"error","message":"Error: Cast to ObjectId failed for value \"6757243ca3c9ec43b05e341\" (type string) at path \"_id\" for model \"Campground\"\n    at errorConverter (/app/src/middlewares/error.js:11:17)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:71:5)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/app/node_modules/express/lib/router/index.js:280:10)\n    at Layer.handle_error (/app/node_modules/express/lib/router/layer.js:67:12)\n    at trim_prefix (/app/node_modules/express/lib/router/index.js:326:13)\n    at /app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/app/node_modules/express/lib/router/index.js:346:12)","timestamp":"2024-12-10 12:43:26 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:45:12 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:45:13 PM"}
+{"level":"error","message":"Error: Campground not found\n    at checkCampground (/app/src/services/review.service.js:8:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Object.createReview (/app/src/services/review.service.js:15:26)\n    at async /app/src/controllers/review.controller.js:5:20","timestamp":"2024-12-10 12:45:22 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:45:35 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:45:35 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:49:02 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:49:02 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:49:39 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:49:39 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:49:55 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:49:55 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:51:27 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:51:27 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:51:42 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:51:42 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:51:47 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:51:47 PM"}
+{"level":"info","message":"listening on port: 3000","timestamp":"2024-12-10 12:51:58 PM"}
+{"level":"info","message":"database connection successful","timestamp":"2024-12-10 12:51:58 PM"}
+{"level":"error","message":"Error: Review not found\n    at checkReview (/app/src/services/review.service.js:19:15)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Object.updateReview (/app/src/services/review.service.js:41:22)\n    at async /app/src/controllers/review.controller.js:11:20","timestamp":"2024-12-10 12:52:44 PM"}
