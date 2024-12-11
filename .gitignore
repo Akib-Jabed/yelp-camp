@@ -4,4 +4,4 @@ node_modules
 
 /public
 
-/logs/*
+/logs/*.log

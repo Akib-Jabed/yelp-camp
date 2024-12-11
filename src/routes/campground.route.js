@@ -41,7 +41,68 @@ module.exports = router;
 
 /**
  * @swagger
- * /campground:
+ * /campgrounds:
+ *  get:
+ *   summery: Get all campgrounds
+ *   tags: [Campground]
+ *   parameters:
+ *    - name: title
+ *      in: query
+ *      description: campground title
+ *      required: false
+ *      schema:
+ *       type: string
+ *       example: fake
+ *    - name: location
+ *      in: query
+ *      description: campground location
+ *      required: false
+ *      schema:
+ *       type: string
+ *       example: fake location
+ *    - name: sort
+ *      in: query
+ *      description: sort campground data based on field
+ *      required: false
+ *      schema:
+ *       type: string
+ *       example: "-price"
+ *       default: "-createdAt"
+ *    - name: page
+ *      in: query
+ *      description: the page number
+ *      required: false
+ *      schema:
+ *       type: number
+ *       minimum: 1
+ *       default: 1
+ *       example: 2
+ *    - name: limit
+ *      in: query
+ *      description: number of campground data to get
+ *      required: false
+ *      schema:
+ *       type: integer
+ *       minimum: 1
+ *       default: 10
+ *       example: 50
+ *   responses:
+ *    "200":
+ *     description: OK
+ *     content:
+ *      application/json:
+ *       schema:
+ *        type: object
+ *        properties:
+ *         results:
+ *          type: array
+ *          items:
+ *           $ref: '#/components/schemas/Campground'
+ */
+
+/**
+ * @swagger
+ * /campgrounds:
  *  post:
  *   summary: Create a campground
  *   tags: [Campground]
@@ -96,7 +157,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /campground/{id}:
+ * /campgrounds/{id}:
  *  get:
  *   summary: Get a campground information
  *   tags: [Campground]
@@ -122,7 +183,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /campground/{id}:
+ * /campgrounds/{id}:
  *  put:
  *   summary: Update a campground
  *   tags: [Campground]
@@ -188,7 +249,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /campground/{id}:
+ * /campgrounds/{id}:
  *  delete:
  *   summary: Delete a campground
  *   tags: [Campground]
