@@ -1,5 +1,6 @@
 const { Campground } = require('../models');
 const ApiError = require('../utils/ApiError');
+const ApiFeatures = require('../utils/ApiFeatures');
 
 const createCampground = async (req) => {
     const campground = new Campground(req.body);
@@ -10,8 +11,10 @@ const createCampground = async (req) => {
     return campground;
 };
 
-const getCampgrounds = async () => {
-    const data = await Campground.find({});
+const getCampgrounds = async (req) => {
+    const features = new ApiFeatures(Campground.find({}), req.query);
+    const data = await features.filter().sort().paginate().query;
+
     return data;
 };
 

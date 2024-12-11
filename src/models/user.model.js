@@ -6,16 +6,6 @@ const { Schema } = mongoose;
 
 const schema = new Schema(
     {
-        // firstName: {
-        //     type: String,
-        //     required: [true, 'Please tell us your first name'],
-        //     trim: true,
-        // },
-        // lastName: {
-        //     type: String,
-        //     required: [true, 'Please tell us your last name'],
-        //     trim: true,
-        // },
         name: {
             type: String,
             required: [true, 'Please tell us your name'],
@@ -48,6 +38,11 @@ const schema = new Schema(
             type: Boolean,
             default: true,
         },
+        createdAt: {
+            type: Date,
+            default: Date.now(),
+            select: false,
+        },
     },
     {
         toJSON: { virtuals: true },
@@ -57,10 +52,6 @@ const schema = new Schema(
         timestamps: true,
     }
 );
-
-// schema.virtual('fullName').get(function () {
-//     return `${this.firstName} ${this.lastName}`;
-// });
 
 schema.pre('save', async function (next) {
     if (this.isModified('password')) {

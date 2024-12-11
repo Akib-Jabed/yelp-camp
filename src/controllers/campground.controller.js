@@ -2,7 +2,7 @@ const catchAsync = require('../utils/catchAsync');
 const { campgroundService } = require('../services');
 
 const getCampgrounds = catchAsync(async (req, res) => {
-    const campgrounds = await campgroundService.getCampgrounds();
+    const campgrounds = await campgroundService.getCampgrounds(req);
 
     res.status(200).send({ data: campgrounds });
 });

@@ -36,6 +36,10 @@ const schema = new Schema(
             ref: 'User',
             required: [true, 'Campground must belong to a user'],
         },
+        createdAt: {
+            type: Date,
+            default: Date.now(),
+        },
     },
     {
         toJSON: { virtuals: true },
