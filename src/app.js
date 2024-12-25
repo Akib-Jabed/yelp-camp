@@ -4,6 +4,8 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xssReqSanitizer = require('xss-req-sanitizer');
 const cors = require('cors');
 const path = require('path');
+const rateLimit = require('express-rate-limit');
+const compression = require('compression');
 const routes = require('./routes');
 const ApiError = require('./utils/ApiError');
 const { errorConverter, errorHandler } = require('./middlewares/error');
@@ -24,10 +26,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(xssReqSanitizer());
 app.use(mongoSanitize());
 
+app.use(compression());
+
 // enable cors
 app.use(cors());
 app.options('*', cors());
 
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    limit: 100,
+    standardHeaders: 'draft-8',
+    legacyHeaders: false,
+    skipSuccessfulRequests: true,
+    message: 'Too many requests from this IP, please try again later!',
+});
+app.use('/api', limiter);
 app.use('/api', routes);
 
 // middleware to handle unknown api requests
