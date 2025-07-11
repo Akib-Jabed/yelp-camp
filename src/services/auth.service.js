@@ -1,9 +1,7 @@
-const jwt = require('jsonwebtoken');
-const { User, Token } = require('../models');
+const { User } = require('../models');
 const ApiError = require('../utils/ApiError');
-const config = require('../config/config');
 
-const createUser = async (data) => {
+const registerUser = async (data) => {
     const { email } = { data };
     if (await User.isEmailTaken(email)) {
         throw new ApiError(409, 'Email already taken');
@@ -12,9 +10,8 @@ const createUser = async (data) => {
     const user = await User.create(data);
     return {
         id: user.id,
-        name: user.name,
+        username: user.username,
         email: user.email,
-        photo: user.photo,
     };
 };
 
@@ -28,49 +25,12 @@ const loginUser = async (data) => {
 
     return {
         id: user.id,
-        name: user.name,
+        username: user.username,
         email: user.email,
-        photo: user.photo,
     };
-};
-
-const logoutUser = async (data) => {
-    const { token, user } = data;
-
-    await Token.create({ token, user: user.id, blacklisted: true });
-};
-
-const updatePassword = async (data, _user) => {
-    const { currentPassword, newPassword } = data;
-
-    const user = await User.findById(_user.id);
-    if (!(await user.isPasswordMatch(currentPassword))) {
-        throw new ApiError(400, 'Old password not matched');
-    }
-
-    user.password = newPassword;
-    await user.save();
-
-    return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        photo: user.photo,
-    };
-};
-
-const generateToken = (user, expires = config.jwt.expires, secret = config.jwt.secret) => {
-    const payload = {
-        data: user,
-    };
-
-    return jwt.sign(payload, secret, { expiresIn: expires });
 };
 
 module.exports = {
-    createUser,
+    registerUser,
     loginUser,
-    logoutUser,
-    updatePassword,
-    generateToken,
 };

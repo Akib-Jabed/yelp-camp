@@ -5,9 +5,8 @@ const generateToken = (user, expires = config.jwt.expires, secret = config.jwt.s
     const payload = {
         data: {
             id: user.id,
-            name: user.fullName,
+            username: user.username,
             email: user.email,
-            role: user.role,
         },
     };
 

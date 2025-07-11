@@ -22,9 +22,6 @@ const checkLogin = catchAsync(async (req, res, next) => {
             const decodedJwt = jwt.decode(token);
             const { data } = decodedJwt;
             req.user = data;
-            if (['/deactivate', '/logout'].includes(req.path)) {
-                req.token = token;
-            }
         }
 
         next();

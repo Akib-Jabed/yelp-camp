@@ -2,14 +2,11 @@ const express = require('express');
 const { authController } = require('../controllers');
 const { authValidation } = require('../validations');
 const validate = require('../middlewares/validate');
-const { checkLogin } = require('../middlewares/auth');
 
 const router = express.Router();
 
 router.post('/register', validate(authValidation.register), authController.register);
 router.post('/login', validate(authValidation.login), authController.login);
-router.post('/logout', checkLogin, authController.logout);
-router.post('/update-password', checkLogin, validate(authValidation.updatePassword), authController.updatePassword);
 
 module.exports = router;
 
@@ -136,76 +133,4 @@ module.exports = router;
  *       example:
  *        code: 401
  *        message: Invalid credentials
- */
-
-/**
- * @swagger
- * /auth/logout:
- *  post:
- *   summary: User logout
- *   tags: [Auth]
- *   security:
- *    - bearerAuth: []
- *   responses:
- *    "204":
- *     description: No content
- *    "401":
- *     $ref: '#/components/responses/Unauthorized'
- *    "404":
- *      $ref: '#/components/responses/NotFound'
- */
-
-/**
- * @swagger
- * /auth/update-password:
- *  post:
- *   summary: User password update
- *   tags: [Auth]
- *   security:
- *    - bearerAuth: []
- *   requestBody:
- *    required: true
- *    content:
- *     application/json:
- *      schema:
- *       type: object
- *       required:
- *        - currentPassword
- *        - newPassword
- *        - confirmPassword
- *       properties:
- *        currentPassword:
- *         type: string
- *         format: password
- *         description: Current password of the user
- *        newPassword:
- *         type: string
- *         format: password
- *         description: New password of the user
- *        confirmPassword:
- *         type: string
- *         format: password
- *         description: Confirm new password of the user
- *     examples:
- *      validRequest:
- *       value:
- *        currentPassword: Password1
- *        newPassword: Password01
- *        confirmPassword: Password01
- *   responses:
- *    "200":
- *     description: Password updated successfully
- *     content:
- *      application/json:
- *       schema:
- *        type: object
- *        properties:
- *         user:
- *          $ref: '#/components/schemas/User'
- *         token:
- *          $ref: '#/components/schemas/Token'
- *    "400":
- *     $ref: '#/components/responses/InvalidInput'
- *    "401":
- *     $ref: '#/components/responses/Unauthorized'
  */

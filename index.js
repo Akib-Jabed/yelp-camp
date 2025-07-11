@@ -10,13 +10,13 @@ const server = app.listen(config.port, () => {
         .then(() => logger.info('database connection successful'))
         .catch((err) => logger.error(err));
 
-    logger.info(`listening on port: ${config.port}`);
+    logger.info(`🚀 Server running at port: ${config.port}`);
 });
 
 const exitHandler = () => {
     if (server) {
         server.close(() => {
-            logger.info('Server closed');
+            logger.info('✅ Server gracefully shutted down...');
         });
     }
     process.exit(1);

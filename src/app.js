@@ -5,6 +5,7 @@ const xssReqSanitizer = require('xss-req-sanitizer');
 const cors = require('cors');
 const path = require('path');
 const rateLimit = require('express-rate-limit');
+const slowDown = require('express-slow-down');
 const compression = require('compression');
 const routes = require('./routes');
 const ApiError = require('./utils/ApiError');
@@ -32,15 +33,26 @@ app.use(compression());
 app.use(cors());
 app.options('*', cors());
 
-const limiter = rateLimit({
+const speedLimiter = slowDown({
+    windowMs: 15 * 60 * 1000,
+    delayAfter: 10,
+    delayMs: () => 500,
+    maxDelayMs: 2000,
+    skipSuccessfulRequests: true,
+});
+
+const rateLimiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     limit: 100,
-    standardHeaders: 'draft-8',
+    standardHeaders: true,
     legacyHeaders: false,
     skipSuccessfulRequests: true,
-    message: 'Too many requests from this IP, please try again later!',
+    message: 'Too many requests, please try again later!',
 });
-app.use('/api', limiter);
+
+app.use('/api', rateLimiter);
+app.use('/api', speedLimiter);
+
 app.use('/api', routes);
 
 // middleware to handle unknown api requests
