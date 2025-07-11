@@ -251,7 +251,7 @@ module.exports = router;
  * @swagger
  * /campgrounds/{id}:
  *  delete:
- *   summary: Delete a campground
+ *   summary: Delete a campground along with all associated reviews.
  *   tags: [Campground]
  *   security:
  *    - bearerAuth: []

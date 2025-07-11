@@ -31,14 +31,14 @@ module.exports = router;
  *      schema:
  *       type: object
  *       required:
- *        - name
+ *        - username
  *        - email
  *        - password
  *        - confirmPassword
  *       properties:
- *        name:
+ *        username:
  *         type: string
- *         description: Name of the user.
+ *         description: Username of the user.
  *        email:
  *         type: string
  *         format: email
@@ -58,7 +58,7 @@ module.exports = router;
  *     examples:
  *      validRequest:
  *       value:
- *        name: Fake name
+ *        username: fake_name
  *        email: fake@example.com
  *        password: Password1
  *        confirmPassword: Password1

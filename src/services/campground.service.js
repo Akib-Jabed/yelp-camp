@@ -1,4 +1,5 @@
-const { Campground } = require('../models');
+const mongoose = require('mongoose');
+const { Campground, Review } = require('../models');
 const ApiError = require('../utils/ApiError');
 const ApiFeatures = require('../utils/ApiFeatures');
 
@@ -28,34 +29,40 @@ const getCampground = async (req) => {
 };
 
 const checkValidUser = (campgroundUser, loggedUser) => {
-    if (campgroundUser !== loggedUser) {
+    if (campgroundUser.toString() !== loggedUser.toSting()) {
         throw new ApiError(403, "Don't have access to take this action");
     }
 };
 
 const updateCampground = async (req) => {
-    const campground = await Campground.findByIdAndUpdate(req.params.id, { ...req.body });
-    if (!campground) {
-        throw new ApiError(404, 'Campground not found');
-    }
+    const campground = await getCampground(req);
     checkValidUser(campground.user, req.user.id);
+
+    campground.set({ ...req.body });
     if (req.files) {
         campground.images.push(...req.files.map((file) => file.filename));
     }
-
     await campground.save();
 
     return campground;
 };
 
 const deleteCampground = async (req) => {
-    const campground = await Campground.findByIdAndUpdate(req.params.id, { active: false });
-    if (!campground) {
-        throw new ApiError(404, 'Campground not found');
-    }
+    const campground = await getCampground(req);
     checkValidUser(campground.user, req.user.id);
 
-    return campground;
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    try {
+        await Review.deleteMany({ campground: req.params.id }).session(session);
+        await Campground.deleteOne({ _id: req.params.id }).session(session);
+        await session.commitTransaction();
+    } catch (err) {
+        await session.abortTransaction();
+        throw err;
+    } finally {
+        session.endSession();
+    }
 };
 
 module.exports = {

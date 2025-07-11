@@ -20,9 +20,9 @@ const updateCampground = catchAsync(async (req, res) => {
 });
 
 const deleteCampground = catchAsync(async (req, res) => {
-    const campground = await campgroundService.deleteCampground(req);
+    await campgroundService.deleteCampground(req);
 
-    res.status(200).send(campground);
+    res.status(204).send();
 });
 
 const getCampground = catchAsync(async (req, res) => {
