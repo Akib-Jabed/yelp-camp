@@ -27,10 +27,6 @@ const schema = new Schema(
             required: [true, 'Price is required'],
         },
         images: [String],
-        active: {
-            type: Boolean,
-            default: true,
-        },
         user: {
             type: mongoose.Schema.ObjectId,
             ref: 'User',
@@ -61,17 +57,12 @@ schema.virtual('reviews', {
 schema.pre(/^find/, function (next) {
     this.populate({
         path: 'user',
-        select: 'name email photo',
+        select: 'username email',
     }).populate({
         path: 'reviews',
         select: 'body rating',
     });
 
-    next();
-});
-
-schema.pre(/^find/, function (next) {
-    this.find({ active: { $ne: false } });
     next();
 });
 

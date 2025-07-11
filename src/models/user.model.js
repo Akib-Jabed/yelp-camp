@@ -6,10 +6,11 @@ const { Schema } = mongoose;
 
 const schema = new Schema(
     {
-        name: {
+        username: {
             type: String,
             required: [true, 'Please tell us your name'],
             trim: true,
+            unique: true,
         },
         email: {
             type: String,
@@ -18,10 +19,6 @@ const schema = new Schema(
             unique: true,
             lowercase: true,
             validate: [validator.isEmail, 'Please provide a valid email'],
-        },
-        photo: {
-            type: String,
-            default: 'default.jpg',
         },
         password: {
             type: String,
@@ -33,10 +30,6 @@ const schema = new Schema(
                     throw new Error('Password must contain at least one letter and one number');
                 }
             },
-        },
-        active: {
-            type: Boolean,
-            default: true,
         },
         createdAt: {
             type: Date,
@@ -58,11 +51,6 @@ schema.pre('save', async function (next) {
         this.password = await bcrypt.hash(this.password, 11);
     }
 
-    next();
-});
-
-schema.pre(/^find/, function (next) {
-    this.find({ active: { $ne: false } });
     next();
 });
 

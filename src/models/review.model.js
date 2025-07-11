@@ -42,7 +42,7 @@ schema.index({ campground: 1, user: 1 }, { unique: true });
 schema.pre(/^find/, function (next) {
     this.populate({
         path: 'user',
-        select: 'name email photo',
+        select: 'username email',
     });
 
     next();

@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const config = require('../config/config');
-const Token = require('../models/token.model');
 
 const checkLogin = catchAsync(async (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -15,9 +14,6 @@ const checkLogin = catchAsync(async (req, res, next) => {
     if (!token) {
         throw new ApiError(401, 'Please log in to get access');
     }
-
-    const blacklistedToken = await Token.findOne({ token });
-    if (blacklistedToken) throw new ApiError(400, 'Invalid token');
 
     jwt.verify(token, config.jwt.secret, (err, decoded) => {
         if (err) {
