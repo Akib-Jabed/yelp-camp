@@ -41,7 +41,7 @@ const uploader = () => {
 };
 
 const generateThumb = (req, res, next) => {
-    req.files.forEach((f) => {
+    req.files?.forEach((f) => {
         fs.readFile(`public/uploads/${f.filename}`, async (err, stream) => {
             if (err) throw err;
             await sharp(stream.buffer).resize(200, 200).toFile(`public/uploads/thumbs/${f.filename}`);

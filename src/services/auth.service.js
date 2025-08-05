@@ -2,7 +2,8 @@ const { User } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 const registerUser = async (data) => {
-    const { email } = { data };
+    const { email } = data;
+
     if (await User.isEmailTaken(email)) {
         throw new ApiError(409, 'Email already taken');
     }
