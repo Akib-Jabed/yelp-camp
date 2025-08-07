@@ -25,6 +25,15 @@ const options = {
                 url: 'http://localhost:3000/api',
             },
         ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            },
+        },
     },
     apis: ['src/docs/*.yml', 'src/routes/*.js'],
 };

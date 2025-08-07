@@ -9,6 +9,7 @@ components:
           example:
             code: 400
             message: Invalid input
+    
     Unauthorized:
       description: Unauthorized (Access token not found)
       content:
@@ -18,6 +19,7 @@ components:
           example:
             code: 401
             message: Please authenticate
+    
     Forbidden:
       description: Access forbidden
       content:
@@ -27,6 +29,7 @@ components:
           example:
             code: 403
             message: Forbidden
+    
     NotFound:
       description: Not found
       content:
@@ -36,12 +39,31 @@ components:
           example:
             code: 404
             message: Not found
-    DuplicateEmail:
-      description: Email already taken
+    
+    UserConflict:
+      description: Conflict - Email or Username already taken
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          examples:
+            duplicateEmail:
+              summary: Email already exists
+              value:
+                code: 409
+                message: Email already taken
+            duplicateUsername:
+              summary: Username already exists
+              value:
+                code: 409
+                message: Username already taken
+
+    TitleConflict:
+      description: Title already taken
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/Error"
           example:
             code: 409
-            message: Email already taken
+            message: Title already taken        

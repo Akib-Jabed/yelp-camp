@@ -43,7 +43,7 @@ module.exports = router;
  * @swagger
  * /campgrounds:
  *  get:
- *   summery: Get all campgrounds
+ *   summary: Get all campgrounds
  *   tags: [Campground]
  *   parameters:
  *    - name: title
@@ -153,6 +153,8 @@ module.exports = router;
  *     $ref: '#/components/responses/InvalidInput'
  *    "401":
  *     $ref: '#/components/responses/Unauthorized'
+ *    "409":
+ *     $ref: '#/components/responses/TitleConflict'
  */
 
 /**
@@ -161,8 +163,6 @@ module.exports = router;
  *  get:
  *   summary: Get a campground information
  *   tags: [Campground]
- *   security:
- *    - bearerAuth: []
  *   parameters:
  *    - name: id
  *      in: path
@@ -245,6 +245,8 @@ module.exports = router;
  *     $ref: '#/components/responses/Forbidden'
  *    "404":
  *     $ref: '#/components/responses/NotFound'
+ *    "409":
+ *     $ref: '#/components/responses/TitleConflict'
  */
 
 /**

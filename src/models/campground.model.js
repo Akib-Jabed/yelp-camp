@@ -66,6 +66,11 @@ schema.pre(/^find/, function (next) {
     next();
 });
 
+schema.statics.isTitleTaken = async function (title, excludeCampgroundId) {
+    const campground = await this.findOne({ title, _id: { $ne: excludeCampgroundId } });
+    return !!campground;
+};
+
 const Campground = mongoose.model('Campground', schema);
 
 module.exports = Campground;

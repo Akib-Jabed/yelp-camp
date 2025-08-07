@@ -11,6 +11,60 @@
 			"item": [
 				{
 					"name": "Get Campgrounds",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"pm.test(\"The structure of the data is an array of objects\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData).to.have.property('data').that.is.an('array');",
+									"",
+									"    responseData.data.forEach(campground => {",
+									"        pm.expect(campground).to.have.all.keys('_id', 'title', 'description', 'location', 'price', 'createdAt', 'user', '__v', 'images', 'reviews', 'id');",
+									"        ",
+									"        pm.expect(campground.user).to.have.all.keys('_id', 'username', 'email', 'id');",
+									"        ",
+									"        pm.expect(campground.reviews).to.be.an('array');",
+									"        campground.reviews.forEach(review => {",
+									"            pm.expect(review).to.have.all.keys('_id', 'body', 'rating', 'campground', 'user', 'id');",
+									"            pm.expect(review.user).to.have.all.keys('_id', 'username', 'email', 'id');",
+									"        });",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"The title, description, and location must be non-empty strings\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    responseData.data.forEach(campground => {",
+									"        pm.expect(campground.title).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Title should not be empty\");",
+									"        pm.expect(campground.description).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Description should not be empty\");",
+									"        pm.expect(campground.location).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Location should not be empty\");",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"The price is a positive number\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    responseData.data.forEach(campground => {",
+									"        pm.expect(campground.price).to.be.a('number').and.to.be.at.least(1, \"Price should be a non-negative number\");",
+									"    });",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -28,6 +82,66 @@
 				},
 				{
 					"name": "Get Campground",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Content-Type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response is either success (200) or not found (404)\", function () {",
+									"    const statusCode = pm.response.code;",
+									"    pm.expect([200, 404]).to.include(statusCode);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response status code is 200\", function () {",
+									"        pm.expect(pm.response.code).to.equal(200);",
+									"    });",
+									"",
+									"    pm.test(\"Response body structure contains the required fields\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData).to.be.an('object');",
+									"        pm.expect(responseData).to.have.all.keys('images', '_id', 'title', 'description', 'location', 'price', 'createdAt', 'user', '__v', 'reviews', 'id');",
+									"",
+									"        pm.expect(responseData.images).to.be.an('array');",
+									"        pm.expect(responseData.title).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Title should not be empty\");",
+									"        pm.expect(responseData.description).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Description should not be empty\");",
+									"        pm.expect(responseData.location).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Location should not be empty\");",
+									"        pm.expect(responseData.price).to.be.a('number').and.to.be.at.least(1, \"Price should be a positive number\");",
+									"    });",
+									"",
+									"    pm.test(\"User object contains required fields\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData.user).to.exist;",
+									"        pm.expect(responseData.user).to.have.all.keys('_id', 'username', 'email', 'id');",
+									"    });",
+									"}",
+									"",
+									"if (pm.response.code === 404) {",
+									"    pm.test(\"Response status code is 404\", function () {",
+									"        pm.expect(pm.response.code).to.equal(404);",
+									"    });",
+									"",
+									"    pm.test(\"Response body contains an error message\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData).to.be.an('object');",
+									"        pm.expect(responseData).to.have.property('message').that.is.a('string');",
+									"        pm.expect(responseData).to.have.property('code').that.is.a('number').that.is.eql(404);",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -49,13 +163,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{base_url}}/campgrounds/68921908a0a0fb3356e2c110",
+							"raw": "{{base_url}}/campgrounds/689375f8884a0a26c7043415",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"campgrounds",
-								"68921908a0a0fb3356e2c110"
+								"689375f8884a0a26c7043415"
 							]
 						}
 					},
@@ -63,6 +177,73 @@
 				},
 				{
 					"name": "Create Campgrounds",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (!pm.environment.get('auth_token')) {",
+									"    console.log('Warning: No auth token found');",
+									"}",
+									"",
+									"pm.test(\"Request was properly authenticated\", function () {",
+									"    pm.response.to.not.have.status(401);",
+									"    pm.response.to.not.have.status(403);",
+									"});",
+									"",
+									"pm.test('Content-Type is application/json', function() {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+									"});",
+									"",
+									"pm.test(\"Response is either created (201) or conflict (409)\", function () {",
+									"    const statusCode = pm.response.code;",
+									"    pm.expect([201, 409]).to.include(statusCode);",
+									"});",
+									"",
+									"if (pm.response.code === 201) {",
+									"    pm.test(\"Response status code is 201\", function () {",
+									"        pm.expect(pm.response.code).to.equal(201);",
+									"    });",
+									"",
+									"    pm.test(\"Response has the required fields\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData).to.be.an('object');",
+									"        pm.expect(responseData).to.have.all.keys('title', 'description', 'location', 'price', 'createdAt', '_id', 'user', '__v', 'id');",
+									"    });",
+									"",
+									"",
+									"    pm.test(\"Price must be a positive number\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData).to.be.an('object');",
+									"        pm.expect(responseData.price).to.exist.and.to.be.a('number').and.to.be.at.least(1, \"Price should be positive\");",
+									"    });",
+									"}",
+									"",
+									"if (pm.response.code === 409) {",
+									"    pm.test(\"Response status code is 409\", function () {",
+									"        pm.expect(pm.response.code).to.equal(409);",
+									"    });",
+									"",
+									"    pm.test(\"Response body contains an error message\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData).to.be.an('object');",
+									"        pm.expect(responseData).to.have.property('message').that.is.a('string');",
+									"        pm.expect(responseData).to.have.property('code').that.is.a('number').that.is.eql(409);",
+									"    });",
+									"}",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -99,6 +280,75 @@
 				},
 				{
 					"name": "Update Campground",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (!pm.environment.get('auth_token')) {",
+									"    console.log('Warning: No auth token found');",
+									"}",
+									"",
+									"pm.test(\"Request was properly authenticated\", function () {",
+									"    pm.response.to.not.have.status(401);",
+									"    pm.response.to.not.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"Content-Type is application/json\", function () {",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+									"});",
+									"",
+									"pm.test(\"Response is either success (200) or not found (404)\", function () {",
+									"    const statusCode = pm.response.code;",
+									"    pm.expect([200, 404]).to.include(statusCode);",
+									"});",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.test(\"Response status code is 200\", function () {",
+									"        pm.expect(pm.response.code).to.equal(200);",
+									"    });",
+									"",
+									"    pm.test(\"Response body structure contains the required fields\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData).to.be.an('object');",
+									"        pm.expect(responseData).to.have.all.keys('images', '_id', 'title', 'description', 'location', 'price', 'createdAt', 'user', '__v', 'reviews', 'id');",
+									"",
+									"        pm.expect(responseData.images).to.be.an('array');",
+									"        pm.expect(responseData.title).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Title should not be empty\");",
+									"        pm.expect(responseData.description).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Description should not be empty\");",
+									"        pm.expect(responseData.location).to.exist.and.to.be.a('string').and.to.have.lengthOf.at.least(1, \"Location should not be empty\");",
+									"        pm.expect(responseData.price).to.be.a('number').and.to.be.at.least(1, \"Price should be a positive number\");",
+									"    });",
+									"",
+									"    pm.test(\"User object contains required fields\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData.user).to.exist;",
+									"        pm.expect(responseData.user).to.have.all.keys('_id', 'username', 'email', 'id');",
+									"    });",
+									"}",
+									"",
+									"if (pm.response.code === 404) {",
+									"    pm.test(\"Response status code is 404\", function () {",
+									"        pm.expect(pm.response.code).to.equal(404);",
+									"    });",
+									"",
+									"    pm.test(\"Response body contains an error message\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData).to.be.an('object');",
+									"        pm.expect(responseData).to.have.property('message').that.is.a('string');",
+									"        pm.expect(responseData).to.have.property('code').that.is.a('number').that.is.eql(404);",
+									"    });",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -122,13 +372,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/campgrounds/68921908a0a0fb3356e2c110",
+							"raw": "{{base_url}}/campgrounds/689375f8884a0a26c7043415",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"campgrounds",
-								"68921908a0a0fb3356e2c110"
+								"689375f8884a0a26c7043415"
 							]
 						}
 					},
@@ -136,6 +386,56 @@
 				},
 				{
 					"name": "Delete Campground",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (!pm.environment.get('auth_token')) {",
+									"    console.log('Warning: No auth token found');",
+									"}",
+									"",
+									"pm.test(\"Request was properly authenticated\", function () {",
+									"    pm.response.to.not.have.status(401);",
+									"    pm.response.to.not.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"Response is either no content (204) or not found (404)\", function () {",
+									"    const statusCode = pm.response.code;",
+									"    pm.expect([204, 404]).to.include(statusCode);",
+									"});",
+									"",
+									"if (pm.response.code === 204) {",
+									"    pm.test(\"Response status code is 204\", function () {",
+									"        pm.expect(pm.response.code).to.eql(204);",
+									"    });",
+									"",
+									"    pm.test(\"Response has no content for a successful DELETE request\", function () {",
+									"        pm.expect(pm.response.text()).to.be.empty;",
+									"    });",
+									"}",
+									"",
+									"if (pm.response.code === 404) {",
+									"    pm.test(\"Response status code is 404\", function () {",
+									"        pm.expect(pm.response.code).to.eql(404);",
+									"    });",
+									"",
+									"    pm.test(\"Response body contains the correct error message\", function () {",
+									"        const responseBody = pm.response.json();",
+									"",
+									"        pm.expect(responseBody.code).to.eql(404);",
+									"        pm.expect(responseBody.message).to.eql(\"Campground not found\");",
+									"    });",
+									"}",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -159,13 +459,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/campgrounds/68921927a0a0fb3356e2c112",
+							"raw": "{{base_url}}/campgrounds/689380d3884a0a26c7043430",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"campgrounds",
-								"68921927a0a0fb3356e2c112"
+								"689380d3884a0a26c7043430"
 							]
 						}
 					},
@@ -183,6 +483,70 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test('Content-Type is application/json', function() {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+									"});",
+									"",
+									"pm.test(\"Response is either created (201) or conflict (409)\", function () {",
+									"    const statusCode = pm.response.code;",
+									"    pm.expect([201, 409]).to.include(statusCode);",
+									"});",
+									"",
+									"if (pm.response.code === 201) {",
+									"    pm.test('Status code is 201', function() {",
+									"        pm.response.to.have.status(201);",
+									"    });",
+									"",
+									"    pm.test('Response contains user and token', function() {",
+									"        const jsonData = pm.response.json();",
+									"",
+									"        pm.expect(jsonData).to.have.property('user')",
+									"        pm.expect(jsonData).to.have.property('token')",
+									"",
+									"        pm.expect(jsonData.user).to.have.property('id')",
+									"        pm.expect(jsonData.user).to.have.property('username')",
+									"        pm.expect(jsonData.user).to.have.property('email')",
+									"",
+									"        pm.expect(jsonData.user.id).to.be.a('string')",
+									"        pm.expect(jsonData.user.id).to.have.lengthOf(24)",
+									"    })",
+									"",
+									"    pm.test('Token is a valid JWT', function() {",
+									"        const jsonData = pm.response.json();",
+									"        const { token } = jsonData",
+									"",
+									"        pm.expect(token).to.be.a('string')",
+									"        pm.expect(token).to.not.be.empty;",
+									"",
+									"        const tokenParts = token.split('.')",
+									"        pm.expect(tokenParts.length).to.eql(3);",
+									"        tokenParts.forEach(part => {",
+									"            pm.expect(part).to.not.be.empty;",
+									"        })",
+									"    })",
+									"",
+									"    pm.test('No sensitive content exposed', function() {",
+									"        const jsonData = pm.response.json()",
+									"",
+									"        pm.expect(jsonData).to.not.have.property('password')",
+									"        pm.expect(jsonData.user).to.not.have.property('password')",
+									"    })",
+									"}",
+									"",
+									"if (pm.response.code === 409) {",
+									"    pm.test(\"Response status code is 409\", function () {",
+									"        pm.expect(pm.response.code).to.equal(409);",
+									"    });",
+									"",
+									"    pm.test(\"Response body contains an error message\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData).to.be.an('object');",
+									"        pm.expect(responseData).to.have.property('message').that.is.a('string');",
+									"        pm.expect(responseData).to.have.property('code').that.is.a('number').that.is.eql(409);",
+									"    });",
+									"}",
+									"",
 									"if (pm.response.code === 201 || pm.response.code === 200) {",
 									"    const responseJson = pm.response.json()",
 									"    const token = responseJson.token",
@@ -200,7 +564,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"@akib11\",\n    \"email\": \"akib.jabed@gmail.com\",\n    \"password\": \"akib1234\",\n    \"confirmPassword\": \"akib1234\"\n}",
+							"raw": "{\n    \"username\": \"@akib12\",\n    \"email\": \"a.jabed12@gmail.com\",\n    \"password\": \"akib1234\",\n    \"confirmPassword\": \"akib1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -486,6 +850,49 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"pm.test('Status code is 200', function() {",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"",
+									"pm.test('Content-Type is application/json', function() {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json')",
+									"})",
+									"",
+									"pm.test('Response contains user and token', function() {",
+									"    const jsonData = pm.response.json();",
+									"",
+									"    pm.expect(jsonData).to.have.property('user')",
+									"    pm.expect(jsonData).to.have.property('token')",
+									"",
+									"    pm.expect(jsonData.user).to.have.property('id')",
+									"    pm.expect(jsonData.user).to.have.property('username')",
+									"    pm.expect(jsonData.user).to.have.property('email')",
+									"",
+									"    pm.expect(jsonData.user.id).to.be.a('string')",
+									"    pm.expect(jsonData.user.id).to.have.lengthOf(24)",
+									"})",
+									"",
+									"pm.test('Token is a valid JWT', function() {",
+									"    const jsonData = pm.response.json();",
+									"    const { token } = jsonData",
+									"",
+									"    pm.expect(token).to.be.a('string')",
+									"    pm.expect(token).to.not.be.empty;",
+									"",
+									"    const tokenParts = token.split('.')",
+									"    pm.expect(tokenParts.length).to.eql(3);",
+									"    tokenParts.forEach(part => {",
+									"        pm.expect(part).to.not.be.empty;",
+									"    })",
+									"})",
+									"",
+									"pm.test('No sensitive content exposed', function() {",
+									"    const jsonData = pm.response.json()",
+									"",
+									"    pm.expect(jsonData).to.not.have.property('password')",
+									"    pm.expect(jsonData.user).to.not.have.property('password')",
+									"})",
+									"",
 									"if (pm.response.code === 201 || pm.response.code === 200) {",
 									"    const responseJson = pm.response.json()",
 									"    const token = responseJson.token",
@@ -659,7 +1066,82 @@
 			"name": "Reviews",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Create Review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (!pm.environment.get('auth_token')) {",
+									"    console.log('Warning: No auth token found');",
+									"}",
+									"",
+									"pm.test(\"Request was properly authenticated\", function () {",
+									"    pm.response.to.not.have.status(401);",
+									"    pm.response.to.not.have.status(403);",
+									"});",
+									"",
+									"pm.test('Content-Type is application/json', function() {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+									"})",
+									"",
+									"pm.test(\"Response is either created (201) or not found (404)\", function () {",
+									"    const statusCode = pm.response.code;",
+									"    pm.expect([201, 404]).to.include(statusCode);",
+									"});",
+									"",
+									"if (pm.response.code === 201) {",
+									"    pm.test('Status code is 201', function() {",
+									"        pm.response.to.have.status(201);",
+									"    })",
+									"",
+									"    pm.test(\"Response contains all required fields\", function () {",
+									"        const responseJson = pm.response.json();",
+									"        ",
+									"        pm.expect(responseJson).to.have.property('body');",
+									"        pm.expect(responseJson).to.have.property('rating');",
+									"        pm.expect(responseJson).to.have.property('createdAt');",
+									"        pm.expect(responseJson).to.have.property('campground');",
+									"        pm.expect(responseJson).to.have.property('user');",
+									"        pm.expect(responseJson).to.have.property('id');",
+									"",
+									"        pm.expect(responseJson.id).to.be.a('string');",
+									"        pm.expect(responseJson.id).to.have.lengthOf(24);",
+									"",
+									"        pm.expect(responseJson.campground).to.be.a('string');",
+									"        pm.expect(responseJson.campground).to.have.lengthOf(24);",
+									"",
+									"        pm.expect(responseJson.user).to.be.a('string');",
+									"        pm.expect(responseJson.user).to.have.lengthOf(24);",
+									"",
+									"        pm.expect(responseJson.rating).to.be.a('number');",
+									"        pm.expect(responseJson.rating).to.be.within(1, 5);",
+									"    });",
+									"",
+									"}",
+									"",
+									"if (pm.response.code === 404) {",
+									"    pm.test(\"Response status code is 404\", function () {",
+									"        pm.expect(pm.response.code).to.equal(404);",
+									"    });",
+									"",
+									"    pm.test(\"Response body contains an error message\", function () {",
+									"        const responseData = pm.response.json();",
+									"        ",
+									"        pm.expect(responseData).to.be.an('object');",
+									"        pm.expect(responseData).to.have.property('message').that.is.a('string');",
+									"        pm.expect(responseData).to.have.property('code').that.is.a('number').that.is.eql(404);",
+									"    });",
+									"}",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -830,6 +1312,16 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",

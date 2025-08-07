@@ -20,11 +20,11 @@ module.exports = router;
  * @swagger
  * /campgrounds/{campgroundId}/reviews:
  *  post:
- *   summary: Post a review
+ *   summary: Post a review for a campground
  *   tags: [Review]
  *   security:
  *    - bearerAuth: []
- *   paramters:
+ *   parameters:
  *    - name: campgroundId
  *      in: path
  *      required: true

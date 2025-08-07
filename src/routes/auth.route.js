@@ -47,13 +47,13 @@ module.exports = router;
  *         type: string
  *         format: password
  *         minLength: 8
- *         pattern: "[A-Za-z0-9]{8,}"
+ *         pattern: "Fake1234"
  *         description: Password for the user. Must be 8 characters long and contain alpha numeric values
  *        confirmPassword:
  *         type: string
  *         format: password
  *         minLength: 8
- *         pattern: "[A-Za-z0-9]{8,}"
+ *         pattern: "Fake1234"
  *         description: Repeat password and both password should match
  *     examples:
  *      validRequest:
@@ -77,7 +77,7 @@ module.exports = router;
  *    "400":
  *     $ref: '#/components/responses/InvalidInput'
  *    "409":
- *     $ref: '#/components/responses/DuplicateEmail'
+ *     $ref: '#/components/responses/UserConflict'
  */
 
 /**
@@ -104,6 +104,7 @@ module.exports = router;
  *        password:
  *         type: string
  *         format: password
+ *         pattern: "Fake1234"
  *         description: Password of the user
  *     examples:
  *      validRequest:

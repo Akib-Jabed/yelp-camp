@@ -3,6 +3,11 @@ const ApiError = require('../utils/ApiError');
 const ApiFeatures = require('../utils/ApiFeatures');
 
 const createCampground = async (req) => {
+    const { title } = req.body;
+    if (await Campground.isTitleTaken(title)) {
+        throw new ApiError(409, 'Title already taken');
+    }
+
     const campground = new Campground(req.body);
     campground.images = req.files?.map((file) => file.filename);
     campground.user = req.user.id;

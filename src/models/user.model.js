@@ -60,6 +60,11 @@ schema.statics.isEmailTaken = async function (email, excludeUserId) {
     return !!user;
 };
 
+schema.statics.isUsernameTaken = async function (username, excludeUserId) {
+    const user = await this.findOne({ username, _id: { $ne: excludeUserId } });
+    return !!user;
+};
+
 schema.methods.isPasswordMatch = async function (password) {
     const isMatched = await bcrypt.compare(password, this.password);
     return isMatched;
