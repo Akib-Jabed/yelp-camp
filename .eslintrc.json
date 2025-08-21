@@ -5,7 +5,8 @@
   },
   "env": {
     "commonjs": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "rules": {
     "no-console": 0,
@@ -36,5 +37,5 @@
     "func-names": "off",
     "consistent-return": "off"
   },
-  "plugins": ["prettier"]
+  "plugins": ["jest", "prettier"]
 }

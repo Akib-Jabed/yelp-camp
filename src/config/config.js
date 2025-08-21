@@ -4,11 +4,10 @@ const path = require('path');
 dotenv.config({ path: path.join(__dirname, '../../.env') });
 
 module.exports = {
-    env: process.env.NODE_ENV,
-    port: process.env.PORT,
+    env: process.env.ENVIRONMENT || 'development',
+    port: process.env.PORT || 3000,
     database: {
-        // url: process.env.DATABASE_URL,
-        url: 'mongodb://admin:password@mongodb/yelp-camp?authSource=admin',
+        url: process.env.DATABASE_URL || 'mongodb://admin:password@localhost:27017/yelp-camp',
     },
     jwt: {
         secret: process.env.SECRET_KEY,
