@@ -6,8 +6,8 @@
   "repository": "https://github.com/Akib-Jabed/yelp-camp",
   "author": "Akib Jabed <a.jabed.bd@gmail.com>",
   "scripts": {
-    "start": "nodemon index",
-    "test": "jest"
+    "dev": "nodemon index",
+    "test": "jest --coverage"
   },
   "keywords": [
     "node",
