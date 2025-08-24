@@ -1,4 +1,4 @@
-const catchAsync = require('../src/utils/catchAsync')
+const catchAsync = require('../../src/utils/catchAsync')
 
 describe('catchAsync', () => {
     let req, res, next;
