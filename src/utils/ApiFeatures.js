@@ -1,5 +1,5 @@
 class ApiFeatures {
-    constructor(query, queryString) {
+    constructor(query, queryString={}) {
         this.query = query;
         this.queryString = queryString;
     }

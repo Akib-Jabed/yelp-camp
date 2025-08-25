@@ -8,8 +8,7 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
-    "test": "jest",
-    "test:cov": "jest --coverage"
+    "test": "jest"
   },
   "keywords": [
     "node",
