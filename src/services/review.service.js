@@ -2,9 +2,7 @@ const { Review, Campground } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 const checkCampground = async (req) => {
-    console.log(req.originalUrl);
     const campgroundId = req.originalUrl.split('/')[3];
-    console.log(campgroundId);
     const campground = await Campground.findById(campgroundId);
     if (!campground) {
         throw new ApiError(404, 'Campground not found');

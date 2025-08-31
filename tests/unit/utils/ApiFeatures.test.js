@@ -1,4 +1,4 @@
-const ApiFeatures = require('../../src/utils/ApiFeatures');
+const ApiFeatures = require('../../../src/utils/ApiFeatures');
 
 describe('ApiFeatures', () => {
     let mockQuery;
@@ -19,6 +19,22 @@ describe('ApiFeatures', () => {
             page: 2,
             limit: 5 
         }
+    })
+
+    describe('constructor', () => {
+        it('should initialize with query and queryString', () => {
+            const apiFeatures = new ApiFeatures(mockQuery, queryString);
+
+            expect(apiFeatures.query).toBe(mockQuery)
+            expect(apiFeatures.queryString).toBe(queryString)
+        })
+
+        it('should handle default queryString', () => {
+            const apiFeatures = new ApiFeatures(mockQuery);
+
+            expect(apiFeatures.query).toBe(mockQuery)
+            expect(apiFeatures.queryString).toEqual({})
+        })
     })
 
     describe('filter', () => {
