@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
-const config = require('../../../src/config/config')
-const { generateToken } = require('../../../src/utils/tokens');
+const config = require('../../src/config/config')
+const { generateToken } = require('../../src/utils/tokens');
 
-jest.mock('../../../src/config/config', () => ({
+jest.mock('../../src/config/config', () => ({
     jwt: {
         expires: 3600,
         secret: 'default-test-secret'

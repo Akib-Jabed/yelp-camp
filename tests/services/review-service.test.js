@@ -1,8 +1,8 @@
-const { createReview } = require('../../../src/services/review.service')
-const { Review, Campground } = require('../../../src/models');
-const ApiError = require('../../../src/utils/ApiError');
+const { createReview } = require('../../src/services/review.service')
+const { Review, Campground } = require('../../src/models');
+const ApiError = require('../../src/utils/ApiError');
 
-jest.mock('../../../src/models', () => ({
+jest.mock('../../src/models', () => ({
     Campground: {
         findById: jest.fn()
     },
@@ -15,7 +15,7 @@ jest.mock('../../../src/models', () => ({
     })
 }))
 
-jest.mock('../../../src/utils/ApiError', () => {
+jest.mock('../../src/utils/ApiError', () => {
     return jest.fn().mockImplementation((statusCode, message, isOperational=true) => {
         const error = new Error(message);
         error.statusCode = statusCode;

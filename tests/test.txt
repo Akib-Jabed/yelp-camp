@@ -1,28 +1,31 @@
 High Priority - Must Test ✅
-Utils (Business Critical)
 
+
+Utils (Business Critical)
+==============================================
 tokens.js - JWT generation is security-critical
 ApiError.js - Error handling affects entire app
 catchAsync.js - Error propagation wrapper
 ApiFeatures.js - If it has complex query logic
 
 
-
-
-
-
-
 Services (Core Business Logic)
-
+==============================================
 auth.service.js - Authentication logic
+
+
+
 campground.service.js - Main business logic
 review.service.js - Review operations
 
 Middlewares (Request Processing)
-
+==============================================
 auth.js - Authentication/authorization
 validate.js - Input validation logic
 error.js - Error handling middleware
+
+
+
 
 Medium Priority - Should Test ⚠️
 Controllers (API Layer)
@@ -37,19 +40,3 @@ user.model.js - User schema/methods
 campground.model.js - Campground schema/methods
 review.model.js - Review schema/methods
 (Focus on custom methods, virtuals, pre/post hooks)
-
-Low Priority - Optional ⏸️
-Routes
-
-Usually just Express route definitions
-Test controllers instead of routes
-Only test if complex route-level logic exists
-
-Validations
-
-Often just Joi/express-validator schemas
-Focus on testing the validation middleware instead
-
-Index Files
-
-Usually just exports, rarely need testing

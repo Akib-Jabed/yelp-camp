@@ -1,4 +1,4 @@
-const ApiFeatures = require('../../../src/utils/ApiFeatures');
+const ApiFeatures = require('../../src/utils/ApiFeatures');
 
 describe('ApiFeatures', () => {
     let mockQuery;

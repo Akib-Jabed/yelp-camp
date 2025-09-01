@@ -1,4 +1,4 @@
-const ApiError = require('../../../src/utils/ApiError')
+const ApiError = require('../../src/utils/ApiError')
 
 describe('ApiError', () => {
     it('should create an instance of Error', () => {
