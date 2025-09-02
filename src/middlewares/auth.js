@@ -17,7 +17,7 @@ const checkLogin = catchAsync(async (req, res, next) => {
 
     jwt.verify(token, config.jwt.secret, (err, decoded) => {
         if (err) {
-            throw new ApiError(403, 'Token expired.');
+            throw new ApiError(403, 'Authorization failed');
         } else {
             const decodedJwt = jwt.decode(token);
             const { data } = decodedJwt;
