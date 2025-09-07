@@ -51,6 +51,7 @@ const generateThumb = (req, res, next) => {
 };
 
 module.exports = {
+    fileFilter,
     uploader,
     generateThumb,
 };
