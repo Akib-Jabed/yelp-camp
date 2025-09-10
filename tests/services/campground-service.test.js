@@ -191,6 +191,41 @@ describe('campground service', () => {
     })
 
     describe('delete campground', () => {
+        const mockReq = {
+            params: 1,
+            user: {
+                id: 1
+            }
+        }
+        const mockCampground = {
+            id: 1,
+            title: 'Campground Title',
+            description: 'Test campground description',
+            location: 'Test location',
+            price: 100,
+            images: ['image1.jpg', 'image2.png'],
+            user: {
+                id: 1
+            },
+        }
 
+        it('should throw error if campground not found', async () => {
+            Campground.findById.mockResolvedValue(null);
+
+            await expect(deleteCampground(mockReq)).rejects.toThrow()
+            expect(ApiError).toHaveBeenCalledWith(404, 'Campground not found')
+            expect(Review.deleteMany).not.toHaveBeenCalled()
+            expect(Campground.deleteOne).not.toHaveBeenCalled()
+        })
+
+        it('should successfully delete campground', async () => {
+            Campground.findById.mockResolvedValue(mockCampground);
+
+            await deleteCampground(mockReq)
+            expect(Campground.findById).toHaveBeenCalledWith(mockReq.params.id)
+            expect(ApiError).not.toHaveBeenCalled()
+            expect(Review.deleteMany).toHaveBeenCalledWith({ campground: mockReq.params.id })
+            expect(Campground.deleteOne).toHaveBeenCalledWith({ _id: mockReq.params.id }) 
+        })
     })
 })
