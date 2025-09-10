@@ -65,4 +65,5 @@ module.exports = {
     getCampgrounds,
     updateCampground,
     deleteCampground,
+    checkValidUser
 };
