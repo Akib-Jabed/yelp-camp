@@ -1,30 +1,6 @@
 High Priority - Must Test ✅
 
 
-Utils (Business Critical)
-==============================================
-tokens.js - JWT generation is security-critical
-ApiError.js - Error handling affects entire app
-catchAsync.js - Error propagation wrapper
-ApiFeatures.js - If it has complex query logic
-
-
-Services (Core Business Logic)
-==============================================
-auth.service.js - Authentication logic
-
-
-
-campground.service.js - Main business logic
-review.service.js - Review operations
-
-Middlewares (Request Processing)
-==============================================
-auth.js - Authentication/authorization
-validate.js - Input validation logic
-error.js - Error handling middleware
-
-
 
 
 Medium Priority - Should Test ⚠️

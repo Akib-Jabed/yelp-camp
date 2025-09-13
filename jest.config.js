@@ -6,6 +6,7 @@ module.exports = {
         "!src/config/**",
         "!src/docs",
         "!src/routes/**",
+        "!src/models/**",
         "!src/validations/**",
         "!src/app.js",
     ],
