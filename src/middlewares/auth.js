@@ -4,28 +4,18 @@ const catchAsync = require('../utils/catchAsync');
 const config = require('../config/config');
 
 const checkLogin = catchAsync(async (req, res, next) => {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader) {
-        throw new ApiError(401, 'Please log in to get access');
-    }
-
-    const token = authHeader.split(' ')[1];
+    const token = req.cookies.token;
     if (!token) {
         throw new ApiError(401, 'Please log in to get access');
     }
 
-    jwt.verify(token, config.jwt.secret, (err, decoded) => {
-        if (err) {
-            throw new ApiError(403, 'Authorization failed');
-        } else {
-            const decodedJwt = jwt.decode(token);
-            const { data } = decodedJwt;
-            req.user = data;
-        }
-
+    try {
+        const decoded = jwt.decode(token, config.jwt.secret);
+        req.user = decoded.data;
         next();
-    });
+    } catch (error) {
+        throw new ApiError(403, 'Authorization failed');
+    }
 });
 
 module.exports = { checkLogin };

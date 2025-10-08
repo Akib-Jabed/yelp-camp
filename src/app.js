@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xssReqSanitizer = require('xss-req-sanitizer');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const rateLimit = require('express-rate-limit');
 const slowDown = require('express-slow-down');
@@ -28,6 +29,7 @@ app.use(xssReqSanitizer());
 app.use(mongoSanitize());
 
 app.use(compression());
+app.use(cookieParser());
 
 // enable cors
 app.use(cors());
