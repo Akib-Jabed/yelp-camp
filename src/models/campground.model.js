@@ -7,7 +7,6 @@ const schema = new Schema(
         title: {
             type: String,
             required: [true, 'Title is required'],
-            unique: [true, 'Title already taken'],
             trim: true,
             maxlength: [30, "Title can't be more than 30 characters"],
             minlength: [3, 'Title must be atleast 3 characters long'],
@@ -32,17 +31,11 @@ const schema = new Schema(
             ref: 'User',
             required: [true, 'Campground must belong to a user'],
         },
-        createdAt: {
-            type: Date,
-            default: Date.now(),
-        },
-    },
-    {
-        toJSON: { virtuals: true },
-        toObject: { virtuals: true },
     },
     {
         timestamps: true,
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true },
     }
 );
 
@@ -52,18 +45,6 @@ schema.virtual('reviews', {
     ref: 'Review',
     foreignField: 'campground',
     localField: '_id',
-});
-
-schema.pre(/^find/, function (next) {
-    this.populate({
-        path: 'user',
-        select: 'username email',
-    }).populate({
-        path: 'reviews',
-        select: 'body rating',
-    });
-
-    next();
 });
 
 schema.statics.isTitleTaken = async function (title, excludeCampgroundId) {
