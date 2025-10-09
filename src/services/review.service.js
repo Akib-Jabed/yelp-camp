@@ -1,25 +1,32 @@
 const { Review, Campground } = require('../models');
 const ApiError = require('../utils/ApiError');
+const mongoose = require('mongoose');
 
-const checkCampground = async (req) => {
-    const campgroundId = req.originalUrl.split('/')[3];
+const createReview = async (req) => {
+    const { campgroundId } = req.params;
+    const userId = req.user.id;
+
+    if (!mongoose.Types.ObjectId.isValid(campgroundId)) {
+        throw new ApiError(400, 'Invalid campground ID format');
+    }
+
     const campground = await Campground.findById(campgroundId);
     if (!campground) {
         throw new ApiError(404, 'Campground not found');
     }
 
-    return campgroundId;
-};
+    const existingReview = await Review.findOne({ campground: campgroundId, user: userId });
+    if (existingReview) {
+        throw new ApiError(400, 'You have already reviewed this campground');
+    }
 
-const createReview = async (req) => {
-    const campgroundId = await checkCampground(req);
+    const review = await Review.create({
+        ...req.body,
+        campground: campgroundId,
+        user: userId,
+    });
 
-    const review = new Review(req.body);
-    review.campground = campgroundId;
-    review.user = req.user.id;
-    await review.save();
-
-    return review;
+    return review.populate('user', 'username email');
 };
 
 module.exports = {

@@ -13,10 +13,6 @@ const schema = new Schema(
             min: 1,
             max: 5,
         },
-        createdAt: {
-            type: Date,
-            default: Date.now(),
-        },
         campground: {
             type: mongoose.Schema.ObjectId,
             ref: 'Campground',
@@ -29,11 +25,9 @@ const schema = new Schema(
         },
     },
     {
+        timestamps: true,
         toJSON: { virtuals: true },
         toObject: { virtuals: true },
-    },
-    {
-        timestamps: true,
     }
 );
 
