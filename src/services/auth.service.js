@@ -15,8 +15,7 @@ const registerUser = async (data) => {
     const user = await User.create(data);
     return {
         id: user.id,
-        username: user.username,
-        email: user.email,
+        username: user.username
     };
 };
 
@@ -30,12 +29,23 @@ const loginUser = async (data) => {
 
     return {
         id: user.id,
-        username: user.username,
-        email: user.email,
+        username: user.username
     };
 };
+
+const getUser = async ({id}) => {
+    const user = await User.findById(id)
+
+    return { 
+        id,
+        email: user.email,
+        username: user.username,
+        createdAt: user.createdAt
+    }
+}
 
 module.exports = {
     registerUser,
     loginUser,
+    getUser
 };

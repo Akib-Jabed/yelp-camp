@@ -23,6 +23,13 @@ const campground = Joi.object({
         'any.required': 'Price is required',
         'number.min': 'Invalid price given',
     }),
+    // files: Joi.array().items(
+    //     Joi.object({
+    //         originalname: Joi.string(),
+    //         encoding: Joi.string(),
+    //         mimetype: Joi.string()
+    //     })
+    // ).optional().allow(null).default([])
 });
 
 module.exports = {

@@ -10,6 +10,7 @@ const errorConverter = (err, req, res, next) => {
         const message = err.message || 'Something went wrong';
         error = new ApiError(statusCode, message, false);
     }
+    
     next(error);
 };
 
@@ -22,6 +23,7 @@ const errorHandler = (err, req, res, next) => {
     }
 
     const response = {
+        success: false,
         code: statusCode,
         message,
     };

@@ -9,15 +9,14 @@ const isUniqueTitle = async (title) => {
     }
 }
 
-const createCampground = async (req) => {
-    const { title } = req.body;
-    isUniqueTitle(title)
-    
-    const campground = new Campground(req.body);
-    campground.images = req.files?.map((file) => file.filename);
-    campground.user = req.user.id;
+const createCampground = async (requestObj) => {
+    const {body, files, userId} = requestObj
+    const { title } = body;
+    await isUniqueTitle(title)
+    const campground = new Campground(body);
+    campground.images = files?.map((file) => file.filename);
+    campground.user = userId;
     await campground.save();
-    
     return campground;
 };
 

@@ -8,9 +8,13 @@ const getCampgrounds = catchAsync(async (req, res) => {
 });
 
 const createCampground = catchAsync(async (req, res) => {
-    const campground = await campgroundService.createCampground(req);
-
-    res.status(201).send({ data: campground});
+    const requestObj = {
+        body: {...req.body},
+        files: req.files,
+        userId: req.user.id
+    }
+    const campground = await campgroundService.createCampground(requestObj);
+    res.status(201).send({ success: true, data: campground});
 });
 
 const updateCampground = catchAsync(async (req, res) => {

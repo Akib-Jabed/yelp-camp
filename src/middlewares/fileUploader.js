@@ -36,7 +36,7 @@ const uploader = () => {
             callback(null, fileName);
         },
     });
-
+    
     return multer({ storage, fileFilter });
 };
 
