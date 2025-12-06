@@ -1,7 +1,6 @@
 const multer = require('multer');
-const sharp = require('sharp');
 const path = require('path');
-const fs = require('fs');
+const cloudinary = require('../config/cloudinary');
 
 const fileFilter = (req, file, callback) => {
     const allowedTypes = [
@@ -24,34 +23,66 @@ const fileFilter = (req, file, callback) => {
     }
 };
 
-const uploader = () => {
-    const UPLOAD_PATH = 'public/uploads';
-    const storage = multer.diskStorage({
-        destination(req, file, callback) {
-            callback(null, UPLOAD_PATH);
-        },
-        filename(req, file, callback) {
-            const ext = path.extname(file.originalname);
-            const fileName = `${Date.now()}${ext}`;
-            callback(null, fileName);
-        },
-    });
+// const uploader = () => {
+//     const UPLOAD_PATH = 'public/uploads';
+//     const storage = multer.diskStorage({
+//         destination(req, file, callback) {
+//             callback(null, UPLOAD_PATH);
+//         },
+//         filename(req, file, callback) {
+//             const ext = path.extname(file.originalname);
+//             const fileName = `${Date.now()}${ext}`;
+//             callback(null, fileName);
+//         },
+//     });
     
-    return multer({ storage, fileFilter });
-};
+//     return multer({ storage, fileFilter });
+// };
 
-const generateThumb = (req, res, next) => {
-    req.files?.forEach((f) => {
-        fs.readFile(`public/uploads/${f.filename}`, async (err, buffer) => {
-            if (err) throw err;
-            await sharp(buffer).resize(200, 200).toFile(`public/uploads/thumbs/${f.filename}`);
-        });
-    });
-    next();
-};
+const uploader = () => {
+    const storage = multer.memoryStorage();
+    return multer({storage, fileFilter});
+}
+
+const uploadToCloudinary = async (req, res, next) => {
+    if (!req.files || req.files.length === 0) {
+        return next();
+    }
+
+    try {
+        const uploadPromises = req.files.map(async (file) => {
+            const ext = path.extname(file.originalname);
+            const filename = `${Date.now()}${ext}`;
+            const publicId = filename.replace(ext, '');
+
+            return new Promise((resolve, reject) => {
+                const uploadStream = cloudinary.uploader.upload_stream({
+                    folder: 'yelp-camp',
+                    public_id: publicId,
+                    resource_type: 'image',
+                    transformation: [
+                        {
+                            quality: 'auto',
+                            fetch_format: 'auto'
+                        }
+                    ]}, (error, result) => {
+                        if (error)  reject(error)
+                        else resolve(result)
+                })
+                uploadStream.end(file.buffer);
+            });
+        })
+
+        const uploadResult = await Promise.all(uploadPromises);
+        req.cloudinaryResults = uploadResult 
+        next()
+    } catch (err) {
+        next(err)
+    }
+}
 
 module.exports = {
     fileFilter,
     uploader,
-    generateThumb,
+    uploadToCloudinary
 };

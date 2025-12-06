@@ -3,7 +3,7 @@ const { checkLogin } = require('../middlewares/auth');
 const { campgroundController } = require('../controllers');
 const validate = require('../middlewares/validate');
 const { campgroundValidation } = require('../validations');
-const { uploader, generateThumb } = require('../middlewares/fileUploader');
+const { uploader, uploadToCloudinary } = require('../middlewares/fileUploader');
 
 const router = express.Router();
 const upload = uploader();
@@ -14,7 +14,7 @@ router
     .post(
         checkLogin,
         upload.array('images'),
-        generateThumb,
+        uploadToCloudinary,
         validate(campgroundValidation.campground),
         campgroundController.createCampground
     );
@@ -25,7 +25,6 @@ router
     .put(
         checkLogin,
         upload.array('images'),
-        generateThumb,
         validate(campgroundValidation.campground),
         campgroundController.updateCampground
     )

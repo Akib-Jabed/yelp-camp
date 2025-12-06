@@ -13,4 +13,9 @@ module.exports = {
         secret: process.env.SECRET_KEY,
         expires: 24 * 60 * 60, // 1 day
     },
+    cloudinary: {
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET
+    }
 };

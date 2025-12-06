@@ -10,7 +10,7 @@ const getCampgrounds = catchAsync(async (req, res) => {
 const createCampground = catchAsync(async (req, res) => {
     const requestObj = {
         body: {...req.body},
-        files: req.files,
+        files: req.cloudinaryResults,
         userId: req.user.id
     }
     const campground = await campgroundService.createCampground(requestObj);

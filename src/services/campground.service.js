@@ -14,7 +14,7 @@ const createCampground = async (requestObj) => {
     const { title } = body;
     await isUniqueTitle(title)
     const campground = new Campground(body);
-    campground.images = files?.map((file) => file.filename);
+    campground.images = files?.map((file) => file.secure_url);
     campground.user = userId;
     await campground.save();
     return campground;

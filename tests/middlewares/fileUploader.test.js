@@ -1,4 +1,4 @@
-const { fileFilter, uploader, generateThumb } = require('../../src/middlewares/fileUploader')
+const { fileFilter, uploader } = require('../../src/middlewares/fileUploader')
 const multer = require('multer');
 const sharp = require('sharp');
 const path = require('path');
