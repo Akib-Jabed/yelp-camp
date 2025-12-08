@@ -4,9 +4,9 @@ const { Schema } = mongoose;
 
 const schema = new Schema(
     {
-        body: {
+        comment: {
             type: String,
-            required: [true, "Review body can't be empty"],
+            required: [true, "Review comment can't be empty"],
         },
         rating: {
             type: Number,

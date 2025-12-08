@@ -6,10 +6,6 @@ const createReview = async (req) => {
     const { campgroundId } = req.params;
     const userId = req.user.id;
 
-    if (!mongoose.Types.ObjectId.isValid(campgroundId)) {
-        throw new ApiError(400, 'Invalid campground ID format');
-    }
-
     const campground = await Campground.findById(campgroundId);
     if (!campground) {
         throw new ApiError(404, 'Campground not found');

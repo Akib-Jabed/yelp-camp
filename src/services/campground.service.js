@@ -10,7 +10,7 @@ const isUniqueTitle = async (title) => {
 }
 
 const createCampground = async (requestObj) => {
-    const {body, files, userId} = requestObj
+    const { body, files, userId } = requestObj
     const { title } = body;
     await isUniqueTitle(title)
     const campground = new Campground(body);
@@ -22,7 +22,7 @@ const createCampground = async (requestObj) => {
 
 const getCampgrounds = async (req) => {
     const features = new ApiFeatures(
-        Campground.find({}).select('title description location price images createdAt'), 
+        Campground.find({}).select('title description location price images createdAt'),
         req.query
     );
     features.filter().sort().paginate();
@@ -31,27 +31,27 @@ const getCampgrounds = async (req) => {
         features.query.exec(),
         features.getCount()
     ])
-    
+
     return [data, totalCount];
 };
 
 const getCampground = async (req) => {
-    const campground = await Campground.findById(req.params.id)
-    .populate({
-        path: 'user',
-        select: 'username email'
-    }).populate({
-        path: 'reviews',
-        select: 'body rating',
-        populate: {
+    const campground = await Campground.findById(req.params.campgroundId)
+        .populate({
             path: 'user',
-            select: 'username'
-        }
-    });
+            select: 'username email'
+        }).populate({
+            path: 'reviews',
+            select: 'comment rating createdAt',
+            populate: {
+                path: 'user',
+                select: 'username'
+            }
+        });
     if (!campground) {
         throw new ApiError(404, 'Campground not found');
     }
-    
+
     return campground;
 };
 
@@ -64,28 +64,28 @@ const checkValidUser = (campgroundUser, loggedUser) => {
 const updateCampground = async (req) => {
     const campground = await getCampground(req);
     checkValidUser(campground.user.id, req.user.id);
-    
+
     const { title } = req.body;
     isUniqueTitle(title)
-    
+
     campground.set({ ...req.body });
     if (req.files) {
         campground.images.push(...req.files.map((file) => file.filename));
     }
     await campground.save();
-    
+
     return campground;
 };
 
 const deleteCampground = async (req) => {
     const campground = await getCampground(req);
     checkValidUser(campground.user.id, req.user.id);
-    
+
     const session = await mongoose.startSession();
     session.startTransaction();
     try {
-        await Review.deleteMany({ campground: req.params.id }, {session});
-        await Campground.deleteOne({ _id: req.params.id }, {session});
+        await Review.deleteMany({ campground: req.params.id }, { session });
+        await Campground.deleteOne({ _id: req.params.id }, { session });
         await session.commitTransaction();
     } catch (error) {
         await session.abortTransaction();
@@ -93,7 +93,7 @@ const deleteCampground = async (req) => {
     } finally {
         session.endSession();
     }
-    
+
     const oldImages = campground.images;
     oldImages.forEach((img) => fs.unlinkSync(`public/uploads/${img}`));
     oldImages.forEach((img) => fs.unlinkSync(`public/uploads/thumbs/${img}`));

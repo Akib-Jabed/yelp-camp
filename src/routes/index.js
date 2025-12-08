@@ -4,6 +4,8 @@ const authRoute = require('./auth.route');
 const campgroundRoute = require('./campground.route');
 const reviewRoute = require('./review.route');
 const docsRoute = require('./docs.route');
+const validate = require('../middlewares/validate');
+const { campgroundValidation } = require('../validations');
 
 const router = express.Router();
 
@@ -18,7 +20,7 @@ const routes = [
     },
     {
         path: '/campgrounds/:campgroundId/reviews',
-        route: reviewRoute,
+        route: reviewRoute
     },
 ];
 
@@ -29,6 +31,6 @@ if (config.env === 'development') {
     });
 }
 
-routes.forEach((route) => router.use(route.path, route.route));
+routes.forEach((route) => router.use(route.path, route.route))
 
 module.exports = router;

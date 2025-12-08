@@ -20,8 +20,11 @@ router
     );
 
 router
-    .route('/:id')
-    .get(campgroundController.getCampground)
+    .route('/:campgroundId')
+    .get(
+        validate({ params: campgroundValidation.campgroundId }),
+        campgroundController.getCampground
+    )
     .put(
         checkLogin,
         upload.array('images'),

@@ -22,16 +22,14 @@ const campground = Joi.object({
         'number.base': 'Price must be a number',
         'any.required': 'Price is required',
         'number.min': 'Invalid price given',
-    }),
-    // files: Joi.array().items(
-    //     Joi.object({
-    //         originalname: Joi.string(),
-    //         encoding: Joi.string(),
-    //         mimetype: Joi.string()
-    //     })
-    // ).optional().allow(null).default([])
+    })
 });
+
+const campgroundId = Joi.object({
+    campgroundId: Joi.string().required().regex(/^[0-9a-fA-F]{24}$/).message('Invalid camground Id')
+})
 
 module.exports = {
     campground,
+    campgroundId
 };

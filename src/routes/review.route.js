@@ -3,10 +3,18 @@ const { checkLogin } = require('../middlewares/auth');
 const { reviewController } = require('../controllers');
 const validate = require('../middlewares/validate');
 const { reviewValidation } = require('../validations');
+const { campgroundValidation } = require('../validations');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
-router.route('/').post(checkLogin, validate(reviewValidation.review), reviewController.postReview);
+router.route('/')
+    .post(checkLogin,
+        validate({
+            params: campgroundValidation.campgroundId,
+            body: reviewValidation.review
+        }),
+        reviewController.postReview
+    );
 
 module.exports = router;
 
@@ -38,17 +46,17 @@ module.exports = router;
  *      schema:
  *       type: object
  *       required:
- *        - body
+ *        - comment
  *        - rating
  *       properties:
- *        body:
+ *        comment:
  *         type: string
  *        rating:
  *         type: number
  *       examples:
  *        validRequest:
  *         value:
- *          body: Fake review
+ *          comment: Fake review
  *          rating: 5
  *   responses:
  *    "201":
