@@ -18,8 +18,14 @@ const createCampground = catchAsync(async (req, res) => {
 });
 
 const updateCampground = catchAsync(async (req, res) => {
-    const campground = await campgroundService.updateCampground(req);
-
+    const requestObj = {
+        campgroundId: req.params.campgroundId,
+        body: { ...req.body },
+        files: req.cloudinaryResults,
+        userId: req.user.id
+    }
+    const campground = await campgroundService.updateCampground(requestObj);
+    console.log('campground', campground);
     res.status(200).send({ success: true, data: campground });
 });
 
@@ -30,7 +36,7 @@ const deleteCampground = catchAsync(async (req, res) => {
 });
 
 const getCampground = catchAsync(async (req, res) => {
-    const campground = await campgroundService.getCampground(req);
+    const campground = await campgroundService.getCampground(req.params.campgroundId);
 
     res.status(200).send({ success: true, data: campground });
 });

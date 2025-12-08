@@ -15,7 +15,7 @@ router
         checkLogin,
         upload.array('images'),
         uploadToCloudinary,
-        validate(campgroundValidation.campground),
+        validate({ body: campgroundValidation.campground }),
         campgroundController.createCampground
     );
 
@@ -28,10 +28,17 @@ router
     .put(
         checkLogin,
         upload.array('images'),
-        validate(campgroundValidation.campground),
+        uploadToCloudinary,
+        validate({
+            params: campgroundValidation.campgroundId,
+            body: campgroundValidation.campground
+        }),
         campgroundController.updateCampground
     )
-    .delete(checkLogin, campgroundController.deleteCampground);
+    .delete(checkLogin,
+        validate({ params: campgroundValidation.campgroundId }),
+        campgroundController.deleteCampground
+    );
 
 module.exports = router;
 

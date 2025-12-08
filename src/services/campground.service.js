@@ -3,8 +3,8 @@ const ApiError = require('../utils/ApiError');
 const ApiFeatures = require('../utils/ApiFeatures');
 const mongoose = require('mongoose');
 
-const isUniqueTitle = async (title) => {
-    if (await Campground.isTitleTaken(title)) {
+const isUniqueTitle = async (title, excludeCampgroundId = null) => {
+    if (await Campground.isTitleTaken(title, excludeCampgroundId)) {
         throw new ApiError(409, 'Title already taken');
     }
 }
@@ -35,8 +35,8 @@ const getCampgrounds = async (req) => {
     return [data, totalCount];
 };
 
-const getCampground = async (req) => {
-    const campground = await Campground.findById(req.params.campgroundId)
+const getCampground = async (campgroundId) => {
+    const campground = await Campground.findById(campgroundId)
         .populate({
             path: 'user',
             select: 'username email'
@@ -61,16 +61,16 @@ const checkValidUser = (campgroundUser, loggedUser) => {
     }
 };
 
-const updateCampground = async (req) => {
-    const campground = await getCampground(req);
-    checkValidUser(campground.user.id, req.user.id);
+const updateCampground = async (requestObj) => {
+    const { campgroundId, body, files, userId } = requestObj;
+    const campground = await getCampground(campgroundId);
 
-    const { title } = req.body;
-    isUniqueTitle(title)
+    checkValidUser(campground.user.id, userId);
+    await isUniqueTitle(body.title, campgroundId)
 
-    campground.set({ ...req.body });
-    if (req.files) {
-        campground.images.push(...req.files.map((file) => file.filename));
+    campground.set({ ...body });
+    if (files && files.length > 0) {
+        campground.images.push(...files.map((file) => file.secure_url));
     }
     await campground.save();
 
