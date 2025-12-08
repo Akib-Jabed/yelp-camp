@@ -2,9 +2,9 @@ const catchAsync = require('../utils/catchAsync');
 const { campgroundService } = require('../services');
 
 const getCampgrounds = catchAsync(async (req, res) => {
-    const campgrounds = await campgroundService.getCampgrounds(req);
+    const [campgrounds, totalCount] = await campgroundService.getCampgrounds(req);
 
-    res.status(200).send({ data: campgrounds });
+    res.status(200).send({ success: true, data: campgrounds, count: totalCount });
 });
 
 const createCampground = catchAsync(async (req, res) => {

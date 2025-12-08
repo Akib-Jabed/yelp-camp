@@ -21,10 +21,18 @@ const createCampground = async (requestObj) => {
 };
 
 const getCampgrounds = async (req) => {
-    const features = new ApiFeatures(Campground.find({}).select('id title description location price images createdAt').lean(), req.query);
-    const data = await features.filter().sort().paginate().query;
+    const features = new ApiFeatures(
+        Campground.find({}).select('title description location price images createdAt'), 
+        req.query
+    );
+    features.filter().sort().paginate();
+
+    const [data, totalCount] = await Promise.all([
+        features.query.exec(),
+        features.getCount()
+    ])
     
-    return data;
+    return [data, totalCount];
 };
 
 const getCampground = async (req) => {
