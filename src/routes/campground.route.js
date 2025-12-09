@@ -35,7 +35,8 @@ router
         }),
         campgroundController.updateCampground
     )
-    .delete(checkLogin,
+    .delete(
+        checkLogin,
         validate({ params: campgroundValidation.campgroundId }),
         campgroundController.deleteCampground
     );

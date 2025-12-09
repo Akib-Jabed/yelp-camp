@@ -35,18 +35,18 @@ const fileFilter = (req, file, callback) => {
 //             callback(null, fileName);
 //         },
 //     });
-    
+
 //     return multer({ storage, fileFilter });
 // };
 
 const uploader = () => {
     const storage = multer.memoryStorage();
-    return multer({storage, fileFilter});
+    return multer({ storage, fileFilter });
 }
 
 const uploadToCloudinary = async (req, res, next) => {
     if (!req.files || req.files.length === 0) {
-        return next();
+        return next()
     }
 
     try {
@@ -65,16 +65,17 @@ const uploadToCloudinary = async (req, res, next) => {
                             quality: 'auto',
                             fetch_format: 'auto'
                         }
-                    ]}, (error, result) => {
-                        if (error)  reject(error)
-                        else resolve(result)
+                    ]
+                }, (error, result) => {
+                    if (error) reject(error)
+                    else resolve(result)
                 })
                 uploadStream.end(file.buffer);
             });
         })
 
         const uploadResult = await Promise.all(uploadPromises);
-        req.cloudinaryResults = uploadResult 
+        req.cloudinaryResults = uploadResult
         next()
     } catch (err) {
         next(err)

@@ -2,6 +2,7 @@ const { Campground, Review } = require('../models');
 const ApiError = require('../utils/ApiError');
 const ApiFeatures = require('../utils/ApiFeatures');
 const mongoose = require('mongoose');
+const { deleteImages } = require('../utils/cloudinary');
 
 const isUniqueTitle = async (title, excludeCampgroundId = null) => {
     if (await Campground.isTitleTaken(title, excludeCampgroundId)) {
@@ -14,7 +15,12 @@ const createCampground = async (requestObj) => {
     const { title } = body;
     await isUniqueTitle(title)
     const campground = new Campground(body);
-    campground.images = files?.map((file) => file.secure_url);
+    campground.images = files?.map((file) => (
+        {
+            publicId: file.public_id,
+            secureUrl: file.secure_url
+        })
+    );
     campground.user = userId;
     await campground.save();
     return campground;
@@ -61,42 +67,48 @@ const checkValidUser = (campgroundUser, loggedUser) => {
     }
 };
 
+const getImagesToDelete = (database, payload) => {
+    return database.images.filter(image => !payload.some(el => el.publicId === image.publicId))
+}
+
 const updateCampground = async (requestObj) => {
-    const { campgroundId, body, files, userId } = requestObj;
+    const { campgroundId, body, existingImages, files, userId } = requestObj;
     const campground = await getCampground(campgroundId);
 
     checkValidUser(campground.user.id, userId);
     await isUniqueTitle(body.title, campgroundId)
 
+    const imagesToDelete = campground.images.filter(image => !existingImages.some(el => el.publicId === image.publicId))
+    if (imagesToDelete.length > 0) {
+        const publicIds = imagesToDelete.map(image => image.publicId)
+        await deleteImages(publicIds)
+    }
+
     campground.set({ ...body });
+    campground.images = existingImages;
     if (files && files.length > 0) {
-        campground.images.push(...files.map((file) => file.secure_url));
+        campground.images.push(...files.map((file) => (
+            {
+                publicId: file.public_id,
+                secureUrl: file.secure_url
+            })
+        ));
     }
     await campground.save();
 
     return campground;
 };
 
-const deleteCampground = async (req) => {
-    const campground = await getCampground(req);
-    checkValidUser(campground.user.id, req.user.id);
+const deleteCampground = async (requestObj) => {
+    const { campgroundId, userId } = requestObj
+    const campground = await getCampground(campgroundId);
+    checkValidUser(campground.user.id, userId);
 
-    const session = await mongoose.startSession();
-    session.startTransaction();
-    try {
-        await Review.deleteMany({ campground: req.params.id }, { session });
-        await Campground.deleteOne({ _id: req.params.id }, { session });
-        await session.commitTransaction();
-    } catch (error) {
-        await session.abortTransaction();
-        throw error;
-    } finally {
-        session.endSession();
-    }
+    const publicIds = campground.images.map(image => image.publicId)
+    if (publicIds.length > 0) await deleteImages(publicIds)
 
-    const oldImages = campground.images;
-    oldImages.forEach((img) => fs.unlinkSync(`public/uploads/${img}`));
-    oldImages.forEach((img) => fs.unlinkSync(`public/uploads/thumbs/${img}`));
+    await Review.deleteMany({ campground: campgroundId });
+    await Campground.deleteOne({ _id: campgroundId });
 };
 
 module.exports = {

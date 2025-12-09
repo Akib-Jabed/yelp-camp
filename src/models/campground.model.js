@@ -25,7 +25,19 @@ const schema = new Schema(
             type: Number,
             required: [true, 'Price is required'],
         },
-        images: [String],
+        images: [
+            {
+                publicId: {
+                    type: String,
+                    required: [true, 'Image public ID is required']
+                },
+                secureUrl: {
+                    type: String,
+                    required: [true, 'Image secure URL is required']
+                },
+                _id: false
+            }
+        ],
         user: {
             type: mongoose.Schema.ObjectId,
             ref: 'User',
@@ -34,24 +46,24 @@ const schema = new Schema(
     },
     {
         timestamps: true,
-        toJSON: { 
+        toJSON: {
             virtuals: true,
-            transform: function(doc, ret) {
+            transform: function (doc, ret) {
                 ret.id = ret._id.toString();
                 delete ret._id;
                 delete ret.__v;
                 return ret;
             }
-         },
-        toObject: { 
+        },
+        toObject: {
             virtuals: true,
-            transform: function(doc, ret) {
+            transform: function (doc, ret) {
                 ret.id = ret._id.toString();
                 delete ret._id;
                 delete ret.__v;
                 return ret;
             }
-         },
+        },
     }
 );
 
